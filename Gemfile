@@ -6,8 +6,8 @@ gem 'sqlite3'
 gem 'sass-rails',               '~> 5.0'
 gem 'uglifier',                 '>= 1.3.0'
 gem 'coffee-rails',             '~> 4.1.0'
-
-gem 'bcrypt',                  '3.1.11'
+gem 'faker',                    '1.4.2'
+gem 'bcrypt',                   '3.1.11'
 gem 'mini_magick',              '3.8.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
