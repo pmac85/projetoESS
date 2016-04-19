@@ -32,7 +32,7 @@ league = League.first
 end
 
 # Players
-teams = Team.all
+teams = Team.order(:created_at).take(10)
 1.times do
   name = Faker::Name.name
   teams.each { |team| Player.create!(name: name, team_id: team.id, position: "Guarda-Redes", value: 15)}
