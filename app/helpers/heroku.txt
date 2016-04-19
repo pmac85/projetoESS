@@ -1,0 +1,3 @@
+A aplicação está a funcionar neste link abaixo:
+
+https://git.heroku.com/boiling-falls-45539.git
