@@ -32,8 +32,20 @@ league = League.first
 end
 
 # Players
-team = Team.first
-10.times do
+teams = Team.all
+1.times do
   name = Faker::Name.name
-  Player.create!(name: name, team_id: team.id, position: "defesa", value: 20)
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "Guarda-Redes", value: 15)}
+end
+4.times do
+  name = Faker::Name.name
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "Defesa", value: 20)}
+end
+4.times do
+  name = Faker::Name.name
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "Medio", value: 25)}
+end
+2.times do
+  name = Faker::Name.name
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "Avançado", value: 40)}
 end

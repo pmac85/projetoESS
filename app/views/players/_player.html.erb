@@ -1,6 +1,6 @@
-<li id="player-<% player.name %>">
-  <%= link_to player.name, player %>
-  <span class="team">, TeamID -<%= player.team.id %></span>
-  <span class="player">, position -<%= player.position %></span>
-  <span class="player">, value -<%= player.value %></span>
-</li>
+<tr>
+  <td><%= link_to player.name, player %></td>
+  <td><%= player.team.id %></td>
+  <td><%= player.position %></td>
+  <td><%= player.value %></td>
+</tr>
