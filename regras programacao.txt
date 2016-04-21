@@ -9,3 +9,6 @@ Nomes das posições guardadas na DB:
 - Defesa       - DEF
 - Medio        - MID
 - Avançado     - FOR
+
+Valores dos Jogadores - entre 40 e 99
+Orcamento dos Users - 900 talvez...
