@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417160453) do
+ActiveRecord::Schema.define(version: 20160421144624) do
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name"
@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(version: 20160417160453) do
     t.string   "position"
     t.integer  "value"
     t.integer  "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "isChosen",   default: false
   end
 
   add_index "players", ["team_id"], name: "index_players_on_team_id"

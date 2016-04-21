@@ -1,10 +1,21 @@
 <% provide(:title, @league.name) %>
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= @league.name %>
-      </h1>
-    </section>
-  </aside>
+    <% if @league.teams.any? %>
+        <h1><%= @league.name %></h1>
+        <h3>Teams (<%= @league.teams.count %>)</h3>
+        <table class="table table-hover table-striped">
+          <thead>
+          <tr class="info">
+            <th>Name</th>
+            <th>UserID</th>
+            <th>LeagueID</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= will_paginate @teams%>
+          <%= render @teams %>
+          </tbody>
+        </table>
+        <%= will_paginate @teams%>
+    <% end %>
 </div>

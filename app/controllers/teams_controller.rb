@@ -8,6 +8,14 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    @players = @team.players.paginate(page: params[:page])
+    if false
+      @team = Team.find(params[:id])
+      @players = @team.players.paginate(page: params[:page])
+    else
+      @allplayers = Player.where("team_id != ?", @team.id).paginate(page:params[:page], :per_page => 15)
+      render 'players/transfer'
+    end
   end
 
   def create

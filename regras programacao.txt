@@ -1,0 +1,11 @@
+Plantel com 15 jogadores;
+-2GR
+-5defesas
+-5medios
+-3avançados
+
+Nomes das posições guardadas na DB:
+- Guarda-redes - GK
+- Defesa       - DEF
+- Medio        - MID
+- Avançado     - FOR

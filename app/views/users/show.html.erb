@@ -8,4 +8,24 @@
       </h1>
     </section>
   </aside>
+  <aside class="col-md-8">
+    <% if @user.teams.any? %>
+        <h1>All Teams</h1>
+        <h3>Teams (<%= @user.teams.count %>)</h3>
+        <table class="table table-hover table-striped">
+          <thead>
+          <tr class="info">
+            <th>Name</th>
+            <th>UserID</th>
+            <th>LeagueID</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= will_paginate @teams%>
+          <%= render @teams %>
+          </tbody>
+        </table>
+        <%= will_paginate @teams%>
+    <% end %>
+  </aside>
 </div>
