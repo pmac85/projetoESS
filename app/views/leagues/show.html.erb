@@ -1,5 +1,6 @@
 <% provide(:title, @league.name) %>
 <div class="row">
+  <div class="divs">
     <% if @league.teams.any? %>
         <h1><%= @league.name %></h1>
         <h3>Teams (<%= @league.teams.count %>)</h3>
@@ -18,4 +19,5 @@
         </table>
         <%= will_paginate @teams%>
     <% end %>
+  </div>
 </div>

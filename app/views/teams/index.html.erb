@@ -1,16 +1,18 @@
 <% provide(:title, 'All teams') %>
-<h1>All teams</h1>
-<table class="table table-hover table-striped">
-  <thead>
-  <tr class="info">
-    <th>Name</th>
-    <th>UserID</th>
-    <th>LeagueID</th>
-  </tr>
-  </thead>
-  <tbody>
+<div class="divs">
+  <h1>All teams</h1>
+  <table class="table table-hover table-striped">
+    <thead>
+    <tr class="info">
+      <th>Name</th>
+      <th>UserID</th>
+      <th>LeagueID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= will_paginate %>
+    <%= render @teams %>
+    </tbody>
+  </table>
   <%= will_paginate %>
-  <%= render @teams %>
-  </tbody>
-</table>
-<%= will_paginate %>
+</div>

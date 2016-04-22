@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :teams,               only: [:create, :destroy, :index, :show]
+  resources :teams
   resources :players,             only: [:index, :show]
   resources :leagues,             only: [:index, :show]
 

@@ -1,17 +1,26 @@
-<% provide(:title, @team.name) %>
+<% provide(:title, 'Transfers') %>
 <div class="row">
   <div class="divs">
-    <aside class="col-md-4">
-      <section class="user_info">
-        <h1>
-          <%= @team.name %>
-        </h1>
-      </section>
+    <aside class="col-md-6">
+      <h1>All Players</h1>
+      <table class="table table-hover table-striped">
+        <thead>
+        <tr class="info">
+          <th>Name</th>
+          <th>Team</th>
+          <th>Position</th>
+          <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render @allplayers %>
+        </tbody>
+      </table>
+      <%= will_paginate @allplayers%>
     </aside>
-    <aside class="col-md-8">
+    <aside class="col-md-6">
       <% if @team.players.any? %>
-          <h1>All Players</h1>
-          <h3>Players (<%= @team.players.count %>)</h3>
+          <h1>Your Team</h1>
           <table class="table table-hover table-striped">
             <thead>
             <tr class="info">

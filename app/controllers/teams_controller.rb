@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :correct_user
 
   def index
     @teams = Team.paginate(page: params[:page])
@@ -9,13 +9,12 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @players = @team.players.paginate(page: params[:page])
-    if false
-      @team = Team.find(params[:id])
-      @players = @team.players.paginate(page: params[:page])
-    else
-      @allplayers = Player.where("team_id != ?", @team.id).paginate(page:params[:page], :per_page => 15)
-      render 'players/transfer'
-    end
+  end
+
+  def edit
+    @team = Team.find(params[:id])
+    @players = @team.players.paginate(page: params[:page])
+    @allplayers = Player.where("team_id != ?", @team.id).paginate(page:params[:page], :per_page => 15)
   end
 
   def create
