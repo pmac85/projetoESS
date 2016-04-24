@@ -330,3 +330,25 @@ input {
     border-bottom: 1px solid $gray-lighter;
   }
 }
+
+/* formulario pesquisa */
+.pesquisa {
+  padding-left: 30px;
+  margin: 0;
+  max-width: 500px;
+  align-items: baseline;
+}
+
+.campo-pesquisa{
+  width: 35%;
+  margin-right: auto;
+  margin-left: auto;
+  display: inline-block;
+}
+
+.botao-pesquisa {
+  width: 20%;
+  margin-right: auto;
+  margin-left: auto;
+  display: inline-block;
+}

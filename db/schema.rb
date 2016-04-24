@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421144624) do
+ActiveRecord::Schema.define(version: 20160424154203) do
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160421144624) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "isChosen",   default: false
+    t.string   "image_path"
   end
 
   add_index "players", ["team_id"], name: "index_players_on_team_id"
@@ -38,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160421144624) do
     t.integer  "league_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image_path"
   end
 
   add_index "teams", ["league_id"], name: "index_teams_on_league_id"

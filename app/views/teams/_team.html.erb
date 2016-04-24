@@ -1,5 +1,11 @@
 <tr>
-  <td><%= link_to team.name, team %></td>
-  <td><%= team.user.id %></td>
-  <td><%= team.league.id %></td>
+  <% if team.image_path.nil? %>
+      <td><%= link_to team.name, team %></td>
+      <td><%= team.user.id %></td>
+      <td><%= team.league.id %></td>
+  <% else %>
+      <td><%= image_tag team.image_path, size: "50x50" %><%= link_to team.name, team %></td>
+      <td><%= team.user.id %></td>
+      <td><%= team.league.id %></td>
+  <% end %>
 </tr>

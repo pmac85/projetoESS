@@ -1,8 +1,42 @@
 <% provide(:title, 'Transfers') %>
 <div class="row">
   <div class="divs">
+    <div class="pesquisa">
+      <div class="campo-pesquisa">
+        <label>See</label>
+        <div class="dropdown text-align-center">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">All players
+            <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Goalkeeper</a></li>
+            <li><a href="#">Defender</a></li>
+            <li><a href="#">Midfielder</a></li>
+            <li><a href="#">Forward</a></li>
+          </ul>
+      </div>
+    </div>
+      <div class="campo-pesquisa">
+        <label>Maximum value</label>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Unlimited
+            <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">100</a></li>
+            <li><a href="#">90</a></li>
+            <li><a href="#">80</a></li>
+            <li><a href="#">70</a></li>
+            <li><a href="#">60</a></li>
+            <li><a href="#">50</a></li>
+          </ul>
+      </div>
+    </div>
+      <div class="botao-pesquisa">
+        <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> Search</button>
+      </div>
+    </div>
+    <div>
     <aside class="col-md-6">
-      <h1>All Players</h1>
+      <h1>Players</h1>
       <table class="table table-hover table-striped">
         <thead>
         <tr class="info">
@@ -31,12 +65,13 @@
             </tr>
             </thead>
             <tbody>
-            <%= will_paginate @players%>
             <%= render @players %>
             </tbody>
           </table>
           <%= will_paginate @players%>
       <% end %>
     </aside>
+    <button type="button" class="btn btn-success pull-right btn-lg">Confirm Transfer</button>
+  </div>
   </div>
 </div>
