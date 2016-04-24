@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:create, :destroy, :edit]
   before_action :correct_user
 
   def index
@@ -15,6 +15,14 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @players = @team.players.paginate(page: params[:page])
     @allplayers = Player.where("team_id != ?", @team.id).paginate(page:params[:page], :per_page => 15)
+  end
+
+  def update
+    @team = Team.find(params[:id])
+    if @team.update_attributes(team_params)
+      flash[:success] = "Transference successfully realized."
+      redirect_to team(current_user)
+    end
   end
 
   def create
@@ -35,7 +43,7 @@ class TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team).permit(:name)
+    params.require(:team).permit(:name, :image_path)
   end
 
   def correct_user

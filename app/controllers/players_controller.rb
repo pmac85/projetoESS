@@ -18,6 +18,6 @@ class PlayersController < ApplicationController
 
   private
   def player_params
-    params.require(:player).permit(:name, :position, :value)
+    params.require(:player).permit(:name, :position, :value, :isChosen, :image_path)
   end
 end
