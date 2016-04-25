@@ -40,7 +40,6 @@ GEM
     ansi (1.5.0)
     arel (6.0.3)
     bcrypt (3.1.11)
-    bcrypt (3.1.11-x86-mingw32)
     binding_of_caller (0.7.3.pre1)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.0)
@@ -75,7 +74,6 @@ GEM
     faker (1.4.2)
       i18n (~> 0.5)
     ffi (1.9.10)
-    ffi (1.9.10-x86-mingw32)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (1.36.0)
@@ -209,6 +207,8 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (5.0.5)
+      railties (>= 3.2.16)
     json (1.8.3)
     listen (3.0.6)
       rb-fsevent (>= 0.9.3)
@@ -238,13 +238,10 @@ GEM
     nenv (0.3.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
-    nokogiri (1.6.7.2-x86-mingw32)
-      mini_portile2 (~> 2.0.0.rc2)
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
     pg (0.17.1)
-    pg (0.17.1-x86-mingw32)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -310,7 +307,6 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.11)
-    sqlite3 (1.3.11-x86-mingw32)
     subexec (0.2.3)
     thor (0.19.1)
     thread_safe (0.3.5)
@@ -332,7 +328,6 @@ GEM
 
 PLATFORMS
   ruby
-  x86-mingw32
 
 DEPENDENCIES
   bcrypt (= 3.1.11)
@@ -346,6 +341,7 @@ DEPENDENCIES
   guard-minitest (= 2.3.1)
   jbuilder (= 2.2.3)
   jquery-rails (= 4.0.3)
+  jquery-ui-rails
   mini_backtrace (= 0.1.3)
   mini_magick (= 3.8.0)
   minitest-reporters (= 1.0.5)
@@ -361,3 +357,6 @@ DEPENDENCIES
   uglifier (= 2.5.3)
   web-console (= 2.0.0.beta3)
   will_paginate (= 3.0.7)
+
+BUNDLED WITH
+   1.11.2
