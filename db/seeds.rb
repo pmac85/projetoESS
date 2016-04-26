@@ -24,11 +24,10 @@ end
 League.create!(name: "Liga NOS")
 
 # Teams
-user = User.first
 league = League.first
-50.times do
+50.times do |n|
   name = Faker::Team.name
-  Team.create!(name: name, user_id: user.id, league_id: league.id,
+  Team.create!(name: name, user_id: n+1, league_id: league.id,
                image_path: "http://media1.fcbarcelona.com/media/asset_publics/resources/000/004/670/original_rgb/FCB.v1319559431.png")
 end
 

@@ -36,9 +36,13 @@ class TeamsController < ApplicationController
   end
 
   def destroy
-    @team.destroy
-    flash[:success] = "Team deleted"
-    redirect_to request.referrer || root_url
+    @team = Team.find(params[:id]).destroy
+    #flash[:success] = "Team deleted"
+    respond_to do |format|
+      format.html {redirect_to request.referrer || root_url}
+      format.js
+    end
+
   end
 
   private
@@ -48,6 +52,7 @@ class TeamsController < ApplicationController
 
   def correct_user
     @team = current_user.teams.find_by(id: params[:id])
+    return if(current_user.admin)
     redirect_to root_url if @team.nil?
   end
 end

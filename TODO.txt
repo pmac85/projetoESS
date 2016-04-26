@@ -1,0 +1,13 @@
+TODO:
+    >
+    >
+    >
+    >
+
+BUGS TO FIX:
+    > Apagar do /teams funciona mas o javascript não retira o elemento, quando se faz inspect à pagina gerada no '_team.html.erb'
+        dá para ver que os divs gerados por '<%= div_for team do %>' não estão no lugar certo
+    >
+    >
+    >
+    >
