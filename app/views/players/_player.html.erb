@@ -2,7 +2,7 @@
   <td>
     <% if request.env['PATH_INFO'].include? "/edit" %>
       <a href="#">
-      <% if current_user.id == player.team_id %>
+      <% if current_user.id == player.team.user_id %>
           <span class="glyphicon glyphicon-minus-sign" style="color: darkred"></span>
       <% else %>
           <span class="glyphicon glyphicon-plus-sign" style="color: darkred"></span>
@@ -10,11 +10,10 @@
       </a>
     <% end %>
 
-    <% if player.image_path.nil? %>
-      <%= link_to player.name, player %>
-    <% else %>
-      <%= image_tag player.image_path, size: "40x40" %><%= link_to player.name, player %>
+    <% if !player.image_path.nil? %>
+      <%= image_tag player.image_path, size: "40x40" %>
     <% end %>
+    <%= link_to player.name, player %>
   </td>
 
   <td class="text-center"><%= player.team.name %></td>
