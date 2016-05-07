@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424154203) do
+ActiveRecord::Schema.define(version: 20160504141036) do
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160424154203) do
     t.datetime "updated_at",                 null: false
     t.boolean  "isChosen",   default: false
     t.string   "image_path"
+    t.string   "real_team"
   end
 
   add_index "players", ["team_id"], name: "index_players_on_team_id"

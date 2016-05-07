@@ -16,9 +16,25 @@ class TeamsController < ApplicationController
   end
 
   def edit
+=begin
+    positionFilter = params[:positionFilter]
+    valueFilter = params[:valueFilter]
+    @response = []
+=end
     @team = Team.find(params[:id])
     @players = @team.players.paginate(page: params[:page])
-    @allplayers = Player.where("team_id != ?", @team.id).paginate(page:params[:page], :per_page => 15)
+    @allplayers = Player.where("team_id != ?", @team.id).all
+=begin
+
+    if (positionFilter == "-1" && valueFilter == "-1")
+      @allplayers = Player.where("team_id != ?", @team.id)
+      for player in @allplayers
+        @response.push(render player)
+      end
+    else
+      @allplayers = Player.where("team_id != ?", @team.id).all
+    end
+=end
   end
 
   def update

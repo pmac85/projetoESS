@@ -3,14 +3,15 @@
     <% if team.image_path.nil? %>
         <td><%= link_to team.name, team %></td>
     <% else %>
-        <td><%= image_tag team.image_path, size: "50x50" %><%= link_to team.name, team %></td>
+        <td><%= image_tag team.image_path, size: "40x40" %><%= link_to team.name, team %></td>
     <% end %>
-    <td><%= team.user_id %></td>
-    <td><%= team.league_id %></td>
-    <td>
-      <%= link_to 'Edit', action: :edit, id: team.id %>
+    <td class="text-center"><%= team.user.username %></td>
+    <td class="text-center"><%= team.league.name %></td>
+    <td class="text-center">
+      <%= link_to 'Edit', edit_team_path(team), :class => 'btn btn-default btn-xs' %>
       </br>
-      <%= link_to 'Delete', team, method: :delete, data: { confirm: "You sure?" }, remote: true %>
+      <%= link_to 'Delete', team_path(team), method: :delete, data: { confirm: "You sure?" },
+                                             remote: true, :class => 'btn btn-xs btn-danger' %>
     </td>
   </tr>
 <% end %>
