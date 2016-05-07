@@ -23,7 +23,7 @@ class TeamsController < ApplicationController
 =end
     @team = Team.find(params[:id])
     @players = @team.players.paginate(page: params[:page])
-    @allplayers = Player.where("team_id != ?", @team.id).all
+    @allplayers = Player.where.not(team_id: @team.id).includes(:team)
 =begin
 
     if (positionFilter == "-1" && valueFilter == "-1")
