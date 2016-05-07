@@ -7,11 +7,13 @@
     <% end %>
     <td class="text-center"><%= team.user.username %></td>
     <td class="text-center"><%= team.league.name %></td>
-    <td class="text-center">
-      <%= link_to 'Edit', edit_team_path(team), :class => 'btn btn-default btn-xs' %>
-      </br>
-      <%= link_to 'Delete', team_path(team), method: :delete, data: { confirm: "You sure?" },
-                                             remote: true, :class => 'btn btn-xs btn-danger' %>
-    </td>
+    <% if !current_user.admin %>
+      <td class="text-center">
+        <%= link_to 'Edit', edit_team_path(team), :class => 'btn btn-default btn-xs' %>
+        </br>
+        <%= link_to 'Delete', team_path(team), method: :delete, data: { confirm: "You sure?" },
+                                               remote: true, :class => 'btn btn-xs btn-danger' %>
+      </td>
+    <% end %>
   </tr>
 <% end %>

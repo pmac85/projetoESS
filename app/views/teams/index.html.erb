@@ -12,7 +12,9 @@
             <th class="text-center" style="background-color:lightgrey;">Name</th>
             <th class="text-center" style="background-color:lightgrey;">User</th>
             <th class="text-center" style="background-color:lightgrey;">League</th>
-            <th class="text-center" style="background-color:lightgrey;">Actions</th>
+            <% if !current_user.admin %>
+              <th class="text-center" style="background-color:lightgrey;">Actions</th>
+            <% end %>
           </tr>
           </thead>
 
