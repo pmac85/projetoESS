@@ -8,32 +8,32 @@
                   <td><a href="#"><span class="glyphicon glyphicon-plus-sign" style="color: darkred">
                   </span></a> <%= link_to player.name, player %></td>
               <% end %>
-              <td><%= player.team_id %></td>
-              <td><%= player.position %></td>
-              <td><%= player.value %></td>
+              <td class="text-center"><%= player.team.name %></td>
+              <td class="text-center"><%= player.position %></td>
+              <td class="text-center"><%= player.value %></td>
         <% elsif request.env['PATH_INFO'] == "/teams/#{player.team.id}"%>
             <td><%= link_to player.name, player %></td>
-            <td><%= player.team.id %></td>
-            <td><%= player.position %></td>
-            <td><%= player.value %></td>
+            <td class="text-center"><%= player.team.name %></td>
+            <td class="text-center"><%= player.position %></td>
+            <td class="text-center"><%= player.value %></td>
         <% end %>
   <% else %>
       <% if request.env['PATH_INFO'].include? "/edit" %>
           <% if current_user.id == player.team_id %>
               <td><a href="#"><span class="glyphicon glyphicon-minus-sign" style="color: darkred">
-                  </span></a> <%= image_tag player.image_path, size: "50x50" %><%= link_to player.name, player %></td>
+                  </span></a> <%= image_tag player.image_path, size: "40x40" %><%= link_to player.name, player %></td>
           <% else %>
               <td><a href="#"><span class="glyphicon glyphicon-plus-sign" style="color: darkred">
-                  </span></a> <%= image_tag player.image_path, size: "50x50" %><%= link_to player.name, player %></td>
+                  </span></a> <%= image_tag player.image_path, size: "40x40" %><%= link_to player.name, player %></td>
           <% end %>
-          <td><%= player.team_id %></td>
-          <td><%= player.position %></td>
-          <td><%= player.value %></td>
+          <td class="text-center"><%= player.team.name %></td>
+          <td class="text-center"><%= player.position %></td>
+          <td class="text-center"><%= player.value %></td>
       <% elsif request.env['PATH_INFO'] == "/teams/#{player.team_id}"%>
-          <td><%= image_tag player.image_path, size: "50x50" %><%= link_to player.name, player %></td>
-          <td><%= player.team_id %></td>
-          <td><%= player.position %></td>
-          <td><%= player.value %></td>
+          <td><%= image_tag player.image_path, size: "40x40" %><%= link_to player.name, player %></td>
+          <td class="text-center"><%= player.team.name %></td>
+          <td class="text-center"><%= player.position %></td>
+          <td class="text-center"><%= player.value %></td>
       <% end %>
   <% end %>
 </tr>

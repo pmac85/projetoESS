@@ -1,23 +1,46 @@
 <% provide(:title, @league.name) %>
-<div class="row">
-  <div class="divs">
-    <% if @league.teams.any? %>
-        <h1><%= @league.name %></h1>
-        <h3>Teams (<%= @league.teams.count %>)</h3>
-        <table class="table table-hover table-striped">
-          <thead>
-          <tr class="info">
-            <th>Name</th>
-            <th>UserID</th>
-            <th>LeagueID</th>
-          </tr>
-          </thead>
-          <tbody>
-          <%= will_paginate @teams%>
-          <%= render @teams %>
-          </tbody>
-        </table>
-        <%= will_paginate @teams%>
-    <% end %>
+
+<div class="divs">
+  <div class="col-md-offset-2 col-xs-8">
+    <div class="box">
+      <h3 class="text-center text-capitalize"><%= @league.name %></h3>
+      <% if @league.teams.any? %>
+          <div class="row">
+            <div class="box-body table-responsive">
+              <table id="listTeams" class="table table-bordered table-hover" style="background-color: #FFFFFF">
+                <thead>
+                <tr class="info">
+                  <th class="text-center" style="background-color:lightgrey;">Name</th>
+                  <th class="text-center" style="background-color:lightgrey;">User</th>
+                  <th class="text-center" style="background-color:lightgrey;">League</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @teams.each do |team| %>
+                    <tr>
+                      <% if team.image_path.nil? %>
+                          <td><%= link_to team.name, team %></td>
+                      <% else %>
+                          <td><%= image_tag team.image_path, size: "30x30" %><%= link_to team.name, team %></td>
+                      <% end %>
+                      <td class="text-center"><%= team.user.username %></td>
+                      <td class="text-center"><%= team.league.name %></td>
+                    </tr>
+                <% end %>>
+                </tbody>
+              </table>
+            </div>
+          </div>
+      <% end %>
+    </div>
   </div>
+  <% content_for :js do %>
+      <script>
+        $(function () {
+          $("#listTeams").DataTable();
+        });
+      </script>
+
+  <% end %>
 </div>
+

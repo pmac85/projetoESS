@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
   end
 
   def index
-    @players = Player.paginate(page: params[:page])
+    @players = Player.all
   end
 
   def create

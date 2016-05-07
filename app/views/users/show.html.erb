@@ -1,6 +1,6 @@
 <% provide(:title, @user.username) %>
 <div class="row">
-  <div class="divs">
+  <div class="divs box-body table-responsive">
     <aside class="col-md-4">
       <section class="user_info">
         <h1>
@@ -11,22 +11,24 @@
     </aside>
     <aside class="col-md-8">
       <% if @user.teams.any? %>
-          <h1>All Teams</h1>
-          <h3>Teams (<%= @user.teams.count %>)</h3>
-          <table class="table table-hover table-striped">
+          <% if @user.teams.count == 1 %>
+            <h3>My Team</h3>
+          <% else %>
+            <h3>My Teams</h3>
+          <% end %>
+          <table class="table table-bordered table-hover" style="background-color: #FFFFFF">
             <thead>
             <tr class="info">
-              <th>Name</th>
-              <th>UserID</th>
-              <th>LeagueID</th>
+              <th class="text-center" style="background-color:lightgrey;">Team</th>
+              <th class="text-center" style="background-color:lightgrey;">User</th>
+              <th class="text-center" style="background-color:lightgrey;">League</th>
+              <th class="text-center" style="background-color:lightgrey;">Actions</th>
             </tr>
             </thead>
             <tbody>
-              <%= will_paginate @teams%>
               <%= render @teams %>
             </tbody>
           </table>
-          <%= will_paginate @teams%>
       <% end %>
     </aside>
     </div>

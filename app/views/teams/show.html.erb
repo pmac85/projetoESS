@@ -1,6 +1,6 @@
 <% provide(:title, @team.name) %>
 <div class="row">
-  <div class="divs">
+  <div class="divs box-body table-responsive">
     <aside class="col-md-4">
       <section class="user_info">
         <h1>
@@ -15,24 +15,30 @@
     </aside>
     <aside class="col-md-8">
       <% if @team.players.any? %>
-          <h1>All Players</h1>
-          <h3>Players (<%= @team.players.count %>)</h3>
-          <table class="table table-hover table-striped">
+          <h3>Players</h3>
+          <div class="row">
+          <table id="listPlayers" class="table table-bordered table-hover" style="background-color: #FFFFFF">
             <thead>
             <tr class="info">
-              <th>Name</th>
-              <th>Team</th>
-              <th>Position</th>
-              <th>Value</th>
+              <th class="text-center" style="background-color:lightgrey;">Name</th>
+              <th class="text-center" style="background-color:lightgrey;">Team</th>
+              <th class="text-center" style="background-color:lightgrey;">Position</th>
+              <th class="text-center" style="background-color:lightgrey;">Value</th>
             </tr>
             </thead>
             <tbody>
-            <%= will_paginate @players%>
             <%= render @players %>
             </tbody>
           </table>
-          <%= will_paginate @players%>
+          </div>
       <% end %>
     </aside>
   </div>
+  <% content_for :js do %>
+      <script>
+        $(function () {
+          $("#listPlayers").DataTable();
+        });
+      </script>
+  <% end %>
 </div>

@@ -1,77 +1,81 @@
 <% provide(:title, 'Transfers') %>
 <div class="row">
-  <div class="divs">
-    <div class="pesquisa">
+  <div class="divs box-body table-responsive">
+    <div id="playerSearch" class="pesquisa">
       <div class="campo-pesquisa">
         <label>See</label>
-        <div class="dropdown text-align-center">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">All players
-            <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Goalkeeper</a></li>
-            <li><a href="#">Defender</a></li>
-            <li><a href="#">Midfielder</a></li>
-            <li><a href="#">Forward</a></li>
-          </ul>
+          <select class="btn btn-default" id="positionFilter">
+            <option selected id="-1">All players</option>
+            <option id="1">Goalkeeper</option>
+            <option id="2">Defender</option>
+            <option id="3">Midfielder</option>
+            <option id="4">Forward</option>
+          </select>
       </div>
-    </div>
       <div class="campo-pesquisa">
         <label>Maximum value</label>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Unlimited
-            <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a href="#">100</a></li>
-            <li><a href="#">90</a></li>
-            <li><a href="#">80</a></li>
-            <li><a href="#">70</a></li>
-            <li><a href="#">60</a></li>
-            <li><a href="#">50</a></li>
-          </ul>
+          <select class="btn btn-default" id="valueFilter">
+            <option selected id="-1">Unlimited</option>
+            <option id="1">100</option>
+            <option id="2">90</option>
+            <option id="3">80</option>
+            <option id="4">70</option>
+            <option id="3">60</option>
+            <option id="4">55</option>
+          </select>
       </div>
-    </div>
       <div class="botao-pesquisa">
         <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> Search</button>
       </div>
     </div>
     <div>
-    <aside class="col-md-6">
-      <h1>Players</h1>
-      <table class="table table-hover table-striped">
+    <aside id="playersEdit" class="col-md-6" style="padding-right: 2%;">
+      <h3>Players</h3>
+      <div class="row">
+      <table id="listAllPlayers" class="table table-bordered table-hover" style="background-color: #FFFFFF">
         <thead>
         <tr class="info">
-          <th>Name</th>
-          <th>Team</th>
-          <th>Position</th>
-          <th>Value</th>
+          <th class="text-center" style="background-color:lightgrey;">Name</th>
+          <th class="text-center" style="background-color:lightgrey;">Team</th>
+          <th class="text-center" style="background-color:lightgrey;">Position</th>
+          <th class="text-center" style="background-color:lightgrey;">Value</th>
         </tr>
         </thead>
         <tbody>
         <%= render @allplayers %>
         </tbody>
       </table>
-      <%= will_paginate @allplayers%>
+      </div>
     </aside>
-    <aside class="col-md-6">
+    <aside class="col-md-6" style="padding-left: 3%;">
       <% if @team.players.any? %>
-          <h1>Your Team</h1>
-          <table class="table table-hover table-striped">
+          <h3>My Team</h3>
+          <div class="row">
+          <table id="listPlayers" class="table table-bordered table-hover" style="background-color: #FFFFFF">
             <thead>
             <tr class="info">
-              <th>Name</th>
-              <th>Team</th>
-              <th>Position</th>
-              <th>Value</th>
+              <th class="text-center" style="background-color:lightgrey;">Name</th>
+              <th class="text-center" style="background-color:lightgrey;">Team</th>
+              <th class="text-center" style="background-color:lightgrey;">Position</th>
+              <th class="text-center" style="background-color:lightgrey;">Value</th>
             </tr>
             </thead>
             <tbody>
             <%= render @players %>
             </tbody>
           </table>
-          <%= will_paginate @players%>
+          </div>
       <% end %>
     </aside>
     <button type="button" class="btn btn-success pull-right btn-lg">Confirm Transfer</button>
   </div>
   </div>
+  <% content_for :js do %>
+      <script>
+        $(function () {
+          $("#listAllPlayers").DataTable();
+          $("#listPlayers").DataTable();
+        });
+      </script>
+  <% end %>
 </div>
