@@ -3,7 +3,11 @@ class TeamsController < ApplicationController
   before_action :correct_user
 
   def index
-    @teams = Team.paginate(page: params[:page])
+    if(current_user.admin)
+      @teams = Team.paginate(page: params[:page])
+    else
+      @teams = current_user.teams.paginate(page: params[:page])
+    end
   end
 
   def show
@@ -51,7 +55,7 @@ class TeamsController < ApplicationController
   end
 
   def correct_user
-    @team = current_user.teams.find_by(id: params[:id])
+    @team = current_user.teams#.find_by(id: params[:id])
     return if(current_user.admin)
     redirect_to root_url if @team.nil?
   end
