@@ -4,16 +4,12 @@
     <aside class="col-md-4">
       <section class="user_info">
         <h1>
-          <% if @player.image_path.nil? %>
-            <%= @player.name %>
-            <%= @player.position %>
-            <%= @player.value %>
-          <% else %>
+          <% if !@player.image_path.nil? %>
               <%= image_tag @player.image_path, size: "150x150" %>
-              <%= @player.name %>
-              <%= @player.position %>
-              <%= @player.value %>
           <% end %>
+          <%= @player.name %>
+          <%= @player.position %>
+          <%= @player.value %>
         </h1>
       </section>
     </aside>

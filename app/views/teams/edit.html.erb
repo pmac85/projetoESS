@@ -4,54 +4,68 @@
   var sell = [];
   var buy = [];
 
-  function addPlayer(id) {
+  var allPlayers;
+  var myPlayers;
+
+  $(document).ready(function () {
+    allPlayers = $("#listAllPlayers").DataTable({
+      select: {
+        style: 'multi'
+      }
+    });
+    myPlayers = $("#listPlayers").DataTable({
+      select: {
+        style: 'multi'
+      }
+    });
+
+
+    allPlayers.on('select', function (e,dt,type,indexes){
+      if (type === 'row') {
+        var data = allPlayers.rows(indexes).nodes().to$();
+        rowSelected(data,true,buy,1);
+      }
+    });
+    allPlayers.on('deselect', function (e,dt,type,indexes){
+      if (type === 'row') {
+        var data = allPlayers.rows(indexes).nodes().to$();
+        rowSelected(data,false,buy,-1);
+      }
+    });
+
+
+    myPlayers.on('select', function (e,dt,type,indexes){
+      if (type === 'row') {
+        var data = myPlayers.rows(indexes).nodes().to$();
+        rowSelected(data,true,sell,-1);
+      }
+    });
+    myPlayers.on('deselect', function (e,dt,type,indexes){
+      if (type === 'row') {
+        var data = myPlayers.rows(indexes).nodes().to$();
+        rowSelected(data,false,sell,1);
+      }
+    });
+  });
+
+  function rowSelected(row,selected,array,change){
+    var id = row.attr('id');
     var budget = parseInt($("#teamBudget").text(),10);
-    var value = parseInt($("#listAllPlayers #"+id+" td:last").text(),10);
+    var value = parseInt(row.find('td:last').text(),10);
+    if(selected){
 
-    $('#listPlayers tr:last').after($("#listAllPlayers #"+id));
-
-
-    $("#listPlayers #"+id+" td:first span").attr("class","glyphicon glyphicon-minus-sign");
-    $("#listPlayers #"+id+" td:first span").attr("onclick","removePlayer("+id+")");
-
-    $("#teamBudget").text(budget-value);
-
-    $("#listAllPlayers #"+id).fadeOut();
-
-    var ind = $.inArray(id, sell);
-    if(ind == -1){
-      buy.push(id);
+      array.push(id);
+      $("#teamBudget").text(budget+value*change);
     }
     else{
-      sell.splice(ind, 1);
+
+      var ind = $.inArray(id, array);
+      if(ind != -1){
+        array.splice(ind, 1);
+      }
+      $("#teamBudget").text(budget+value*change);
     }
-
-    //alert('Add!');
-  };
-  function removePlayer(id) {
-    var budget = parseInt($("#teamBudget").text(),10);
-    var value = parseInt($("#listPlayers #"+id+" td:last").text(),10);
-
-    $('#listAllPlayers tr:last').after($("#listPlayers #"+id));
-
-    $("#listAllPlayers #"+id+" td:first span").attr("class","glyphicon glyphicon-plus-sign");
-    $("#listAllPlayers #"+id+" td:first span").attr("onclick","addPlayer("+id+")");
-
-    $("#teamBudget").text(budget+value);
-
-    $("#listPlayers #"+id).fadeOut();
-
-    var ind = $.inArray(id, buy);
-    if(ind == -1){
-      sell.push(id);
-    }
-    else{
-      buy.splice(ind, 1);
-    }
-
-
-    //alert('Remove!');
-  };
+  }
 </script>
 
 <div class="row">
@@ -88,50 +102,45 @@
     <aside id="playersEdit" class="col-md-6" style="padding-right: 2%;">
       <h3>Players</h3>
       <div class="row">
-      <table id="listAllPlayers" class="table table-bordered table-hover" style="background-color: #FFFFFF">
-        <thead>
-        <tr class="info">
-          <th class="text-center" style="background-color:lightgrey;">Name</th>
-          <th class="text-center" style="background-color:lightgrey;">Team</th>
-          <th class="text-center" style="background-color:lightgrey;">Position</th>
-          <th class="text-center" style="background-color:lightgrey;">Value</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%= render @allplayers %>
-        </tbody>
-      </table>
+        <table id="listAllPlayers" class="table table-bordered" style="background-color: #FFFFFF">
+          <thead>
+          <tr class="info">
+            <th class="text-center" style="background-color:lightgrey;">Name</th>
+            <th class="text-center" style="background-color:lightgrey;">Team</th>
+            <th class="text-center" style="background-color:lightgrey;">Position</th>
+            <th class="text-center" style="background-color:lightgrey;">Value</th>
+          </tr>
+          </thead>
+          <tbody>
+            <%= render @allplayers %>
+          </tbody>
+        </table>
       </div>
     </aside>
     <aside class="col-md-6" style="padding-left: 3%;">
       <% if @team.players.any? %>
           <h3>My Team</h3>
           <div class="row">
-          <table id="listPlayers" class="table table-bordered table-hover" style="background-color: #FFFFFF">
-            <thead>
-            <tr class="info">
-              <th class="text-center" style="background-color:lightgrey;">Name</th>
-              <th class="text-center" style="background-color:lightgrey;">Team</th>
-              <th class="text-center" style="background-color:lightgrey;">Position</th>
-              <th class="text-center" style="background-color:lightgrey;">Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%= render @players %>
-            </tbody>
-          </table>
+            <table id="listPlayers" class="table table-bordered" style="background-color: #FFFFFF">
+              <thead>
+                <tr class="info">
+                  <th class="text-center" style="background-color:lightgrey;">Name</th>
+                  <th class="text-center" style="background-color:lightgrey;">Team</th>
+                  <th class="text-center" style="background-color:lightgrey;">Position</th>
+                  <th class="text-center" style="background-color:lightgrey;">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= render @players %>
+              </tbody>
+            </table>
           </div>
       <% end %>
     </aside>
     <button type="button" class="btn btn-success pull-right btn-lg">Confirm Transfer</button>
   </div>
   </div>
-  <% content_for :js do %>
-      <script>
-        $(function () {
-          $("#listAllPlayers").DataTable();
-          $("#listPlayers").DataTable();
-        });
-      </script>
-  <% end %>
+
+
+
 </div>

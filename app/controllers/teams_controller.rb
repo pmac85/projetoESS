@@ -22,7 +22,7 @@ class TeamsController < ApplicationController
     @response = []
 =end
     @team = Team.find(params[:id])
-    @players = @team.players.paginate(page: params[:page])
+    @players = @team.players#.paginate(page: params[:page])
     @allplayers = Player.where.not(team_id: @team.id).includes(:team)
 =begin
 
