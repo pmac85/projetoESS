@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504141036) do
+ActiveRecord::Schema.define(version: 20160509110941) do
+
+  create_table "games", force: :cascade do |t|
+    t.string   "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "team1_id"
+    t.integer  "team2_id"
+  end
+
+  create_table "journeys", force: :cascade do |t|
+    t.date     "date"
+    t.integer  "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name"
@@ -33,14 +48,28 @@ ActiveRecord::Schema.define(version: 20160504141036) do
 
   add_index "players", ["team_id"], name: "index_players_on_team_id"
 
+  create_table "real_teams", force: :cascade do |t|
+    t.string   "name"
+    t.string   "image_path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer  "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string   "name"
     t.integer  "budget"
     t.integer  "user_id"
     t.integer  "league_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "image_path"
+    t.integer  "total_score"
   end
 
   add_index "teams", ["league_id"], name: "index_teams_on_league_id"
