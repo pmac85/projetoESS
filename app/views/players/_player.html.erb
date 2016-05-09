@@ -1,15 +1,5 @@
 <tr id="<%= player.id %>">
   <td>
-    <% if request.env['PATH_INFO'].include? "/edit" %>
-
-      <% if current_user.id == player.team.user_id %>
-          <span onclick="removePlayer(<%= player.id %>)" class="glyphicon glyphicon-minus-sign" style="color: darkred"></span>
-      <% else %>
-          <span onclick="addPlayer(<%= player.id %>)" class="glyphicon glyphicon-plus-sign" style="color: darkred"></span>
-      <% end %>
-
-    <% end %>
-
     <% if !player.image_path.nil? %>
       <%= image_tag player.image_path, size: "40x40" %>
     <% end %>

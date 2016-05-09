@@ -10,7 +10,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require data_tables/dataTables.bootstrap
+ *= require data_tables/dataTables.bootstrap.min.css
+ *= require data_tables/select.bootstrap.min.css
  *= require_tree .
  *= require_self
  */
