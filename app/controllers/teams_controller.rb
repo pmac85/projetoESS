@@ -16,25 +16,40 @@ class TeamsController < ApplicationController
   end
 
   def edit
-=begin
     positionFilter = params[:positionFilter]
     valueFilter = params[:valueFilter]
-    @response = []
-=end
     @team = Team.find(params[:id])
     @players = @team.players#.paginate(page: params[:page])
-    @allplayers = Player.where.not(team_id: @team.id).includes(:team)
-=begin
+ #   @allplayers = Player.where.not(team_id: @team.id).includes(:team)
 
     if (positionFilter == "-1" && valueFilter == "-1")
-      @allplayers = Player.where("team_id != ?", @team.id)
-      for player in @allplayers
-        @response.push(render player)
+      @allplayers = Player.where.not(team_id: @team.id).includes(:team)
+    elsif (positionFilter != "-1" && valueFilter == "-1")
+      case positionFilter
+        when "1"
+          @allplayers = Player.where.not(team_id: @team.id).where(position: "GK").includes(:team)
+        when "2"
+          @allplayers = Player.where.not(team_id: @team.id).where(position: "DEF").includes(:team)
+        when "3"
+          @allplayers = Player.where.not(team_id: @team.id).where(position: "MID").includes(:team)
+        when "4"
+          @allplayers = Player.where.not(team_id: @team.id).where(position: "FOR").includes(:team)
       end
+    elsif (positionFilter == "-1" && valueFilter != "-1")
+      @allplayers = Player.where.not(team_id: @team.id).where(value: 0..valueFilter.to_i).includes(:team)
     else
-      @allplayers = Player.where("team_id != ?", @team.id).all
+      case positionFilter
+        when "1"
+          @allplayers = Player.where.not(team_id: @team.id).where(position: "GK").where(value: 0..valueFilter.to_i).includes(:team)
+        when "2"
+          @allplayers = Player.where.not(team_id: @team.id).where(position: "DEF").where(value: 0..valueFilter.to_i).includes(:team)
+        when "3"
+          @allplayers = Player.where.not(team_id: @team.id).where(position: "MID").where(value: 0..valueFilter.to_i).includes(:team)
+        when "4"
+          @allplayers = Player.where.not(team_id: @team.id).where(position: "FOR").where(value: 0..valueFilter.to_i).includes(:team)
+      end
     end
-=end
+
   end
 
   def update
