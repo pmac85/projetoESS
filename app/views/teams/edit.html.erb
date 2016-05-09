@@ -23,13 +23,13 @@
     allPlayers.on('select', function (e,dt,type,indexes){
       if (type === 'row') {
         var data = allPlayers.rows(indexes).nodes().to$();
-        rowSelected(data,true,buy,1);
+        rowSelection(data,true,buy,-1);
       }
     });
     allPlayers.on('deselect', function (e,dt,type,indexes){
       if (type === 'row') {
         var data = allPlayers.rows(indexes).nodes().to$();
-        rowSelected(data,false,buy,-1);
+        rowSelection(data,false,buy,1);
       }
     });
 
@@ -37,18 +37,18 @@
     myPlayers.on('select', function (e,dt,type,indexes){
       if (type === 'row') {
         var data = myPlayers.rows(indexes).nodes().to$();
-        rowSelected(data,true,sell,-1);
+        rowSelection(data,true,sell,1);
       }
     });
     myPlayers.on('deselect', function (e,dt,type,indexes){
       if (type === 'row') {
         var data = myPlayers.rows(indexes).nodes().to$();
-        rowSelected(data,false,sell,1);
+        rowSelection(data,false,sell,-1);
       }
     });
   });
 
-  function rowSelected(row,selected,array,change){
+  function rowSelection(row,selected,array,change){
     var id = row.attr('id');
     var budget = parseInt($("#teamBudget").text(),10);
     var value = parseInt(row.find('td:last').text(),10);
