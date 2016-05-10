@@ -72,6 +72,11 @@
     var valueFilter = $('#valueFilter option:selected').attr('id');
     window.open("/teams/<%= @team.id %>/edit?positionFilter="+positionFilter+"&valueFilter="+valueFilter,"_self");
   };
+
+  function confirmaTransferencia(){
+    window.open("/teams/<%= @team.id %>/transfer?sell="+sell+"&buy="+buy,"_self");
+
+  };
 </script>
 
 <div class="row">
@@ -109,7 +114,7 @@
     <aside id="playersEdit" class="col-md-6" style="padding-right: 2%;">
       <h3>Players</h3>
       <div class="row">
-        <table id="listAllPlayers" class="table table-bordered" style="background-color: #FFFFFF">
+        <table id="listAllPlayers" class="table table-bordered table-condensed" style="background-color: #FFFFFF">
           <thead>
           <tr class="info">
             <th class="text-center" style="background-color:lightgrey;">Name</th>
@@ -128,7 +133,7 @@
       <% if @team.players.any? %>
           <h3>My Team</h3>
           <div class="row">
-            <table id="listPlayers" class="table table-bordered" style="background-color: #FFFFFF">
+            <table id="listPlayers" class="table table-bordered table-condensed" style="background-color: #FFFFFF">
               <thead>
                 <tr class="info">
                   <th class="text-center" style="background-color:lightgrey;">Name</th>
@@ -144,7 +149,7 @@
           </div>
       <% end %>
     </aside>
-    <button type="button" class="btn btn-success pull-right btn-lg">Confirm Transfer</button>
+    <button type="button" class="btn btn-success pull-right btn-lg" onclick = "confirmaTransferencia()">Confirm Transfer</button>
   </div>
   </div>
 
