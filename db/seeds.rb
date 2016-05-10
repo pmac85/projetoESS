@@ -46,21 +46,21 @@ end
 teams = Team.order(:created_at).take(10)
 2.times do
   name = Faker::Name.name
-  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "GK", value: 15,isChosen: true,
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "GK", value: 15, isChosen: true, is_active: (Random.new.rand(2) == 0),
                                      image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
 end
 5.times do
   name = Faker::Name.name
-  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "DEF", value: 20,isChosen: true,
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "DEF", value: 20, isChosen: true, is_active: (Random.new.rand(2) == 0),
                                      image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
 end
 5.times do
   name = Faker::Name.name
-  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "MID", value: 25,isChosen: true,
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "MID", value: 25, isChosen: true, is_active: (Random.new.rand(2) == 0),
                                      image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
 end
 3.times do
   name = Faker::Name.name
-  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "FOR", value: 40,isChosen: true,
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "FOR", value: 40, isChosen: true, is_active: (Random.new.rand(2) == 0),
                                      image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
 end
