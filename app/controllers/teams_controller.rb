@@ -76,7 +76,21 @@ class TeamsController < ApplicationController
       format.html {redirect_to request.referrer || root_url}
       format.js
     end
+  end
 
+  def changeStrategy
+    @team = Team.find(params[:id])
+
+    @team.players.update_all(is_active: false)
+
+    ids = []
+    ['FOR','MID','DEF','GK'].each do |pos|
+      ids += params[pos] if(params[pos] != nil)
+    end
+
+    @team.players.where(id: ids).update_all(is_active: true)
+
+    render :nothing => true
   end
 
   private

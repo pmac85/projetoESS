@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   resources :players,             only: [:index, :show]
   resources :leagues,             only: [:index, :show]
 
+  post 'teams/:id/strategy' => 'teams#changeStrategy'
+
 end
