@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509110941) do
+ActiveRecord::Schema.define(version: 20160510093354) do
 
   create_table "games", force: :cascade do |t|
     t.string   "score"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160509110941) do
     t.boolean  "isChosen",   default: false
     t.string   "image_path"
     t.string   "real_team"
+    t.boolean  "is_active",  default: false
   end
 
   add_index "players", ["team_id"], name: "index_players_on_team_id"

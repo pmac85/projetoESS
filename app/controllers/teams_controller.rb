@@ -6,21 +6,20 @@ class TeamsController < ApplicationController
     if(current_user.admin)
       @teams = Team.paginate(page: params[:page])
     else
-      @teams = current_user.teams.paginate(page: params[:page])
+      @teams = current_user.teams
     end
   end
 
   def show
     @team = Team.find(params[:id])
-    @players = @team.players.paginate(page: params[:page])
+    @players = @team.players
   end
 
   def edit
     positionFilter = params[:positionFilter]
     valueFilter = params[:valueFilter]
     @team = Team.find(params[:id])
-    @players = @team.players#.paginate(page: params[:page])
- #   @allplayers = Player.where.not(team_id: @team.id).includes(:team)
+    @players = @team.players
 
     if (positionFilter == "-1" && valueFilter == "-1")
       @allplayers = Player.where.not(team_id: @team.id).includes(:team)
