@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @teams = @user.teams.paginate(page: params[:page], :per_page => 15)
+    @teams = @user.teams
   end
 
   def create

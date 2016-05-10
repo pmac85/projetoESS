@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   resources :leagues,             only: [:index, :show]
 
   post 'teams/:id/strategy' => 'teams#changeStrategy'
+  get 'teams/:id/transfer' => 'teams#transfer'
 
 end
