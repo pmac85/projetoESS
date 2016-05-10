@@ -9,8 +9,11 @@
     <% end %>
     <%= link_to player.name, player %>
   </td>
-
-  <td class="text-center"><%= player.team.name %></td>
+  <% if player.team %>
+    <td class="text-center"><%= player.team.name %></td>
+  <% else %>
+    <td class="text-center">Free player</td>
+  <% end %>
   <td class="text-center"><%= player.position %></td>
   <td class="text-center"><%= player.value %></td>
 </tr>

@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20160510093354) do
     t.integer  "team_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.boolean  "isChosen",   default: false
+    t.boolean  "is_chosen",  default: false
     t.string   "image_path"
     t.string   "real_team"
     t.boolean  "is_active",  default: false

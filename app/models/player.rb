@@ -11,6 +11,7 @@ class Player < ActiveRecord::Base
       errors.add(:team_id, "Error in team_id, team can't have more than 15 players") if(team_id && Player.where(team_id: self.team_id).size >= 15)
   end
   def playersPositions
+    return if !self.team_id
     size = Player.where(team_id: self.team_id, position: self.position).size
 
     case self.position

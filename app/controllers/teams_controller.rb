@@ -20,35 +20,63 @@ class TeamsController < ApplicationController
     valueFilter = params[:valueFilter]
     @team = Team.find(params[:id])
     @players = @team.players
-
+    @allplayers = Player.where(is_chosen: false).includes(:team)
     if (positionFilter == "-1" && valueFilter == "-1")
-      @allplayers = Player.where.not(team_id: @team.id).includes(:team)
+      @allplayers = Player.where(is_chosen: false).includes(:team)
     elsif (positionFilter != "-1" && valueFilter == "-1")
       case positionFilter
         when "1"
-          @allplayers = Player.where.not(team_id: @team.id).where(position: "GK").includes(:team)
+          @allplayers = Player.where(position: "GK", is_chosen: false).includes(:team)
         when "2"
-          @allplayers = Player.where.not(team_id: @team.id).where(position: "DEF").includes(:team)
+          @allplayers = Player.where(position: "DEF", is_chosen: false).includes(:team)
         when "3"
-          @allplayers = Player.where.not(team_id: @team.id).where(position: "MID").includes(:team)
+          @allplayers = Player.where(position: "MID", is_chosen: false).includes(:team)
         when "4"
-          @allplayers = Player.where.not(team_id: @team.id).where(position: "FOR").includes(:team)
+          @allplayers = Player.where(position: "FOR", is_chosen: false).includes(:team)
       end
     elsif (positionFilter == "-1" && valueFilter != "-1")
-      @allplayers = Player.where.not(team_id: @team.id).where(value: 0..valueFilter.to_i).includes(:team)
+      @allplayers = Player.where(value: 0..valueFilter.to_i, is_chosen: false).includes(:team)
     else
       case positionFilter
         when "1"
-          @allplayers = Player.where.not(team_id: @team.id).where(position: "GK").where(value: 0..valueFilter.to_i).includes(:team)
+          @allplayers = Player.where(position: "GK", value: 0..valueFilter.to_i, is_chosen: false).includes(:team)
         when "2"
-          @allplayers = Player.where.not(team_id: @team.id).where(position: "DEF").where(value: 0..valueFilter.to_i).includes(:team)
+          @allplayers = Player.where(position: "DEF", value: 0..valueFilter.to_i, is_chosen: false).includes(:team)
         when "3"
-          @allplayers = Player.where.not(team_id: @team.id).where(position: "MID").where(value: 0..valueFilter.to_i).includes(:team)
+          @allplayers = Player.where(position: "MID", value: 0..valueFilter.to_i, is_chosen: false).includes(:team)
         when "4"
-          @allplayers = Player.where.not(team_id: @team.id).where(position: "FOR").where(value: 0..valueFilter.to_i).includes(:team)
+          @allplayers = Player.where(position: "FOR", value: 0..valueFilter.to_i, is_chosen: false).includes(:team)
       end
     end
+  end
 
+  def transfer
+    sell = params[:sell].split(',')
+    buy = params[:buy].split(',')
+
+    @team = Team.find(params[:id])
+    @allplayers = Player.where(is_chosen: false).includes(:team)
+    if sell && buy
+      sell.each do |s|
+        @player = @team.players.find(s.to_i)
+        @player.team_id = nil
+        @player.is_chosen = false
+        @player.is_active = false
+        @player.save
+      end
+      buy.each do |b|
+        @playerb = @allplayers.find(b.to_i)
+        @playerb.team_id = @team.id
+        @playerb.is_chosen = true
+        @playerb.save
+      end
+
+      @team.save
+      flash[:success] = "Transference successfully realized."
+    else
+      flash[:error] = "Transferência não pode ser realizada"
+    end
+    redirect_to edit_team_path(@team)
   end
 
   def update
