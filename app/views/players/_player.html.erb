@@ -1,4 +1,8 @@
-<tr id="<%= player.id %>">
+<% if player.is_active %>
+  <tr id="<%= player.id %>" class="clickable-row" style="background-color: #666666">
+<% else %>
+  <tr id="<%= player.id %>" class="clickable-row">
+<% end %>
   <td>
     <% if !player.image_path.nil? %>
       <%= image_tag player.image_path, size: "40x40" %>

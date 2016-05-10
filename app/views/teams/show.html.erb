@@ -1,14 +1,13 @@
 <% provide(:title, @team.name) %>
 
 <script>
-
-  var players;
-
   $(document).ready(function () {
-    players = $("#listPlayers").DataTable({
-      select: true
-    });
-  });
+  $(".clickable-row").click(function(){
+    if($(this).hasClass("active"))
+      $(this).removeClass('active');
+    else
+      $(this).addClass('active').siblings().removeClass('active');
+  })});
 
 
 </script>
@@ -82,7 +81,7 @@
       <% if @team.players.any? %>
         <h3>Players</h3>
         <div class="row">
-          <table id="listPlayers" class="table table-bordered" style="background-color: #FFFFFF">
+          <table id="listPlayers" class="table table-bordered table-condensed" style="background-color: #FFFFFF">
             <thead>
               <tr class="info">
                 <th class="text-center" style="background-color:lightgrey;">Name</th>
