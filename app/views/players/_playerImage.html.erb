@@ -1,0 +1,47 @@
+
+<% if !player.image_path.nil? %>
+    <%= image_tag player.image_path, size: image_size %>
+<% else %>
+    <% case player.real_team %>
+      <% when "Porto" %>
+         <%= image_tag "default_teams/fcp_default.png", size: image_size %>
+      <% when "Bayern" %>
+          <%= image_tag "default_teams/bay_default.png", size: image_size %>
+      <% when "Dortmund" %>
+          <%= image_tag "default_teams/bvb_default.png", size: image_size %>
+      <% when "PSG" %>
+          <%= image_tag "default_teams/psg_default.png", size: image_size %>
+      <% when "Lisbon" %>
+          <%= image_tag "default_teams/slb_default.png", size: image_size %>
+      <% when "ManCity" %>
+          <%= image_tag "default_teams/mnc_default.png", size: image_size %>
+      <% when "Juventus" %>
+          <%= image_tag "default_teams/juv_default.png", size: image_size %>
+      <% when "Zenit" %>
+          <%= image_tag "default_teams/znt_default.png", size: image_size %>
+      <% when "Eindhoven" %>
+          <%= image_tag "default_teams/psv_default.png", size: image_size %>
+      <% when "Shakhtar" %>
+          <%= image_tag "default_teams/shk_default.png", size: image_size %>
+      <% when "Real Madrid" %>
+          <%= image_tag "default_teams/rma_default.png", size: image_size %>
+      <% when "Barcelona" %>
+          <%= image_tag "default_teams/bar_default.png", size: image_size %>
+      <% when "Atlético" %>
+          <%= image_tag "default_teams/atm_default.png", size: image_size %>
+      <% when "Arsenal" %>
+          <%= image_tag "default_teams/ars_default.png", size: image_size %>
+      <% when "Chelsea" %>
+          <%= image_tag "default_teams/che_default.png", size: image_size %>
+      <% when "Spurs" %>
+          <%= image_tag "default_teams/tot_default.png", size: image_size %>
+      <% when "Napoli" %>
+          <%= image_tag "default_teams/nap_default.png", size: image_size %>
+      <% when "Inter" %>
+          <%= image_tag "default_teams/int_default.png", size: image_size %>
+      <% when "Braga" %>
+          <%= image_tag "default_teams/scb_default.png", size: image_size %>
+      <% when "Ajax" %>
+          <%= image_tag "default_teams/ajx_default.png", size: image_size %>
+    <% end %>
+<% end %>

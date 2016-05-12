@@ -4,9 +4,7 @@
   <tr id="<%= player.id %>" class="clickable-row">
 <% end %>
   <td>
-    <% if !player.image_path.nil? %>
-      <%= image_tag player.image_path, size: "40x40" %>
-    <% end %>
+    <%= render :partial => '/players/playerImage', :locals => { :player => player, :image_size => "40x40" } %>
     <%= link_to player.name, player %>
   </td>
   <% if player.team %>
