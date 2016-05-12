@@ -32,7 +32,11 @@
                       <% else %>
                           <td><%= image_tag team.image_path, size: "30x30" %><%= link_to team.name, team %></td>
                       <% end %>
-                      <td class="text-center"><%= team.user.username %></td>
+                      <% if !team.user %>
+                          <td class="text-center">Sem User</td>
+                      <% else %>
+                        <td class="text-center"><%= team.user.username %></td>
+                      <% end %>
                       <td class="text-center"><%= team.league.name %></td>
                     </tr>
                 <% end %>
