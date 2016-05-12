@@ -51,78 +51,51 @@ class TeamsController < ApplicationController
   end
 
   def transfer
-    sell = params[:sell].split(',')
-    buy = params[:buy].split(',')
-    numGK  = 0
-    numDEF = 0
-    numMID = 0
-    numFOR = 0
-    numGK2  = 0
-    numDEF2 = 0
-    numMID2 = 0
-    numFOR2 = 0
+    if(params['sell'] == nil)
+      sell = []
+    else
+      sell = params['sell']
+    end
 
+    if(params['buy'] == nil)
+      buy = []
+    else
+      buy = params['buy']
+    end
 
     @team = Team.find(params[:id])
-    @allplayers = Player.where(is_chosen: false).includes(:team)
-    budget = @team.budget
-    if sell && buy && sell.count == buy.count
-      sell.each do |s|
-        @player = @team.players.find(s.to_i)
-        budget += @player.value
-        case @player.position
-          when "GK"
-            numGK += 1
-          when "DEF"
-            numDEF += 1
-          when "MID"
-            numMID += 1
-          when "FOR"
-            numFOR += 1
-        end
-      end
-      buy.each do |b|
-        @playerb = @allplayers.find(b.to_i)
-        budget -= @playerb.value
-        case @playerb.position
-          when "GK"
-            numGK2 += 1
-          when "DEF"
-            numDEF2 += 1
-          when "MID"
-            numMID2 += 1
-          when "FOR"
-            numFOR2 += 1
-        end
-      end
-      if numGK == numGK2 && numDEF == numDEF2 && numMID == numMID2 && numFOR == numFOR2 && budget >= 0
-        sell.each do |s|
-          @player = @team.players.find(s.to_i)
-          @player.team_id = nil
-          @player.is_chosen = false
-          @player.is_active = false
-          @player.save
-        end
-        buy.each do |b|
-          @playerb = @allplayers.find(b.to_i)
-          @playerb.team_id = @team.id
-          @playerb.is_chosen = true
-          @playerb.save
-        end
-        @team.save
-        flash[:success] = "Transference successfully realized."
-        redirect_to edit_team_path(@team)
-      elsif budget < 0
-        flash[:danger] = "Transferência não pode ser realizada. Está a tentar fazer transferências para as quais não tem orçamento."
-        redirect_to edit_team_path(@team)
-      else
-        flash[:danger] = "Transferência não pode ser realizada. Está a selecionar jogadores de posicoes que não correspondem."
-        redirect_to edit_team_path(@team)
-      end
-    else
+    @toSell = Player.where(id: sell)
+    @toBuy = Player.where(id: buy)
+
+    if(sell.length != buy.length)
       flash[:danger] = "Transferência não pode ser realizada! Pois não está a escolher o mesmo número de jogadores de cada lado"
-      redirect_to edit_team_path(@team)
+      render :nothing => true
+      return
     end
+
+    if(@toSell.where(position: 'FOR').count != @toBuy.where(position: 'FOR').count ||
+       @toSell.where(position: 'MID').count != @toBuy.where(position: 'MID').count ||
+       @toSell.where(position: 'DEF').count != @toBuy.where(position: 'DEF').count ||
+       @toSell.where(position: 'GK').count != @toBuy.where(position: 'GK').count)
+
+      flash[:danger] = "Transferência não pode ser realizada. Está a selecionar jogadores de posições que não correspondem."
+      render :nothing => true
+      return
+    end
+
+    if(@toBuy.sum(:value) > @team.budget+@toSell.sum(:value))
+      flash[:danger] = "Transferência não pode ser realizada. Está a tentar fazer transferências para as quais não tem orçamento."
+      render :nothing => true
+      return
+    end
+
+    @toBuy.update_all(team_id: @team.id)
+    @toSell.update_all(team_id: nil)
+    @team.update(budget: @team.budget+@toSell.sum(:value)-@toBuy.sum(:value))
+
+    flash[:success] = "Transference successfully realized."
+
+    render :nothing => true
   end
 
 

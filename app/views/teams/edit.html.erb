@@ -76,8 +76,17 @@
   };
 
   function confirmaTransferencia(){
-    window.open("/teams/<%= @team.id %>/transfer?sell="+sell+"&buy="+buy,"_self");
-
+    $.ajax({
+      type: "POST",
+      url: "/teams/<%= @team.id %>/transfer",
+      data: {
+        'buy': buy,
+        'sell': sell
+      },
+      success: function(){
+        location.reload();
+      }
+    });
   };
 </script>
 

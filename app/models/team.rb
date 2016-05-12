@@ -9,8 +9,8 @@ class Team < ActiveRecord::Base
 
   private
   def oneTeamPerUserPerLeague
+    return if(self.user_id == nil)
     @teams = Team.where(user_id: self.user_id, league_id: self.league_id)
-    errors.add(:user_id, 'Error in Team, you can only have one team per user per league') if(@teams.size >= 1)
+    errors.add(:user_id, 'Error in Team, you can only have one team per user per league') if(@teams.size > 1)
   end
-
 end
