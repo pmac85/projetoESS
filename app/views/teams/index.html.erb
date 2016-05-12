@@ -1,4 +1,14 @@
 <% provide(:title, 'All teams') %>
+
+<script>
+  $(document).ready(function () {
+    $("#listTeams").DataTable();
+
+
+  });
+
+</script>
+
 <div class="divs">
   <div class="col-xs-12">
     <div class="row">
@@ -26,12 +36,4 @@
     </div>
     </div>
   </div>
-  <% content_for :js do %>
-      <script>
-        $(function () {
-          $("#listTeams").DataTable();
-        });
-      </script>
-
-  <% end %>
 </div>
