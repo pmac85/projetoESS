@@ -51,19 +51,19 @@
     }
 
     function updateStrategy(){
-      var request = new XMLHttpRequest();
-      //request.onload = callback;
-
-      request.open("post", "/teams/<%= @team.id %>/strategy");
-      request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-      request.setRequestHeader("Content-Type", "application/json");
-
-      request.send(JSON.stringify({
-        'FOR': getIDs('FOR'),
-        'MID': getIDs('MID'),
-        'DEF': getIDs('DEF'),
-        'GK': getIDs('GK'),
-      }));
+      $.ajax({
+        type: "POST",
+        url: "/teams/<%= @team.id %>/strategy",
+        data: {
+              'FOR': getIDs('FOR'),
+              'MID': getIDs('MID'),
+              'DEF': getIDs('DEF'),
+              'GK': getIDs('GK')
+        },
+        success: function(){
+          location.reload();
+        }
+      });
     }
 
     function getIDs(position){
