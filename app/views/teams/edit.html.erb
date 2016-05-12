@@ -10,16 +10,22 @@
   $(document).ready(function () {
     allPlayers = $("#listAllPlayers").DataTable({
       select: {
-        style: 'multi'
+        style: 'multi',
+        info: false
       },
-      "pageLength": 15
+      "pageLength": 15,
+      //"info": false
     });
     myPlayers = $("#listPlayers").DataTable({
       select: {
-        style: 'multi'
+        style: 'multi',
+        selector: 'tr.clickable-row',
+        info: false
       },
-      "pageLength": 15
+      "paging": false,
+      "info": false
     });
+
 
 
     allPlayers.on('select', function (e,dt,type,indexes){
