@@ -16,37 +16,19 @@ class TeamsController < ApplicationController
   end
 
   def edit
+    positionArray = ["GK","DEF","MID","FOR"]
     positionFilter = params[:positionFilter]
     valueFilter = params[:valueFilter]
     @team = Team.find(params[:id])
     @players = @team.players
     @allplayers = Player.where(is_chosen: false).includes(:team)
-    if (positionFilter == "-1" && valueFilter == "-1")
-      @allplayers = Player.where(is_chosen: false).includes(:team)
-    elsif (positionFilter != "-1" && valueFilter == "-1")
-      case positionFilter
-        when "1"
-          @allplayers = Player.where(position: "GK", is_chosen: false).includes(:team)
-        when "2"
-          @allplayers = Player.where(position: "DEF", is_chosen: false).includes(:team)
-        when "3"
-          @allplayers = Player.where(position: "MID", is_chosen: false).includes(:team)
-        when "4"
-          @allplayers = Player.where(position: "FOR", is_chosen: false).includes(:team)
-      end
-    elsif (positionFilter == "-1" && valueFilter != "-1")
-      @allplayers = Player.where(value: 0..valueFilter.to_i, is_chosen: false).includes(:team)
-    else
-      case positionFilter
-        when "1"
-          @allplayers = Player.where(position: "GK", value: 0..valueFilter.to_i, is_chosen: false).includes(:team)
-        when "2"
-          @allplayers = Player.where(position: "DEF", value: 0..valueFilter.to_i, is_chosen: false).includes(:team)
-        when "3"
-          @allplayers = Player.where(position: "MID", value: 0..valueFilter.to_i, is_chosen: false).includes(:team)
-        when "4"
-          @allplayers = Player.where(position: "FOR", value: 0..valueFilter.to_i, is_chosen: false).includes(:team)
-      end
+
+    if(positionFilter != nil && positionFilter != "-1")
+      @allplayers = @allplayers.where(position: positionArray[positionFilter.to_i-1])
+    end
+
+    if(valueFilter != nil && valueFilter != "-1")
+      @allplayers = @allplayers.where(value: 0..valueFilter.to_i);
     end
   end
 
