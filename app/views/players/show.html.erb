@@ -4,9 +4,7 @@
     <aside class="col-md-4">
       <section class="user_info">
         <h1>
-          <% if !@player.image_path.nil? %>
-              <%= image_tag @player.image_path, size: "150x150" %>
-          <% end %>
+          <%= render :partial => '/players/playerImage', :locals => { :player => @player, :image_size => "150x150" } %>
           <%= @player.name %>
           <%= @player.position %>
           <%= @player.value %>

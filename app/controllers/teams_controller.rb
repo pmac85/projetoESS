@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
   before_action :correct_user
 
   def index
-    if(current_user.admin)
+    if current_user.admin
       @teams = Team.paginate(page: params[:page])
     else
       @teams = current_user.teams
