@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :teams
   resources :players,             only: [:index, :show]
-  resources :leagues,             only: [:index, :show]
+  resources :leagues,             only: [:index, :show, :new, :create]
 
   post 'teams/:id/strategy' => 'teams#changeStrategy'
   post 'teams/:id/transfer' => 'teams#transfer'
