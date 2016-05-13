@@ -5,6 +5,13 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script>
+    $(function() {
+      $('#flash').delay(500).fadeIn('normal', function() {
+        $(this).delay(4000).fadeOut();
+      });
+    });
+  </script>
 </head>
 <body>
   <div class="wrapper">
@@ -13,7 +20,7 @@
   <div class="content-wrapper" style="padding: 100px 100px 0px 100px;">
     <div class="overlay">
       <% flash.each do |message_type, message| %>
-          <div class="alert alert-<%= message_type %>"><%= message %></div>
+          <div class="alert alert-<%= message_type %>" id="flash"><%= message %></div>
       <% end %>
       <%= yield %>
     </div>

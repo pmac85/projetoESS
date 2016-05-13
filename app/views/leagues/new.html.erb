@@ -1,0 +1,32 @@
+<% provide(:title, "New League") %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.datepicker').datepicker
+    ({
+      format: "dd-mm-yyyy",
+      weekStart: 1
+    });
+    return {
+      autoclose: true
+    };
+  });
+</script>
+
+<div class="divs">
+  <h1 class="text-center">New League</h1>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(@league) do |f| %>
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+
+          <%= f.label :initial_date%>
+          <%= f.text_field :initial_date, :class =>"datepicker" %>
+
+          <%= f.submit "Submit", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
