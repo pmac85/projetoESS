@@ -17,6 +17,6 @@ Rails.application.routes.draw do
   get 'teams/:id/transfers' => 'teams#transfers', :as => 'transfers_team'
   post 'teams/:id/strategy' => 'teams#changeStrategy'
   post 'teams/:id/transfer' => 'teams#transfer'
-  post 'teams/:id/edit' => 'teams#edit'
+  post 'teams/:id/edit'     => 'teams#edit'
 
 end
