@@ -1,0 +1,177 @@
+<% provide(:title, 'Transfers') %>
+
+<script>
+  var sell = [];
+  var buy = [];
+
+  var allPlayers;
+  var myPlayers;
+
+  $(document).ready(function () {
+    allPlayers = $("#listAllPlayers").DataTable({
+      select: {
+        style: 'multi',
+        info: false
+      },
+      "pageLength": 15,
+      "pagingType": 'numbers'
+      //"info": false
+    });
+    myPlayers = $("#listPlayers").DataTable({
+      select: {
+        style: 'multi',
+        selector: 'tr.clickable-row',
+        info: false
+      },
+      "paging": false,
+      "info": false
+    });
+
+
+
+    allPlayers.on('select', function (e,dt,type,indexes){
+      if (type === 'row') {
+        var data = allPlayers.rows(indexes).nodes().to$();
+        rowSelection(data,true,buy,-1);
+      }
+    });
+    allPlayers.on('deselect', function (e,dt,type,indexes){
+      if (type === 'row') {
+        var data = allPlayers.rows(indexes).nodes().to$();
+        rowSelection(data,false,buy,1);
+      }
+    });
+
+
+    myPlayers.on('select', function (e,dt,type,indexes){
+      if (type === 'row') {
+        var data = myPlayers.rows(indexes).nodes().to$();
+        rowSelection(data,true,sell,1);
+      }
+    });
+    myPlayers.on('deselect', function (e,dt,type,indexes){
+      if (type === 'row') {
+        var data = myPlayers.rows(indexes).nodes().to$();
+        rowSelection(data,false,sell,-1);
+      }
+    });
+  });
+
+  function rowSelection(row,selected,array,change){
+    var id = row.attr('id');
+    var budget = parseInt($("#teamBudget").text(),10);
+    var value = parseInt(row.find('td:last').text(),10);
+    if(selected){
+
+      array.push(id);
+      $("#teamBudget").text(budget+value*change);
+    }
+    else{
+
+      var ind = $.inArray(id, array);
+      if(ind != -1){
+        array.splice(ind, 1);
+      }
+      $("#teamBudget").text(budget+value*change);
+    }
+  }
+
+  function recarregaAllPlayers(){
+    var positionFilter = $('#positionFilter option:selected').attr('id');
+    var valueFilter = $('#valueFilter option:selected').attr('id');
+    window.open("/teams/<%= @team.id %>/transfers?positionFilter="+positionFilter+"&valueFilter="+valueFilter,"_self");
+  };
+
+  function confirmaTransferencia(){
+    $.ajax({
+      type: "POST",
+      url: "/teams/<%= @team.id %>/transfer",
+      data: {
+        'buy': buy,
+        'sell': sell
+      },
+      success: function(){
+        location.reload();
+      }
+    });
+  };
+</script>
+
+<div class="row">
+  <div class="divs box-body table-responsive">
+    <div class="row" style="align-items: baseline; position: relative">
+      <div id="playerSearch" class="pesquisa">
+        <div class="campo-pesquisa">
+          <label>See</label>
+            <select class="btn btn-default" id="positionFilter">
+              <option selected id="-1">All players</option>
+              <option id="1">Goalkeeper</option>
+              <option id="2">Defender</option>
+              <option id="3">Midfielder</option>
+              <option id="4">Forward</option>
+            </select>
+        </div>
+        <div class="campo-pesquisa">
+          <label>Maximum value</label>
+            <select class="btn btn-default" id="valueFilter">
+              <option selected id="-1">Unlimited</option>
+              <option id="100">100</option>
+              <option id="90">90</option>
+              <option id="80">80</option>
+              <option id="70">70</option>
+              <option id="60">60</option>
+              <option id="55">55</option>
+            </select>
+        </div>
+        <div class="botao-pesquisa">
+          <button type="button" class="btn btn-info" onclick = "recarregaAllPlayers()"><span class="glyphicon glyphicon-search"></span> Search</button>
+        </div>
+      </div>
+      <div style="top: 0; right: 50px; position: absolute"><h1>Budget: <label id="teamBudget"><%= @team.budget %></label></h1></div>
+    </div>
+    <div>
+    <aside id="playersEdit" class="col-md-6" style="padding-right: 2%;">
+      <h3>Players</h3>
+      <div class="row">
+        <table id="listAllPlayers" class="table table-bordered table-condensed" style="background-color: #FFFFFF">
+          <thead>
+          <tr class="info">
+            <th class="text-center" style="background-color:lightgrey;">Name</th>
+            <th class="text-center" style="background-color:lightgrey;">Team</th>
+            <th class="text-center" style="background-color:lightgrey;">Position</th>
+            <th class="text-center" style="background-color:lightgrey;">Value</th>
+          </tr>
+          </thead>
+          <tbody>
+            <%= render @allplayers %>
+          </tbody>
+        </table>
+      </div>
+    </aside>
+    <aside class="col-md-6" style="padding-left: 3%;">
+      <% if @team.players.any? %>
+          <h3>My Team</h3>
+          <div class="row">
+            <table id="listPlayers" class="table table-bordered table-condensed" style="background-color: #FFFFFF">
+              <thead>
+                <tr class="info">
+                  <th class="text-center" style="background-color:lightgrey;">Name</th>
+                  <th class="text-center" style="background-color:lightgrey;">Team</th>
+                  <th class="text-center" style="background-color:lightgrey;">Position</th>
+                  <th class="text-center" style="background-color:lightgrey;">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= render @players %>
+              </tbody>
+            </table>
+          </div>
+      <% end %>
+    </aside>
+    <button type="button" class="btn btn-success pull-right btn-lg" onclick = "confirmaTransferencia()">Confirm Transfer</button>
+  </div>
+  </div>
+
+
+
+</div>
