@@ -508,7 +508,7 @@ Player.create(name:"Vaclav Cerny", position:"FOR", value:54, real_team:"Ajax")
 
 
 # League
-League.create!(name: "Liga NOS")
+League.create!(name: "Liga NOS", initial_date: "2016-05-20")
 
 # Teams
 league = League.first
