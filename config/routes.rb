@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   resources :teams
   resources :players,             only: [:index, :show]
   resources :leagues,             only: [:index, :show, :new, :create]
-
+  resources :journeys
   post 'teams/:id/strategy' => 'teams#changeStrategy'
   post 'teams/:id/transfer' => 'teams#transfer'
-
+  get 'league/:id/calendar'=> 'leagues#calendarshow', :as =>'calendarleague'
 end

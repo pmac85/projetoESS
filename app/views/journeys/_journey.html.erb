@@ -1,0 +1,23 @@
+<h1><%= journeys.number%></h1>
+<h1><%= journeys.date%></h1>
+<table class="w3-table-all" style="width:50%">
+  <tbody>
+  <tr>
+    <th>House</th>
+    <th>Result</th>
+    <th>Out</th>
+  </tr>
+  <%
+    $x=0
+    begin
+  %>
+      <tr>
+        <td>Eve</td>
+        <td>1-1</td>
+        <td>Jackson</td>
+      </tr>
+  <%
+    $x+=1
+    end while $x<4
+  %>
+  </tbody></table>
