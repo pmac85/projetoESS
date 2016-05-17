@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy, :edit]
+  before_action :logged_in_user, only: [:create, :destroy, :transfers]
   before_action :correct_user
 
   def index
@@ -16,6 +16,10 @@ class TeamsController < ApplicationController
   end
 
   def edit
+    @team = Team.find(params[:id])
+  end
+
+  def transfers
     positionArray = ["GK","DEF","MID","FOR"]
     positionFilter = params[:positionFilter]
     valueFilter = params[:valueFilter]
@@ -31,6 +35,7 @@ class TeamsController < ApplicationController
       @allplayers = @allplayers.where(value: 0..valueFilter.to_i);
     end
   end
+
 
   def transfer
     if(params['sell'] == nil)
@@ -71,8 +76,8 @@ class TeamsController < ApplicationController
       return
     end
 
-    @toBuy.update_all(team_id: @team.id)
-    @toSell.update_all(team_id: nil)
+    @toBuy.update_all(team_id: @team.id, is_chosen: true)
+    @toSell.update_all(team_id: nil, is_chosen: false, is_active: false)
     @team.update(budget: @team.budget+@toSell.sum(:value)-@toBuy.sum(:value))
 
     flash[:success] = "Transference successfully realized."
@@ -84,8 +89,10 @@ class TeamsController < ApplicationController
   def update
     @team = Team.find(params[:id])
     if @team.update_attributes(team_params)
-      flash[:success] = "Transference successfully realized."
-      redirect_to team(current_user)
+      flash[:success] = "Team profile updated."
+      redirect_to team_path(current_user)
+    else
+      render 'edit'
     end
   end
 

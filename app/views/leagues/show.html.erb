@@ -12,12 +12,14 @@
 <div class="divs">
   <div class="col-md-offset-2 col-xs-8">
     <div class="box">
-      <h3 class="text-center text-capitalize"><%= @league.name %></h3>
-      <%= link_to "Calendar", calendarleague_path%>
-      <a href="/leagues/new" class="shiftView btn btn-app">
-        <i class="fa fa-plus"></i>
-        New
-      </a>
+
+      <div class="col-md-offset-4 col-md-4">
+        <h3 class="text-center text-capitalize"><%= @league.name %></h3>
+        <%= link_to "Calendar", calendarleague_path%>
+        <% if current_user.admin %>
+            <%= button_to "Create New League", new_league_path, :method => :get, class: "btn btn-primary"  %>
+        <% end %>
+      </div>
       <% if @league.teams.any? %>
           <div class="row">
             <div class="box-body table-responsive">
@@ -38,7 +40,7 @@
                           <td><%= image_tag team.image_path, size: "30x30" %><%= link_to team.name, team %></td>
                       <% end %>
                       <% if !team.user %>
-                          <td class="text-center">Sem User</td>
+                          <td class="text-center">Free</td>
                       <% else %>
                         <td class="text-center"><%= team.user.username %></td>
                       <% end %>

@@ -5,11 +5,9 @@
     $('.datepicker').datepicker
     ({
       format: "dd-mm-yyyy",
-      weekStart: 1
-    });
-    return {
+      weekStart: 1,
       autoclose: true
-    };
+    });
   });
 </script>
 
@@ -19,6 +17,8 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <%= form_for(@league) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+
           <%= f.label :name %>
           <%= f.text_field :name, class: 'form-control' %>
 
