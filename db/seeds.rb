@@ -508,17 +508,10 @@ Player.create(name:"Vaclav Cerny", position:"FOR", value:54, real_team:"Ajax")
 
 
 # League
-League.create!(name: "Liga NOS",initial_date:Date.today)
-
-
-
-
+League.create!(name: "Liga NOS", initial_date: Date.today)
 
 
 # Teams
-league = League.all
-
-
 league=League.first
 Journey.create!(date:Date.today,number:1,league_id:league.id)
 Journey.create!(date:Date.today,number:2,league_id:league.id)
