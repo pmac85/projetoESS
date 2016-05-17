@@ -7,7 +7,8 @@ class LeaguesController < ApplicationController
   end
 
   def index
-    @leagues = League.all
+    @leagues = League.paginate(page: params[:page])
+    #@leagues = League.all
   end
 
   def new
@@ -29,7 +30,12 @@ class LeaguesController < ApplicationController
       redirect_to root_path
     end
   end
-
+  def calendarshow
+    @league=League.find(1)
+    p(@league)
+    @journeys=@league.journeys.paginate(page: params[:page],:per_page=>1)
+    p(@journeys)
+  end
   private
   def league_params
     params.require(:league).permit(:name, :initial_date)
