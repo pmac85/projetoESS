@@ -132,8 +132,14 @@ class TeamsController < ApplicationController
 
   def choose_team
     @team = Team.find(params[:id])
-    @team.update_attributes(user_id: current_user.id)
-    redirect_to team_path
+    if current_user.teams
+      flash[:danger] = "You can't have more than one team."
+      redirect_to root_path
+    else
+      flash[:success] = "You have a new team. Enjoy."
+      @team.update_attributes(user_id: current_user.id)
+      redirect_to team_path
+    end
   end
 
   private
