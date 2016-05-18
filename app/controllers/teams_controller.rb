@@ -130,6 +130,12 @@ class TeamsController < ApplicationController
     render :nothing => true
   end
 
+  def choose_team
+    @team = Team.find(params[:id])
+    @team.update_attributes(user_id: current_user.id)
+    redirect_to team_path
+  end
+
   private
   def team_params
     params.require(:team).permit(:name, :image_path)
