@@ -1,9 +1,9 @@
 <%= div_for team do %>
   <tr>
-    <% if team.image_path.nil? %>
-        <td><%= link_to team.name, team %></td>
-    <% else %>
+    <% if !team.image_path.nil? %>
         <td><%= image_tag team.image_path, size: "40x40" %><%= link_to team.name, team %></td>
+    <% else %>
+        <td><%= image_tag "default_team.png", size: "40x40" %><%= link_to team.name, team %></td>
     <% end %>
     <% if team.user %>
       <td class="text-center"><%= team.user.username %></td>

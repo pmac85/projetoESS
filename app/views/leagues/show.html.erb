@@ -35,7 +35,7 @@
                 <% @teams.each do |team| %>
                     <tr>
                       <% if team.image_path.nil? %>
-                          <td><%= link_to team.name, team %></td>
+                          <td><%= image_tag "default_team.png", size: "30x30" %><%= link_to team.name, team %></td>
                       <% else %>
                           <td><%= image_tag team.image_path, size: "30x30" %><%= link_to team.name, team %></td>
                       <% end %>

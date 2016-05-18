@@ -79,7 +79,8 @@
       <section class="user_info">
         <h1>
           <% if @team.image_path.nil? %>
-          <%= @team.name %>
+            <p class="text-center"><%= image_tag "default_team.png", size: "150x150" %></p>
+            <p class="text-center"><%= @team.name %></p>
           <% else %>
             <p class="text-center"><%= image_tag @team.image_path, size: "150x150" %></p>
             <p class="text-center"><%= @team.name %></p>
