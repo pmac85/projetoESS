@@ -13,7 +13,7 @@
     <td class="text-center"><%= team.league.name %></td>
     <% if !current_user.admin %>
       <td class="text-center">
-        <%= link_to 'Edit', transfers_team_path(team), :class => 'btn btn-default btn-xs' %>
+        <%= link_to 'Transfers', transfers_team_path(team), :class => 'btn btn-default btn-xs' %>
         </br>
         <%= link_to 'Delete', team_path(team), method: :delete, data: { confirm: "You sure?" },
                                                remote: true, :class => 'btn btn-xs btn-danger' %>

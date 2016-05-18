@@ -1,4 +1,5 @@
 class LeaguesController < ApplicationController
+  require 'round_robin_tournament'
   before_action :admin_user,     only: [:new, :create]
 
   def show
@@ -31,12 +32,15 @@ class LeaguesController < ApplicationController
       redirect_to root_path
     end
   end
+
   def calendarshow
     @league=League.find(1)
     p(@league)
     @journeys=@league.journeys.paginate(page: params[:page],:per_page=>1)
     p(@journeys)
   end
+
+
   private
   def league_params
     params.require(:league).permit(:name, :initial_date)
@@ -47,6 +51,8 @@ class LeaguesController < ApplicationController
       Team.create!(name: "Team#{n+1}", user_id: nil, league_id: @league.id, budget: 900)
     end
     populate_teams
+    populate_with_journeys
+    populate_journeys
   end
 
   def populate_teams
@@ -78,5 +84,24 @@ class LeaguesController < ApplicationController
     end
   end
 
+  def populate_with_journeys
+    38.times do |n|
+      @journey = Journey.create!(date: (@league.initial_date + n.days), number: (n+1), league_id: @league.id)
+    end
+  end
+
+  def populate_journeys
+    teams = @league.teams.ids
+    teams2= teams.map(&:to_s)
+    journeys = @league.journeys
+    # gera calendario de jogos
+    journeys_schedule = RoundRobinTournament.schedule(teams2)
+
+    # atribuo o calendario gerado às jornadas e crio jogos
+    journeys_schedule.each_with_index do |day, index|
+      journey = journeys.find_by(number: (index + 1))
+      day.map { |team| Game.create!(journey_id: journey.id, team1_id: team.first.to_i, team2_id: team.last.to_i)}
+    end
+  end
 
 end

@@ -19,6 +19,7 @@ gem 'jbuilder',                '2.2.3'
 gem 'sdoc',                    '0.4.0', group: :doc
 
 gem 'bootstrap-datepicker-rails'
+gem 'round_robin_tournament'
 
 
 group :development, :test do
