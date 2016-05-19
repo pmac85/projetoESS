@@ -1,54 +1,14 @@
 <% provide(:title, "Calendar") %>
 <div class="divs">
-  <%=
-    nj=1
-    @journeys.each do |journey|
-      if(journey.date == Date.today())
-        nj=journey.number
-        break
-      end
-    end
-  %>
-  <script>
-    $(document).ready(function () {
-      $("#listAllJourneys").DataTable({
-        select: {
-          style: 'multi',
-          info: false
-        },
-        "pageLength": 1,
-        "pagingType": 'simple',
-        "searching" : false,
-        "info": false,
-        "lengthMenu": false,
-        "bLengthChange": false,
-        "displayStart": 0<% nj %>,
-        "language": {"paginate": {
-          "previous": "Previous Journey",
-          "next": "Next Journey"
-        }}
-      });
-
-      $("#listAllJourneys").on('page.dt',function(){
-        alert(<% nj %>);
-        var info=table.page.info();
-        $('#number').html(info.page);
-
-      });
-    });
-
-  </script>
-  <h3 id="number">100</h3>
-  <h3 id="data"/>1111</h3>
-  <table id="listAllJourneys" class="w3-table-all" style="width:50%">
-    <thead>
-    <tr>
-      <th>House</th>
-      <th>Result</th>
-      <th>Out</th>
-    </tr>
-    </thead>
-        <%= render @journeys%>
-
-  </table>
+  <select>
+    <% @journeys.each do |journey| %>
+        <% if(journey.date == Date.today()) %>
+            <option selected>Journey <%= journey.number %></option>
+            <% else %>
+        <option>Journey <%= journey.number %></option>
+        <% end %>
+    <% end %>
+  </select>
+  <script>var j=<%= @journeys.first.games.to_s() %>;
+  alert(j);</script>
 </div>

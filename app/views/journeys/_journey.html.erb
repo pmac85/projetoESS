@@ -1,19 +1,9 @@
-<script>
-  var numero=document.getElementById("number");
-  numero.innerHTML="Journey <%= journey.number%>";
-  var dataj=document.getElementById("data");
-</script>
-<tbody>
-<%
-  x=0;
-  begin%>
 <tr>
+  <table>
+    <tr>
   <td>Eve</td>
   <td>1-<%= journey.number%></td>
   <td>Jackson</td>
+  </tr>
+  </table>
 </tr>
-<%
-  x=x+1
-  end while x<3
-%>
-</tbody>
