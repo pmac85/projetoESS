@@ -1,23 +1,19 @@
-<h1><%= @journeys.first.number%></h1>
-<h1><%= @journeys.first.date%></h1>
-<table class="w3-table-all" style="width:50%">
-  <tbody>
-  <tr>
-    <th>House</th>
-    <th>Result</th>
-    <th>Out</th>
-  </tr>
-  <%
-    $x=0
-    begin
-  %>
-      <tr>
-        <td>Eve</td>
-        <td>1-1</td>
-        <td>Jackson</td>
-      </tr>
-  <%
-    $x+=1
-    end while $x<4
-  %>
-  </tbody></table>
+<script>
+  var numero=document.getElementById("number");
+  numero.innerHTML="Journey <%= journey.number%>";
+  var dataj=document.getElementById("data");
+</script>
+<tbody>
+<%
+  x=0;
+  begin%>
+<tr>
+  <td>Eve</td>
+  <td>1-<%= journey.number%></td>
+  <td>Jackson</td>
+</tr>
+<%
+  x=x+1
+  end while x<3
+%>
+</tbody>
