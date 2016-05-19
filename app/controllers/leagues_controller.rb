@@ -35,11 +35,13 @@ class LeaguesController < ApplicationController
 
   def calendarshow
     @league=League.find(1)
-    p(@league)
-    @journeys=@league.journeys.paginate(page: params[:page],:per_page=>1)
-    p(@journeys)
+    @journeys=@league.journeys
   end
 
+  def offset(page)
+    per_page = 15
+    @off_set = WillPaginate::PageNumber(page).to_offset(per_page).to_i
+  end
 
   private
   def league_params
