@@ -1,14 +1,37 @@
 <% provide(:title, "Calendar") %>
+<% jogos="" %>
+
+<script>var jogos=new Array()
+  function journeyToJavascript(games){
+    var gamess=games.split("][");
+    for(x=0;x<gamess.length-1;x++){
+      gamess[x]=gamess[x]+"]";
+      gamess[x+1]="["+gamess[x+1];
+      var gamesStr=JSON.parse(gamess[x]);
+      //alert(gamesStr[0].id);
+      for(y=0;y<gamesStr.length;y++){
+        jogos[y]=new Array(gamesStr[y].journey_id,gamesStr[y].team1_id,gamesStr[y].team1_id);
+      }
+    }
+    alert(jogos[0]);
+  }
+</script>
+
 <div class="divs">
   <select>
     <% @journeys.each do |journey| %>
+        <% jogos=jogos+journey.games.to_json %>
         <% if(journey.date == Date.today()) %>
-            <option selected>Journey <%= journey.number %></option>
+            <option value="<%= journey.date %>" selected>Journey <%= journey.number %></option>
             <% else %>
-        <option>Journey <%= journey.number %></option>
+        <option value="<%= journey.date %>" >Journey <%= journey.number %></option>
         <% end %>
     <% end %>
+    <% p(@teams) %>
   </select>
-  <script>var j=<%= @journeys.first.games.to_s() %>;
-  alert(j);</script>
+  <%= javascript_tag "var games='#{jogos}';" %>
+<script>
+  journeyToJavascript(games);
+  </script>
 </div>
+

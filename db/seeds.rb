@@ -510,16 +510,22 @@ Player.create(name:"Vaclav Cerny", position:"FOR", value:54, real_team:"Ajax")
 # League
 League.create!(name: "Liga NOS", initial_date: Date.today)
 
-
 # Teams
 league=League.first
 Journey.create!(date:Date.today,number:1,league_id:league.id)
 Journey.create!(date:Date.today,number:2,league_id:league.id)
+
+
+
 20.times do |n|
   name = Faker::Team.name
   Team.create!(name: name, user_id: n+1, league_id: league.id, budget: 500,
                image_path: "http://media1.fcbarcelona.com/media/asset_publics/resources/000/004/670/original_rgb/FCB.v1319559431.png")
 end
+team1=Team.first
+journey=Journey.first
+Game.create!(journey:journey,team1:team1,team2:team1)
+Game.create!(journey:journey,team1:team1,team2:team1)
 
 # Players
 teams = Team.order(:created_at).take(10)

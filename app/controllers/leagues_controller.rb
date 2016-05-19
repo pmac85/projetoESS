@@ -36,11 +36,8 @@ class LeaguesController < ApplicationController
   def calendarshow
     @league=League.find(1)
     @journeys=@league.journeys
-  end
-
-  def offset(page)
-    per_page = 15
-    @off_set = WillPaginate::PageNumber(page).to_offset(per_page).to_i
+    @teams=Team.find_by_league_id(@league.id)
+    p(@teams)
   end
 
   private
