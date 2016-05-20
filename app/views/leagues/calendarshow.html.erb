@@ -2,19 +2,39 @@
 <% jogos="" %>
 
 <script>var jogos=new Array()
-  function journeyToJavascript(games){
+  function journeyToJavascript(games,teams){
     var gamess=games.split("][");
     for(x=0;x<gamess.length-1;x++){
       gamess[x]=gamess[x]+"]";
       gamess[x+1]="["+gamess[x+1];
       var gamesStr=JSON.parse(gamess[x]);
-      //alert(gamesStr[0].id);
       for(y=0;y<gamesStr.length;y++){
-        jogos[y]=new Array(gamesStr[y].journey_id,gamesStr[y].team1_id,gamesStr[y].team1_id);
+	var scr="---";	
+	if(gamesStr[y].score!=null){
+		scr=gamesStr[y].score;	
+	}
+	var t1=searchTeamName(gamesStr[y].team1_id,teams);
+	var t2=searchTeamName(gamesStr[y].team2_id,teams);
+        jogos[y]=new Array(gamesStr[y].journey_id,t1,t2,scr);
       }
     }
     alert(jogos[0]);
   }
+
+function searchTeamName(id, teams){
+  if(teams[1]=="{"){
+    teams="["+teams+"]";
+  }
+  teams=JSON.parse(teams);
+  alert(teams.length);
+	for(x=0;x<teams.length;x++){
+    console.log(id +" - "+ teams[x].id);
+		if(id==teams[x].id){
+			return team.name;
+		}	
+	}
+return "ERROR";
+}
 </script>
 
 <div class="divs">
@@ -30,8 +50,9 @@
     <% p(@teams) %>
   </select>
   <%= javascript_tag "var games='#{jogos}';" %>
+<%= javascript_tag "var teams='#{@teams.to_json}';" %>
 <script>
-  journeyToJavascript(games);
+  journeyToJavascript(games,teams);
   </script>
 </div>
 

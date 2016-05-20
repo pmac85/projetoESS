@@ -39,7 +39,6 @@ class LeaguesController < ApplicationController
     @league=League.find(1)
     @journeys=@league.journeys
     @teams=Team.find_by_league_id(@league.id)
-    p(@teams)
   end
 
   private
