@@ -505,3 +505,48 @@ Player.create(name:"Nemanja Gudelj", position:"MID", value:55, real_team:"Ajax")
 Player.create(name:"Donny van de Beek", position:"MID", value:53, real_team:"Ajax")
 Player.create(name:"Vaclav Cerny", position:"FOR", value:54, real_team:"Ajax")
 
+
+
+# League
+League.create!(name: "Liga NOS", initial_date: Date.today)
+
+# Teams
+league=League.first
+Journey.create!(date:Date.today,number:1,league_id:league.id)
+Journey.create!(date:Date.today,number:2,league_id:league.id)
+
+
+
+20.times do |n|
+  name = Faker::Team.name
+  Team.create!(name: name, user_id: n+1, league_id: league.id, budget: 500,
+               image_path: "http://media1.fcbarcelona.com/media/asset_publics/resources/000/004/670/original_rgb/FCB.v1319559431.png")
+end
+team1=Team.first
+journey=Journey.first
+Game.create!(journey:journey,team1:team1,team2:team1)
+Game.create!(journey:journey,team1:team1,team2:team1)
+
+# Players
+teams = Team.order(:created_at).take(10)
+2.times do
+  name = Faker::Name.name
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "GK", value: 15, is_chosen: true, is_active: (Random.new.rand(2) == 0),
+                                     image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
+end
+5.times do
+  name = Faker::Name.name
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "DEF", value: 20, is_chosen: true, is_active: (Random.new.rand(2) == 0),
+                                     image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
+end
+5.times do
+  name = Faker::Name.name
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "MID", value: 25, is_chosen: true, is_active: (Random.new.rand(2) == 0),
+                                     image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
+end
+3.times do
+  name = Faker::Name.name
+  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "FOR", value: 40, is_chosen: true, is_active: (Random.new.rand(2) == 0),
+                                     image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
+end
+
