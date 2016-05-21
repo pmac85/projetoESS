@@ -3,33 +3,28 @@
 
 <script>var jogos=new Array()
 function journeyToJavascript(games,teams){
-  var gamess=games.split("][");
-  for(x=0;x<gamess.length-1;x++) {
-    gamess[x] = gamess[x] + "]";
-    gamess[x + 1] = "[" + gamess[x + 1];
-  }for(x=0;x<gamess.length;x++) {
-    var gamesStr=JSON.parse(gamess[x]);
+  teams=JSON.parse(teams);
+  var gamesJourney=games.split("][");
+  for(x=0;x<gamesJourney.length-1;x++) {
+    gamesJourney[x] = gamesJourney[x] + "]";
+    gamesJourney[x + 1] = "[" + gamesJourney[x + 1];
+  }
+  for(x=0;x<gamesJourney.length;x++) {
+   var gamesStr=JSON.parse(gamesJourney[x]);
     for(y=0;y<gamesStr.length;y++){
       var scr="---";
       if(gamesStr[y].score!=null){
         scr=gamesStr[y].score;
       }
-      var t1=searchTeamName(gamesStr[y].team1_id,teams);
 
+      var t1=searchTeamName(gamesStr[y].team1_id,teams);
       var t2=searchTeamName(gamesStr[y].team2_id,teams);
-      jogos[y]=new Array(gamesStr[y].journey_id,t1,t2,scr);
+      jogos.push(new Array(gamesStr[y].journey_id,t1,t2,scr));
     }
   }
-  //for(x=0;x<jogos.length;x++) {
-  //alert(jogos[0]);
-  //}
 }
 
 function searchTeamName(id, teams){
-  if(teams[0]=="{"){
-    teams="["+teams+"]";
-  }
-  teams=JSON.parse(teams);
   for(x=0;x<teams.length;x++){
     if(id==teams[x].id){
       return teams[x].name;

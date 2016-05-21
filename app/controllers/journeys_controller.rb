@@ -12,6 +12,6 @@ class JourneysController < ApplicationController
   def index
     @league=League.find(params[:id])
     @journeys=@league.journeys.includes(:games)
-    @teams=Team.find_by_league_id(@league.id)
+    @teams=@league.teams
   end
 end
