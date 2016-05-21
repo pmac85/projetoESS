@@ -4,9 +4,10 @@
 <script>var jogos=new Array()
   function journeyToJavascript(games,teams){
     var gamess=games.split("][");
-    for(x=0;x<gamess.length-1;x++){
-      gamess[x]=gamess[x]+"]";
-      gamess[x+1]="["+gamess[x+1];
+    for(x=0;x<gamess.length-1;x++) {
+      gamess[x] = gamess[x] + "]";
+      gamess[x + 1] = "[" + gamess[x + 1];
+    }for(x=0;x<gamess.length;x++) {
       var gamesStr=JSON.parse(gamess[x]);
       for(y=0;y<gamesStr.length;y++){
 	var scr="---";	
@@ -14,31 +15,49 @@
 		scr=gamesStr[y].score;	
 	}
 	var t1=searchTeamName(gamesStr[y].team1_id,teams);
+
 	var t2=searchTeamName(gamesStr[y].team2_id,teams);
         jogos[y]=new Array(gamesStr[y].journey_id,t1,t2,scr);
       }
     }
-    alert(jogos[0]);
+    //for(x=0;x<jogos.length;x++) {
+      //alert(jogos[0]);
+    //}
   }
 
 function searchTeamName(id, teams){
-  if(teams[1]=="{"){
+  if(teams[0]=="{"){
     teams="["+teams+"]";
   }
   teams=JSON.parse(teams);
-  alert(teams.length);
 	for(x=0;x<teams.length;x++){
-    console.log(id +" - "+ teams[x].id);
 		if(id==teams[x].id){
-			return team.name;
+			return teams[x].name;
 		}	
 	}
 return "ERROR";
 }
+
+    function changedslct(sel){
+      var dv=document.getElementById("gPresent");
+      var jdt=sel.value;
+      var jn=sel.options[sel.selectedIndex].text;
+      jn=jn.substr(jn.indexOf(" ")+1);
+      var next="<h3>"+jdt+"</h3><table class=\"w3-table-all\">";
+
+      for(x=20*(jn-1);x<jogos.length;x++){
+        if(jogos[x][0]==jn){
+          next+="<tr><td>"+jogos[x][1]+"</td><td>"+jogos[x][3]+"</td><td>"+jogos[x][2]+"</td></tr>";
+        }
+      }
+
+      next+="</table>";
+      dv.innerHTML=next;
+    }
 </script>
 
 <div class="divs">
-  <select>
+  <select id="jselect" onchange="changedslct(this)">
     <% @journeys.each do |journey| %>
         <% jogos=jogos+journey.games.to_json %>
         <% if(journey.date == Date.today()) %>
@@ -47,12 +66,15 @@ return "ERROR";
         <option value="<%= journey.date %>" >Journey <%= journey.number %></option>
         <% end %>
     <% end %>
-    <% p(@teams) %>
   </select>
   <%= javascript_tag "var games='#{jogos}';" %>
 <%= javascript_tag "var teams='#{@teams.to_json}';" %>
 <script>
   journeyToJavascript(games,teams);
+    $(document).ready(function(){
+        $("#jselect").trigger("change");}
+    );
   </script>
+  <div id="gPresent"></div>
 </div>
 
