@@ -102,6 +102,7 @@ class LeaguesController < ApplicationController
     journeys_schedule.each_with_index do |day, index|
       journey = journeys.find_by(number: (index + 1))
       day.map { |team| Game.create!(journey_id: journey.id, team1_id: team.first.to_i, team2_id: team.last.to_i)}
+      day.map { |team| Game.create!(journey_id: (journey.id+19), team1_id: team.last.to_i, team2_id: team.first.to_i)}
     end
   end
 

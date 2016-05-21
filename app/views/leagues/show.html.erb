@@ -39,14 +39,21 @@
                       <% else %>
                           <td><%= image_tag team.image_path, size: "30x30" %><%= link_to team.name, team %></td>
                       <% end %>
-
-                      <% if !team.user %>
-                          <td class="text-center">Free
-                          <%= link_to choose_team_path(team), method: :post, data: { confirm: "Are you sure?"} do %>
-                              <span class="glyphicon glyphicon-check"></span>
-                          <% end %></td>
+                      <% if current_user.teams.any? %>
+                          <% if !team.user %>
+                              <td class="text-center">Free</td>
+                          <% else %>
+                              <td class="text-center"><%= team.user.username %></td>
+                          <% end %>
                       <% else %>
-                        <td class="text-center"><%= team.user.username %></td>
+                          <% if !team.user %>
+                              <td class="text-center">Free
+                              <%= link_to choose_team_path(team), method: :post, data: { confirm: "Are you sure?"} do %>
+                                  <span class="glyphicon glyphicon-check"></span>
+                              <% end %></td>
+                          <% else %>
+                            <td class="text-center"><%= team.user.username %></td>
+                          <% end %>
                       <% end %>
                       <td class="text-center"><%= team.league.name %></td>
                     </tr>
