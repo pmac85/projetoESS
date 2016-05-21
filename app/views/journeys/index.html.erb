@@ -2,48 +2,32 @@
 <% jogos="" %>
 
 <script>var jogos=new Array()
-function journeyToJavascript(games,teams){
-  teams=JSON.parse(teams);
-  var gamesJourney=games.split("][");
-  for(x=0;x<gamesJourney.length-1;x++) {
-    gamesJourney[x] = gamesJourney[x] + "]";
-    gamesJourney[x + 1] = "[" + gamesJourney[x + 1];
-  }
-  for(x=0;x<gamesJourney.length;x++) {
-   var gamesStr=JSON.parse(gamesJourney[x]);
-    for(y=0;y<gamesStr.length;y++){
-      var scr="---";
-      if(gamesStr[y].score!=null){
-        scr=gamesStr[y].score;
-      }
-
-      var t1=searchTeamName(gamesStr[y].team1_id,teams);
-      var t2=searchTeamName(gamesStr[y].team2_id,teams);
-      jogos.push(new Array(gamesStr[y].journey_id,t1,t2,scr));
-    }
-  }
-}
-
 function searchTeamName(id, teams){
-  for(x=0;x<teams.length;x++){
-    if(id==teams[x].id){
-      return teams[x].name;
-    }
-  }
+
+ for(c=0;c<teams.length;c++){
+   if(id==teams[c].id){
+    return teams[c].name;
+   }
+ }
   return "ERROR";
 }
 
 function changedslct(sel){
+
   var dv=document.getElementById("gPresent");
   var jdt=sel.value;
   var jn=sel.options[sel.selectedIndex].text;
   jn=jn.substr(jn.indexOf(" ")+1);
+  var jogos2=JSON.parse(jogos[jn-1]);
   var next="<h3></h3><table class=\"j-table-all\"><thead><tr><th colspan='3' class='thJ'> Journey "+jn+"<br>"+jdt+"</th></tr></thead><tbody>";
-
-  for(x=20*(jn-1);x<jogos.length;x++){
-    if(jogos[x][0]==jn){
-      next+="<tr><td>"+jogos[x][1]+"</td><td>"+jogos[x][3]+"</td><td>"+jogos[x][2]+"</td></tr>";
+  for(x=0;x<jogos2.length;x++){
+    var scr = "---";
+    if (jogos2[x].score != null) {
+      scr = jogos2[x].score;
     }
+    var t1 = searchTeamName(jogos2[x].team1_id, teams);
+    var t2 = searchTeamName(jogos2[x].team2_id, teams);
+      next+="<tr><td>"+t1+"</td><td>"+scr+"</td><td>"+t2+"</td></tr>";
   }
 
   next+="</tbody></table>";
@@ -57,9 +41,9 @@ function changedslct(sel){
       height: 29px;
       padding: 5px;width: 268px;
       position: absolute;
-      right: 39%;"
-  >
+      right: 39%;">
     <% @journeys.each do |journey| %>
+        <%= javascript_tag "jogos.push('#{journey.games.to_json}');" %>
         <% jogos=jogos+journey.games.to_json %>
         <% if(journey.date == Date.today()) %>
             <option value="<%= journey.date %>" selected>Journey <%= journey.number %></option>
@@ -68,14 +52,12 @@ function changedslct(sel){
         <% end %>
     <% end %>
   </select>
-  <%= javascript_tag "var games='#{jogos}';" %>
+  <div id="gPresent"></div>
   <%= javascript_tag "var teams='#{@teams.to_json}';" %>
   <script>
-    journeyToJavascript(games,teams);
-    $(document).ready(function(){
-      $("#jselect").trigger("change");}
-    );
+    teams=JSON.parse(teams);
+    $("#jselect").trigger("change");
   </script>
-  <div id="gPresent"></div>
+
 </div>
 

@@ -48,7 +48,15 @@ class GamesController < ApplicationController
     valueRandom2=Random.new(6);
 
 
+    if(gol1>gol2)
 
 
+    end
+    if(gol1<gol2)
+
+
+
+
+    end
   end
 end
