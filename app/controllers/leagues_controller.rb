@@ -5,7 +5,7 @@ class LeaguesController < ApplicationController
 
   def show
     @league = League.find(params[:id])
-    @teams = @league.teams.all.includes(:user)
+    @teams = @league.teams.all.includes(:user).order(:total_score)
   end
 
   def index
@@ -57,7 +57,7 @@ class LeaguesController < ApplicationController
   end
 
   def populate_teams(league)
-    @allplayers = Player.where(is_chosen: false).includes(:team)
+    @allplayers = Player.where( "value < ?", 61).where(is_chosen: false)
     league.teams.each do |team|
       @gk = @allplayers.where(is_chosen: false, position: "GK").sample(2)
       @def = @allplayers.where(is_chosen: false, position: "DEF").sample(5)

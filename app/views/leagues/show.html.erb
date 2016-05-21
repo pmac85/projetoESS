@@ -23,17 +23,26 @@
       <% if @league.teams.any? %>
           <div class="row">
             <div class="box-body table-responsive">
-              <table id="listTeams" class="table table-bordered table-hover" style="background-color: #FFFFFF">
+              <table id="listTeams" class="table table-bordered table-hover table-condensed" style="background-color: #FFFFFF">
                 <thead>
                 <tr class="info">
-                  <th class="text-center" style="background-color:lightgrey;">Name</th>
+                  <th class="text-center" style="background-color:lightgrey;">Position</th>
+                  <th class="text-center" style="background-color:lightgrey;">Team</th>
                   <th class="text-center" style="background-color:lightgrey;">User</th>
-                  <th class="text-center" style="background-color:lightgrey;">League</th>
+                  <th class="text-center" style="background-color:lightgrey;">Points</th>
+                  <th class="text-center" style="background-color:lightgrey;">Victories</th>
+                  <th class="text-center" style="background-color:lightgrey;">Draws</th>
+                  <th class="text-center" style="background-color:lightgrey;">Defeats</th>
                 </tr>
                 </thead>
                 <tbody>
                 <% @teams.each do |team| %>
                     <tr>
+                      <% if team.total_score %>
+                          <td class="text-center"><% @teams.index(team) %>º</td>
+                      <% else %>
+                        <td class="text-center">-</td>
+                      <% end %>
                       <% if team.image_path.nil? %>
                           <td><%= image_tag "default_team.png", size: "30x30" %><%= link_to team.name, team %></td>
                       <% else %>
@@ -55,7 +64,17 @@
                             <td class="text-center"><%= team.user.username %></td>
                           <% end %>
                       <% end %>
-                      <td class="text-center"><%= team.league.name %></td>
+                      <% if team.total_score %>
+                          <td class="text-center"><%= team.total_score %></td>
+                          <td class="text-center"><%= team.victories %></td>
+                          <td class="text-center"><%= team.draws %></td>
+                          <td class="text-center"><%= team.defeats %></td>
+                      <% else %>
+                          <td class="text-center">-</td>
+                          <td class="text-center">-</td>
+                          <td class="text-center">-</td>
+                          <td class="text-center">-</td>
+                      <% end %>
                     </tr>
                 <% end %>
                 </tbody>
