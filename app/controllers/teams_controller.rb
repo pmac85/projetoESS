@@ -133,7 +133,7 @@ class TeamsController < ApplicationController
 
   def choose_team
     @team = Team.find(params[:id])
-    if current_user.teams
+    if current_user.teams.any?
       flash[:danger] = "You can't have more than one team."
       redirect_to root_path
     else

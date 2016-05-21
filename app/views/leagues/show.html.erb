@@ -39,6 +39,7 @@
                       <% else %>
                           <td><%= image_tag team.image_path, size: "30x30" %><%= link_to team.name, team %></td>
                       <% end %>
+
                       <% if !team.user %>
                           <td class="text-center">Free
                           <%= link_to choose_team_path(team), method: :post, data: { confirm: "Are you sure?"} do %>

@@ -1,17 +1,15 @@
 class LeaguesController < ApplicationController
   require 'round_robin_tournament'
   before_action :check_league
-#  before_action :check_teams, only: :show
   before_action :admin_user,     only: [:new, :create]
 
   def show
     @league = League.find(params[:id])
-    @teams = @league.teams.all
+    @teams = @league.teams.all.includes(:user)
   end
 
   def index
     @leagues = League.paginate(page: params[:page])
-    #@leagues = League.all
   end
 
   def new
@@ -46,13 +44,6 @@ class LeaguesController < ApplicationController
       league.update_attributes(name: "Liga NOS", initial_date: Date.today + 7.days)
       league.save
       populate_league(league)
-    end
-  end
-
-  def check_teams
-    league = League.find(params[:id])
-    if !league.teams
-      populate_league
     end
   end
 
