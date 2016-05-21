@@ -19,6 +19,6 @@ Rails.application.routes.draw do
   post 'teams/:id/transfer' => 'teams#transfer'
   post 'teams/:id/edit'     => 'teams#edit'
   post 'teams/:id/choose'   => 'teams#choose_team',     :as => 'choose_team'
-  get 'league/:id/calendar' => 'leagues#calendarshow',  :as => 'calendarleague'
+  get 'journeys/:id/index'   => 'journeys#index', :as => 'journeys_show'
 
 end

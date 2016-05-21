@@ -35,12 +35,6 @@ class LeaguesController < ApplicationController
     end
   end
 
-  def calendarshow
-    @league=League.find(1)
-    @journeys=@league.journeys
-    @teams=Team.find_by_league_id(@league.id)
-  end
-
   private
   def league_params
     params.require(:league).permit(:name, :initial_date)

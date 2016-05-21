@@ -8,4 +8,10 @@ class JourneysController < ApplicationController
     params[:journeys].inspect
     render nothing: true
   end
+
+  def index
+    @league=League.find(params[:id])
+    @journeys=@league.journeys
+    @teams=Team.find_by_league_id(@league.id)
+  end
 end
