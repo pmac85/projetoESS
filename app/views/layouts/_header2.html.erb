@@ -22,7 +22,6 @@
                 <li><%= link_to "USERS", users_path %></li>
             <% end %>
           <li><%= link_to "PROFILE", current_user %></li>
-          <li><%= link_to "SETTINGS", edit_user_path(current_user) %></li>
           <li><%= link_to "RULES", rules_path %></li>
           <li><%= link_to "LOG OUT", logout_path, method: "delete" %></li>
         <% else %>
