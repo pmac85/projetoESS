@@ -12,7 +12,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
           <% if current_user.teams.any? %>
-            <li><%= link_to "TEAM", team_path(current_user) %></li>
+            <li><%= link_to "TEAM", team_path(current_user.teams.first) %></li>
             <li><%= link_to "LEAGUE", league_path(current_user.teams.first.league_id) %></li>
           <% else %>
             <li><%= link_to "TEAMS", teams_path %></li>
@@ -22,7 +22,6 @@
                 <li><%= link_to "USERS", users_path %></li>
             <% end %>
           <li><%= link_to "PROFILE", current_user %></li>
-          <li><%= link_to "SETTINGS", edit_user_path(current_user) %></li>
           <li><%= link_to "RULES", rules_path %></li>
           <li><%= link_to "LOG OUT", logout_path, method: "delete" %></li>
         <% else %>

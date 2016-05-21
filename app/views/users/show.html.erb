@@ -7,6 +7,9 @@
           <%= gravatar_for @user %>
           <%= @user.username %>
         </h1>
+        <% if current_user == @user %>
+            <%= button_to "Edit Profile", edit_user_path(current_user), class: "btn btn-primary" %>
+        <% end %>
       </section>
     </aside>
     <aside class="col-md-8">
@@ -22,7 +25,9 @@
               <th class="text-center" style="background-color:lightgrey;">Team</th>
               <th class="text-center" style="background-color:lightgrey;">User</th>
               <th class="text-center" style="background-color:lightgrey;">League</th>
-              <th class="text-center" style="background-color:lightgrey;">Actions</th>
+              <% if current_user == @user %>
+                  <th class="text-center" style="background-color:lightgrey;">Actions</th>
+              <% end %>
             </tr>
             </thead>
             <tbody>
