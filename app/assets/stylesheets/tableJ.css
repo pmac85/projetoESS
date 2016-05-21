@@ -1,0 +1,7 @@
+.j-table-all{border-collapse:collapse;border-spacing:0;width:100%;display:table;border:1px solid #ccc}
+.j-table-all tr{border-bottom:1px solid #ddd}
+.thJ {background-color: #A1A1A1}
+.j-table-all tr:nth-child(odd){background-color:#fff}
+.j-table-all tr:nth-child(even){background-color:#f1f1f1}
+.j-table-all td,.j-table-all th{padding:6px 8px;display:table-cell;text-align:center;vertical-align:top}
+.j-table-all th:first-child,.j-table-all td:first-child{padding-left:16px}
