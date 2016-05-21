@@ -13,7 +13,7 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
-    @players = @team.players
+    @players = @team.players.order(:position)
   end
 
   def edit
@@ -33,7 +33,7 @@ class TeamsController < ApplicationController
     end
 
     if(valueFilter != nil && valueFilter != "-1")
-      @allplayers = @allplayers.where(value: 0..valueFilter.to_i);
+      @allplayers = @allplayers.where(value: 0..valueFilter.to_i)
     end
   end
 
@@ -133,8 +133,11 @@ class TeamsController < ApplicationController
 
   def choose_team
     @team = Team.find(params[:id])
-    if current_user.teams
+    if current_user.teams.any?
       flash[:danger] = "You can't have more than one team."
+      redirect_to root_path
+    elsif current_user.admin
+      flash[:danger] = "You can't have a team."
       redirect_to root_path
     else
       flash[:success] = "You have a new team. Enjoy."
