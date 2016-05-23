@@ -20,7 +20,7 @@
     myPlayers = $("#listPlayers").DataTable({
       select: {
         style: 'multi',
-        selector: 'tr.clickable-row',
+    //    selector: 'tr.clickable-row',
         info: false
       },
       "paging": false,
@@ -77,6 +77,7 @@
   }
 
   function recarregaAllPlayers(){
+
     var positionFilter = $('#positionFilter option:selected').attr('id');
     var valueFilter = $('#valueFilter option:selected').attr('id');
     window.open("/teams/<%= @team.id %>/transfers?positionFilter="+positionFilter+"&valueFilter="+valueFilter,"_self");

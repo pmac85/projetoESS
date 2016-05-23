@@ -88,6 +88,7 @@
         </h1>
         <% if current_user == @team.user %>
           <%= button_to "Edit Team Profile", edit_team_path(@team), class: "btn btn-primary" %>
+          <%= button_to "Transfers", transfers_team_path(@team), class: "btn btn-success" %>
         <% end %>
       </section>
       <div id="field" style="position: relative; width: 100%; height: 100%">
