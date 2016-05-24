@@ -36,12 +36,8 @@ function changedslct(sel){
 </script>
 
 <div class="divs">
-  <select id="jselect" onchange="changedslct(this)" style="background: transparent;
-      font-size: 14px;
-      height: 29px;
-      padding: 5px;width: 268px;
-      position: absolute;
-      right: 39%;">
+  <div class="col-md-4 col-md-offset-4">
+  <select class="btn btn-default" id="jselect" onchange="changedslct(this)" style="font-size: 14px;>
     <% @journeys.each do |journey| %>
         <%= javascript_tag "jogos.push('#{journey.games.to_json}');" %>
         <% jogos=jogos+journey.games.to_json %>
@@ -52,7 +48,8 @@ function changedslct(sel){
         <% end %>
     <% end %>
   </select>
-  <div id="gPresent"></div>
+  </div>
+  <div class="col-md-8 col-md-offset-2" id="gPresent"></div>
   <%= javascript_tag "var teams='#{@teams.to_json}';" %>
   <script>
     teams=JSON.parse(teams);

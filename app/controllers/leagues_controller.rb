@@ -1,6 +1,6 @@
 class LeaguesController < ApplicationController
   require 'round_robin_tournament'
-  before_action :check_league
+  before_action :check_league,   except: [:new, :create]
   before_action :admin_user,     only: [:new, :create]
 
   def show

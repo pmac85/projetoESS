@@ -1,9 +1,18 @@
 <% provide(:title, 'All leagues') %>
 <div class="divs">
-  <h1>All leagues</h1>
-
-  <ul class="leagues">
-    <%= render @leagues %>
-  </ul>
-
+  <div class="col-md-6 col-md-offset-3">
+    <% if @leagues.count == 1 %>
+      <h1 class="text-center">League</h1>
+    <% else %>
+      <h1 class="text-center">Leagues</h1>
+    <% end %>
+    <ul class="leagues text-center">
+      <%= render @leagues %>
+    </ul>
+    <% if current_user.admin %>
+        <div class="col-md-6 col-md-offset-3">
+          <%= button_to "Create New League", new_league_path, :method => :get, class: "btn btn-xs btn-primary"  %>
+        </div>
+    <% end %>
+  </div>
 </div>

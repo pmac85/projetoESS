@@ -1,15 +1,21 @@
 <% provide(:title, @player.name) %>
 <div class="row">
   <div class="divs">
-    <aside class="col-md-4">
+    <div class="col-md-4 col-md-offset-4" style="background-color: whitesmoke">
       <section class="user_info">
-        <h1>
-          <%= render :partial => '/players/playerImage', :locals => { :player => @player, :image_size => "150x150" } %>
-          <%= @player.name %>
-          <%= @player.position %>
-          <%= @player.value %>
-        </h1>
+          <p class="text-center"><%= render :partial => '/players/playerImage', :locals => { :player => @player, :image_size => "150x150" } %></p>
+          <h1 class="text-center"><%= @player.name %></h1>
+          <% if @player.position == "GK" %>
+            <p class="text-center"><b>Position: </b>GoalKeeper</p>
+          <% elsif @player.position == "DEF" %>
+            <p class="text-center"><b>Position: </b>Defender</p>
+          <% elsif @player.position == "MID" %>
+            <p class="text-center"><b>Position: </b>Midfielder</p>
+          <% else %>
+            <p class="text-center"><b>Position: </b>Forward</p>
+          <% end %>
+          <p class="text-center"><b>Value: </b><%= @player.value %></p>
       </section>
-    </aside>
+    </div>
   </div>
 </div>
