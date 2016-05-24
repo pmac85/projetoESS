@@ -73,19 +73,21 @@
     }
 </script>
 
+
 <div class="row">
   <div class="divs box-body table-responsive">
+    <% if @team.user_id == current_user.id %>
     <aside class="col-md-6" >
       <section class="user_info">
-        <h1>
           <% if @team.image_path.nil? %>
             <p class="text-center"><%= image_tag "default_team.png", size: "150x150" %></p>
-            <p class="text-center"><%= @team.name %></p>
+            <h1 class="text-center"><b><%= @team.name %></b></h1>
+            <p class="text-center"><b>Budget: </b><%= @team.budget %></p>
           <% else %>
             <p class="text-center"><%= image_tag @team.image_path, size: "150x150" %></p>
-            <p class="text-center"><%= @team.name %></p>
+            <h1 class="text-center"><%= @team.name %></h1>
+            <p class="text-center"><b>Budget: </b><%= @team.budget %></p>
           <% end %>
-        </h1>
         <% if current_user == @team.user %>
           <%= button_to "Edit Team Profile", edit_team_path(@team), class: "btn btn-primary" %>
           <%= button_to "Transfers", transfers_team_path(@team), class: "btn btn-success" %>
@@ -138,5 +140,42 @@
         </div>
       <% end %>
     </aside>
+    <% else %>
+      <div class="col-md-offset-2 col-md-8">
+        <div class="col-md-4">
+          <section class="user_info">
+              <% if @team.image_path.nil? %>
+                <p class="text-center"><%= image_tag "default_team.png", size: "150x150" %></p>
+                <h1 class="text-center"><b><%= @team.name %></b></h1>
+                <p class="text-center"><b>Budget: </b><%= @team.budget %></p>
+              <% else %>
+                <p class="text-center"><%= image_tag @team.image_path, size: "150x150" %></p>
+                <h1 class="text-center"><b><%= @team.name %></b></h1>
+                <p class="text-center"><b>Budget: </b><%= @team.budget %></p>
+              <% end %>
+          </section>
+        </div>
+        <div class="col-md-8">
+            <% if @team.players.any? %>
+                <h3>Players</h3>
+                <div class="row" style="position: relative">
+                  <table id="listPlayers" class="table table-bordered table-condensed" style="background-color: #FFFFFF">
+                    <thead>
+                    <tr class="info">
+                      <th class="text-center" style="background-color:lightgrey;">Name</th>
+                      <th class="text-center" style="background-color:lightgrey;">Team</th>
+                      <th class="text-center" style="background-color:lightgrey;">Position</th>
+                      <th class="text-center" style="background-color:lightgrey;">Value</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%= render @players %>
+                    </tbody>
+                  </table>
+                </div>
+            <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
