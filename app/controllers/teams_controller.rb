@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy, :transfers]
   before_action :correct_user
+  before_action :check_actives, only: [:show]
 
   def index
     if current_user.admin
@@ -12,7 +13,7 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
-    @players = @team.players
+    @players = @team.players.order(:position)
   end
 
   def edit
@@ -32,7 +33,7 @@ class TeamsController < ApplicationController
     end
 
     if(valueFilter != nil && valueFilter != "Unlimited")
-      @allplayers = @allplayers.where(value: 0..valueFilter.to_i);
+      @allplayers = @allplayers.where(value: 0..valueFilter.to_i)
     end
   end
 
@@ -132,8 +133,11 @@ class TeamsController < ApplicationController
 
   def choose_team
     @team = Team.find(params[:id])
-    if current_user.teams
+    if current_user.teams.any?
       flash[:danger] = "You can't have more than one team."
+      redirect_to root_path
+    elsif current_user.admin
+      flash[:danger] = "You can't have a team."
       redirect_to root_path
     else
       flash[:success] = "You have a new team. Enjoy."
@@ -151,5 +155,57 @@ class TeamsController < ApplicationController
     @team = current_user.teams#.find_by(id: params[:id])
     return if(current_user.admin)
     redirect_to root_url if @team.nil?
+  end
+
+  def check_actives
+    team = Team.find(params[:id]).players
+    actives = team.where(is_active: true)
+    gkall = team.where(position: "GK")
+    defall = team.where(position: "DEF")
+    midall = team.where(position: "MID")
+    forall = team.where(position: "FOR")
+    gka = actives.where(position: "GK")
+    defa = actives.where(position: "DEF")
+    mida = actives.where(position: "MID")
+    fora = actives.where(position: "FOR")
+
+    if !actives.empty?
+      if actives.count != 11
+        if gka.empty?
+          gk = gkall.limit(1)
+          gk.update_all(is_active: true)
+        elsif gka.count == 2
+          gk = gka.limit(1)
+          gk.update_all(is_active: false)
+        end
+        check_actives_position(defa, defall, "DEF", 4, mida.count + fora.count, 6)
+        check_actives_position(mida, midall, "MID", 4, defa.count + fora.count, 6)
+        check_actives_position(fora, forall, "FOR", 2, mida.count + defa.count, 8)
+      end
+    else
+      gk = team.where(position: "GK").limit(1)
+      gk.update_all(is_active: true)
+      defense = team.where(position: "DEF").limit(4)
+      defense.update_all(is_active: true)
+      mid = team.where(position: "MID").limit(4)
+      mid.update_all(is_active: true)
+      forward = team.where(position: "FOR").limit(2)
+      forward.update_all(is_active: true)
+    end
+  end
+
+  def check_actives_position(listaJog, team, pos, numDef, numNDef, numNDefPerm)
+    if team.where(is_active: true).count != 11
+      if listaJog.empty? && numNDef <= numNDefPerm
+        players = team.where(position: pos).limit(numDef)
+        players.update_all(is_active: true)
+      elsif listaJog.empty? && numNDef == numNDefPerm+1
+        players = team.where(position: pos).limit(numDef-1)
+        players.update_all(is_active: true)
+      else
+        players = team.where(position: pos).limit(numDef - listaJog.count)
+        players.update_all(is_active: true)
+      end
+    end
   end
 end

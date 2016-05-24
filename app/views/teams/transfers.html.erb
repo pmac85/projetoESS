@@ -20,7 +20,7 @@
     myPlayers = $("#listPlayers").DataTable({
       select: {
         style: 'multi',
-        selector: 'tr.clickable-row',
+    //    selector: 'tr.clickable-row',
         info: false
       },
       "paging": false,
@@ -77,8 +77,9 @@
   }
 
   function recarregaAllPlayers(){
+
     var positionFilter = $('#positionFilter option:selected').attr('id');
-    var valueFilter = $('#valueFilter option:selected').attr('id');
+    var valueFilter = $('#valueFilter option:selected').text();
     window.open("/teams/<%= @team.id %>/transfers?positionFilter="+positionFilter+"&valueFilter="+valueFilter,"_self");
   };
 
@@ -115,12 +116,12 @@
           <label>Maximum value</label>
             <select class="btn btn-default" id="valueFilter">
               <option selected id="-1">Unlimited</option>
-              <option id="100">100</option>
-              <option id="90">90</option>
-              <option id="80">80</option>
-              <option id="70">70</option>
-              <option id="60">60</option>
-              <option id="55">55</option>
+              <option>100</option>
+              <option>90</option>
+              <option>80</option>
+              <option>70</option>
+              <option>60</option>
+              <option>55</option>
             </select>
         </div>
         <div class="botao-pesquisa">

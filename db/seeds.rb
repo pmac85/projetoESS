@@ -28,29 +28,29 @@ User.create!(username:  "Admin",
 #----------------------------------------------------------------------------------#
 Player.create(name:"Maicon", position:"DEF", value:57, real_team:"Porto")
 Player.create(name:"Silvestre Varela", position:"FOR", value:54, real_team:"Porto")
-Player.create(name:"Maxi Pereira", position:"DEF", value:54, real_team:"Porto")
+Player.create(name:"Maxi Pereira", position:"DEF", value:54, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/3ee184b50e63a3b1cdf58f43ac9c32c1d0416831.png")
 Player.create(name:"Helton", position:"GK", value:54, real_team:"Porto")
-Player.create(name:"Bruno Martins Indi", position:"DEF", value:56, real_team:"Porto")
-Player.create(name:"Iván Marcano", position:"DEF", value:55, real_team:"Porto")
-Player.create(name:"José Ángel", position:"DEF", value:55, real_team:"Porto")
-Player.create(name:"Rúben Neves", position:"MID", value:53, real_team:"Porto")
-Player.create(name:"Héctor Herrera", position:"MID", value:60, real_team:"Porto")
+Player.create(name:"Bruno Martins Indi", position:"DEF", value:56, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/e83b987fabc08a002161d5b1dda0186e90fc96b9.png")
+Player.create(name:"Iván Marcano", position:"DEF", value:55, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/a34731af4950cc8ae0920a1833490fe340d8a2f0.png")
+Player.create(name:"José Ángel", position:"DEF", value:55, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/607b25b2c9a35692cc20d1e17fd06322963984c8.png")
+Player.create(name:"Rúben Neves", position:"MID", value:53, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/c34e6832ef0e9496cffd31a6fcff415bc222e7ae.png")
+Player.create(name:"Héctor Herrera", position:"MID", value:60, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/09e1b2240c761d079a7fa29940d9bbf7537ed4b9.png")
 Player.create(name:"Evandro", position:"MID", value:56, real_team:"Porto")
-Player.create(name:"Yacine Brahimi", position:"FOR", value:66, real_team:"Porto")
+Player.create(name:"Yacine Brahimi", position:"FOR", value:66, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/87f6541468d4a14721d632ba24f68d08673df205.png")
 Player.create(name:"Kelvin", position:"FOR", value:55, real_team:"Porto")
-Player.create(name:"Vincent Aboubakar", position:"FOR", value:56, real_team:"Porto")
-Player.create(name:"Miguel Layún", position:"DEF", value:55, real_team:"Porto")
-Player.create(name:"Iker Casillas", position:"GK", value:54, real_team:"Porto")
+Player.create(name:"Vincent Aboubakar", position:"FOR", value:56, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/dce41c4c8e5f470275afece6ad7d6f262495fafa.png")
+Player.create(name:"Miguel Layún", position:"DEF", value:55, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/a634dddae59a58a6fd42773455ab8195446ddfcb.png")
+Player.create(name:"Iker Casillas", position:"GK", value:54, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/80644664b92b6baecf043c8f125a2216f44f5dcd.png")
 Player.create(name:"Alberto Bueno", position:"MID", value:56, real_team:"Porto")
-Player.create(name:"José Sá", position:"GK", value:57, real_team:"Porto")
-Player.create(name:"Danilo Pereira", position:"MID", value:55, real_team:"Porto")
+Player.create(name:"José Sá", position:"GK", value:57, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/e9d9429f2608fa20773312bd75c928a7418d5934.png")
+Player.create(name:"Danilo Pereira", position:"MID", value:55, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/fd4cceda286d050c3ae8b72af3510b64642635ac.png")
 Player.create(name:"Moussa Marega", position:"FOR", value:55, real_team:"Porto")
-Player.create(name:"André André", position:"MID", value:55, real_team:"Porto")
-Player.create(name:"Sérgio Oliveira", position:"MID", value:57, real_team:"Porto")
-Player.create(name:"Hyun-Jun Suk", position:"FOR", value:55, real_team:"Porto")
-Player.create(name:"Jesús Corona", position:"FOR", value:57, real_team:"Porto")
+Player.create(name:"André André", position:"MID", value:55, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/360051ab306b545697f14f50991a34aa8ebdf514.png")
+Player.create(name:"Sérgio Oliveira", position:"MID", value:57, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/447c82b0b03c77a315756d078d10df36831f53d1.png")
+Player.create(name:"Hyun-Jun Suk", position:"FOR", value:55, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/cc8de643a0781320fcf6de8a46dc3fdb8e0df8b3.png")
+Player.create(name:"Jesús Corona", position:"FOR", value:57, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/9ccb64b3965c08d2e133a42973092bb1d56876da.png")
 Player.create(name:"André Silva", position:"FOR", value:53, real_team:"Porto")
-Player.create(name:"Walter", position:"FOR", value:56, real_team:"Porto")
+Player.create(name:"Walter", position:"FOR", value:56, real_team:"Porto", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/b488852064763567056f809997e170c42e91a0e6.png")
 Player.create(name:"Manuel Neuer", position:"GK", value:76, real_team:"Bayern")
 Player.create(name:"Sven Ulreich", position:"GK", value:56, real_team:"Bayern")
 Player.create(name:"Tom Starke", position:"GK", value:52, real_team:"Bayern")
@@ -123,28 +123,28 @@ Player.create(name:"Zlatan Ibrahimovic", position:"FOR", value:52, real_team:"PS
 Player.create(name:"Hervin Ongenda", position:"FOR", value:54, real_team:"PSG")
 Player.create(name:"Presnel Kimpembe", position:"DEF", value:55, real_team:"PSG")
 Player.create(name:"Jean-Kévin Augustin", position:"FOR", value:53, real_team:"PSG")
-Player.create(name:"Ederson", position:"GK", value:54, real_team:"Lisbon")
-Player.create(name:"Konstantinos Mitroglou", position:"FOR", value:55, real_team:"Lisbon")
-Player.create(name:"Júlio César", position:"GK", value:54, real_team:"Lisbon")
-Player.create(name:"Paulo Lopes", position:"GK", value:54, real_team:"Lisbon")
-Player.create(name:"Lisandro López", position:"DEF", value:57, real_team:"Lisbon")
-Player.create(name:"Luisão", position:"DEF", value:52, real_team:"Lisbon")
-Player.create(name:"Jardel", position:"DEF", value:56, real_team:"Lisbon")
+Player.create(name:"Ederson", position:"GK", value:54, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/848e5c255c43b6599d763f3ce06ac52f3ad1fff5.png")
+Player.create(name:"Konstantinos Mitroglou", position:"FOR", value:55, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/28f31cc81fa2a94d98d106f162bc54e56be314f3.png")
+Player.create(name:"Júlio César", position:"GK", value:54, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/0a39eb0fc70ee189b1ee6ab76e1c3a3042be590f.png")
+Player.create(name:"Paulo Lopes", position:"GK", value:54, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/00984c9e9b773660f18d25e7957a6e66b4e9b69f.png")
+Player.create(name:"Lisandro López", position:"DEF", value:57, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/9acb25a7f592e4f73345f2f1256ad6a4b886d84d.png")
+Player.create(name:"Luisão", position:"DEF", value:52, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/c7a8355274d6b6ef885d7d8a0c615d4c8a8c0d99.png")
+Player.create(name:"Jardel", position:"DEF", value:56, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/2343a4b55b06aee7daf40620c2809883b5a29079.png")
 Player.create(name:"Eliseu", position:"DEF", value:52, real_team:"Lisbon")
-Player.create(name:"André Almeida", position:"DEF", value:57, real_team:"Lisbon")
-Player.create(name:"Sílvio", position:"DEF", value:56, real_team:"Lisbon")
+Player.create(name:"André Almeida", position:"DEF", value:57, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/b4026de32990f0e7bb83fe8dfbbc5bd08cb373f2.png")
+Player.create(name:"Sílvio", position:"DEF", value:56, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/2e16a31d4eb2a90511096c17ff71cb942d381d18.png")
 Player.create(name:"Andreas Samaris", position:"MID", value:56, real_team:"Lisbon")
-Player.create(name:"Ljubomir Fejsa", position:"MID", value:55, real_team:"Lisbon")
-Player.create(name:"Pizzi", position:"FOR", value:55, real_team:"Lisbon")
-Player.create(name:"Jonas", position:"FOR", value:52, real_team:"Lisbon")
-Player.create(name:"Talisca", position:"MID", value:55, real_team:"Lisbon")
-Player.create(name:"Raúl Jiménez", position:"FOR", value:56, real_team:"Lisbon")
+Player.create(name:"Ljubomir Fejsa", position:"MID", value:55, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/671393e32919011d828090917c72faa0e22abd20.png")
+Player.create(name:"Pizzi", position:"FOR", value:55, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/cab477cd773d4894b68192e16fcb4a78ce42fb7e.png")
+Player.create(name:"Jonas", position:"FOR", value:52, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/b18acbfab78a916422f546f9ed3b59f5e18185ba.png")
+Player.create(name:"Talisca", position:"MID", value:55, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/c927222b8ed9f46a3edea4b1635c44cae7aa3241.png")
+Player.create(name:"Raúl Jiménez", position:"FOR", value:56, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/a20a13e05d1b61bceee30a56bbd9e478791b25cf.png")
 Player.create(name:"Raphael Guzzo", position:"MID", value:54, real_team:"Lisbon")
-Player.create(name:"Victor Lindelöf", position:"DEF", value:53, real_team:"Lisbon")
-Player.create(name:"Nélson Semedo", position:"DEF", value:53, real_team:"Lisbon")
-Player.create(name:"Toto Salvio", position:"FOR", value:66, real_team:"Lisbon")
+Player.create(name:"Victor Lindelöf", position:"DEF", value:53, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/731912863ef5446a8f683cc98a90c685f2f0d103.png")
+Player.create(name:"Nélson Semedo", position:"DEF", value:53, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/61fbc901ddb95a10c87548152266eabd164e9296.png")
+Player.create(name:"Toto Salvio", position:"FOR", value:66, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/308e5d0e365460a885537baf07fb3bbc29a2f82e.png")
 Player.create(name:"Mehdi Carcela-González", position:"FOR", value:57, real_team:"Lisbon")
-Player.create(name:"Gonçalo Guedes", position:"FOR", value:54, real_team:"Lisbon")
+Player.create(name:"Gonçalo Guedes", position:"FOR", value:54, real_team:"Lisbon", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/1e30c6c45f5197a505d4b7e1631580c8c3661b20.png")
 Player.create(name:"Álex Grimaldo", position:"DEF", value:55, real_team:"Lisbon")
 Player.create(name:"Renato Sanches", position:"MID", value:53, real_team:"Lisbon")
 Player.create(name:"Nico Gaitán", position:"FOR", value:67, real_team:"Lisbon")
@@ -448,7 +448,7 @@ Player.create(name:"Davide Santon", position:"DEF", value:56, real_team:"Inter")
 Player.create(name:"Stevan Jovetic", position:"FOR", value:61, real_team:"Inter")
 Player.create(name:"Alex Telles", position:"DEF", value:56, real_team:"Inter")
 Player.create(name:"Felipe Melo", position:"MID", value:52, real_team:"Inter")
-Player.create(name:"Geoffrey Kondogbia", position:"MID", value:67, real_team:"Inter")
+Player.create(name:"Geoffrey Kondogbia", position:"MID", value:67, real_team:"Inter", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/fb8fa6c4a9fb810edf18f6cfc6d979ebf4759caa.png")
 Player.create(name:"Jeison Murillo", position:"DEF", value:62, real_team:"Inter")
 Player.create(name:"Miranda", position:"DEF", value:58, real_team:"Inter")
 Player.create(name:"Éder", position:"FOR", value:57, real_team:"Inter")
@@ -456,27 +456,27 @@ Player.create(name:"Marcelo Brozovic", position:"MID", value:57, real_team:"Inte
 Player.create(name:"Assane Gnoukouri", position:"MID", value:54, real_team:"Inter")
 Player.create(name:"Rey Manaj", position:"FOR", value:55, real_team:"Inter")
 Player.create(name:"Aarón Ñíguez", position:"FOR", value:55, real_team:"Braga")
-Player.create(name:"Filipe Augusto", position:"MID", value:55, real_team:"Braga")
+Player.create(name:"Filipe Augusto", position:"MID", value:55, real_team:"Braga", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/5fd29d4cdaaa95dfb9fe576ff59556d860ff55f7.png")
 Player.create(name:"Arghus", position:"DEF", value:55, real_team:"Braga")
-Player.create(name:"Ricardo Ferreira", position:"DEF", value:57, real_team:"Braga")
-Player.create(name:"Ahmed Hassan", position:"FOR", value:56, real_team:"Braga")
-Player.create(name:"Matheus", position:"GK", value:55, real_team:"Braga")
-Player.create(name:"André Pinto", position:"DEF", value:56, real_team:"Braga")
-Player.create(name:"Willy Boly", position:"DEF", value:55, real_team:"Braga")
+Player.create(name:"Ricardo Ferreira", position:"DEF", value:57, real_team:"Braga", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/d6aceb0855e081953d37aae94f9e69091aea40a6.png")
+Player.create(name:"Ahmed Hassan", position:"FOR", value:56, real_team:"Braga", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/cada8fe786838be6ceb9e10c1a28ec4a45978371.png")
+Player.create(name:"Matheus", position:"GK", value:55, real_team:"Braga", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/d83e00a5436553f8ee462f7b835830d88f814cfa.png")
+Player.create(name:"André Pinto", position:"DEF", value:56, real_team:"Braga", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/5ff64cf8068826ae773e00093791c2d09274b989.png")
+Player.create(name:"Willy Boly", position:"DEF", value:55, real_team:"Braga", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/c494abec15cb4daa63ec82406b8b031e51143420.png")
 Player.create(name:"Djavan", position:"DEF", value:56, real_team:"Braga")
 Player.create(name:"Baiano", position:"DEF", value:55, real_team:"Braga")
-Player.create(name:"Marcelo Goiano", position:"DEF", value:55, real_team:"Braga")
+Player.create(name:"Marcelo Goiano", position:"DEF", value:55, real_team:"Braga", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/3f04107955da86ea1282ff513804751f2166ab40.png")
 Player.create(name:"Mauro", position:"MID", value:56, real_team:"Braga")
 Player.create(name:"Luíz Carlos", position:"MID", value:53, real_team:"Braga")
-Player.create(name:"Nikola Vukcevic", position:"MID", value:57, real_team:"Braga")
+Player.create(name:"Nikola Vukcevic", position:"MID", value:57, real_team:"Braga", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/f7694c45f9e452621689e40d27e0553697b6c2df.png")
 Player.create(name:"Pedro Santos", position:"FOR", value:57, real_team:"Braga")
-Player.create(name:"Rafa Silva", position:"FOR", value:53, real_team:"Braga")
+Player.create(name:"Rafa Silva", position:"FOR", value:53, real_team:"Braga", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/1989fb5b4017fb1c2c58e1a9f7dfd4ab917119d4.png")
 Player.create(name:"Alan", position:"FOR", value:53, real_team:"Braga")
 Player.create(name:"Rui Fonte", position:"FOR", value:55, real_team:"Braga")
 Player.create(name:"Alef", position:"MID", value:55, real_team:"Braga")
 Player.create(name:"William Pottker", position:"FOR", value:54, real_team:"Braga")
-Player.create(name:"Wilson Eduardo", position:"FOR", value:55, real_team:"Braga")
-Player.create(name:"Nikola Stojiljkovic", position:"FOR", value:56, real_team:"Braga")
+Player.create(name:"Wilson Eduardo", position:"FOR", value:55, real_team:"Braga", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/8aa7e905715e19178529e1cf0bb61b8c440194cf.png")
+Player.create(name:"Nikola Stojiljkovic", position:"FOR", value:56, real_team:"Braga", image_path:"https://assets.onlinesoccermanager.com/Player/Normal/b49ea720e97fdd0ed2455befc42f4c98a4b9dfc3.png")
 Player.create(name:"Crislan", position:"FOR", value:56, real_team:"Braga")
 Player.create(name:"Marafona", position:"GK", value:57, real_team:"Braga")
 Player.create(name:"Stian Ringstad", position:"DEF", value:57, real_team:"Braga")
@@ -504,43 +504,4 @@ Player.create(name:"Mitchell Dijks", position:"DEF", value:55, real_team:"Ajax")
 Player.create(name:"Nemanja Gudelj", position:"MID", value:55, real_team:"Ajax")
 Player.create(name:"Donny van de Beek", position:"MID", value:53, real_team:"Ajax")
 Player.create(name:"Vaclav Cerny", position:"FOR", value:54, real_team:"Ajax")
-
-
-
-# League
-League.create!(name: "Liga NOS", initial_date: Date.today)
-
-
-# Teams
-league=League.first
-Journey.create!(date:Date.today,number:1,league_id:league.id)
-Journey.create!(date:Date.today,number:2,league_id:league.id)
-20.times do |n|
-  name = Faker::Team.name
-  Team.create!(name: name, user_id: n+1, league_id: league.id, budget: 500,
-               image_path: "http://media1.fcbarcelona.com/media/asset_publics/resources/000/004/670/original_rgb/FCB.v1319559431.png")
-end
-
-# Players
-teams = Team.order(:created_at).take(10)
-2.times do
-  name = Faker::Name.name
-  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "GK", value: 15, is_chosen: true, is_active: (Random.new.rand(2) == 0),
-                                     image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
-end
-5.times do
-  name = Faker::Name.name
-  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "DEF", value: 20, is_chosen: true, is_active: (Random.new.rand(2) == 0),
-                                     image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
-end
-5.times do
-  name = Faker::Name.name
-  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "MID", value: 25, is_chosen: true, is_active: (Random.new.rand(2) == 0),
-                                     image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
-end
-3.times do
-  name = Faker::Name.name
-  teams.each { |team| Player.create!(name: name, team_id: team.id, position: "FOR", value: 40, is_chosen: true, is_active: (Random.new.rand(2) == 0),
-                                     image_path: "http://futhead.cursecdn.com/static/img/14/players/158023.png")}
-end
 

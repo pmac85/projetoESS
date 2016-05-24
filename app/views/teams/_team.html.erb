@@ -11,9 +11,9 @@
       <td class="text-center">Free Team</td>
     <% end %>
     <td class="text-center"><%= team.league.name %></td>
-    <% if !current_user.admin %>
+    <% if current_user.id == team.user_id %>
       <td class="text-center">
-        <%= link_to 'Transfers', transfers_team_path(team), :class => 'btn btn-default btn-xs' %>
+        <%= link_to 'Transfers', transfers_team_path(team), method: :post, :class => 'btn btn-default btn-xs' %>
         </br>
         <%= link_to 'Delete', team_path(team), method: :delete, data: { confirm: "You sure?" },
                                                remote: true, :class => 'btn btn-xs btn-danger' %>

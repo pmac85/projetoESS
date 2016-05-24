@@ -15,7 +15,7 @@
 
       <div class="col-md-offset-4 col-md-4">
         <h3 class="text-center text-capitalize"><%= @league.name %></h3>
-        <%= link_to "Calendar", calendarleague_path%>
+        <%= button_to "Journeys", journeys_show_path , :method => :get, class:"btn btn-primary" %>
         <% if current_user.admin %>
             <%= button_to "Create New League", new_league_path, :method => :get, class: "btn btn-primary"  %>
         <% end %>
@@ -23,31 +23,58 @@
       <% if @league.teams.any? %>
           <div class="row">
             <div class="box-body table-responsive">
-              <table id="listTeams" class="table table-bordered table-hover" style="background-color: #FFFFFF">
+              <table id="listTeams" class="table table-bordered table-hover table-condensed" style="background-color: #FFFFFF">
                 <thead>
                 <tr class="info">
-                  <th class="text-center" style="background-color:lightgrey;">Name</th>
+                  <th class="text-center" style="background-color:lightgrey;">Position</th>
+                  <th class="text-center" style="background-color:lightgrey;">Team</th>
                   <th class="text-center" style="background-color:lightgrey;">User</th>
-                  <th class="text-center" style="background-color:lightgrey;">League</th>
+                  <th class="text-center" style="background-color:lightgrey;">Points</th>
+                  <th class="text-center" style="background-color:lightgrey;">Victories</th>
+                  <th class="text-center" style="background-color:lightgrey;">Draws</th>
+                  <th class="text-center" style="background-color:lightgrey;">Defeats</th>
                 </tr>
                 </thead>
                 <tbody>
                 <% @teams.each do |team| %>
                     <tr>
+                      <% if team.total_score %>
+                          <td class="text-center"><% @teams.index(team) %>º</td>
+                      <% else %>
+                        <td class="text-center">-</td>
+                      <% end %>
                       <% if team.image_path.nil? %>
                           <td><%= image_tag "default_team.png", size: "30x30" %><%= link_to team.name, team %></td>
                       <% else %>
                           <td><%= image_tag team.image_path, size: "30x30" %><%= link_to team.name, team %></td>
                       <% end %>
-                      <% if !team.user %>
-                          <td class="text-center">Free
-                          <%= link_to choose_team_path(team), method: :post, data: { confirm: "Are you sure?"} do %>
-                              <span class="glyphicon glyphicon-check"></span>
-                          <% end %></td>
+                      <% if current_user.teams.any? %>
+                          <% if !team.user %>
+                              <td class="text-center">Free</td>
+                          <% else %>
+                              <td class="text-center"><%= team.user.username %></td>
+                          <% end %>
                       <% else %>
-                        <td class="text-center"><%= team.user.username %></td>
+                          <% if !team.user %>
+                              <td class="text-center">Free
+                              <%= link_to choose_team_path(team), method: :post, data: { confirm: "Are you sure?"} do %>
+                                  <span class="glyphicon glyphicon-check"></span>
+                              <% end %></td>
+                          <% else %>
+                            <td class="text-center"><%= team.user.username %></td>
+                          <% end %>
                       <% end %>
-                      <td class="text-center"><%= team.league.name %></td>
+                      <% if team.total_score %>
+                          <td class="text-center"><%= team.total_score %></td>
+                          <td class="text-center"><%= team.victories %></td>
+                          <td class="text-center"><%= team.draws %></td>
+                          <td class="text-center"><%= team.defeats %></td>
+                      <% else %>
+                          <td class="text-center">-</td>
+                          <td class="text-center">-</td>
+                          <td class="text-center">-</td>
+                          <td class="text-center">-</td>
+                      <% end %>
                     </tr>
                 <% end %>
                 </tbody>

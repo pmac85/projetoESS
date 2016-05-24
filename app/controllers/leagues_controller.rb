@@ -1,15 +1,15 @@
 class LeaguesController < ApplicationController
   require 'round_robin_tournament'
+  before_action :check_league
   before_action :admin_user,     only: [:new, :create]
 
   def show
     @league = League.find(params[:id])
-    @teams = @league.teams.all
+    @teams = @league.teams.all.includes(:user).order(:total_score)
   end
 
   def index
     @leagues = League.paginate(page: params[:page])
-    #@leagues = League.all
   end
 
   def new
@@ -20,7 +20,7 @@ class LeaguesController < ApplicationController
     if current_user.admin
       @league = League.new(league_params)
       if @league.save
-        populate_league
+        populate_league(@league)
         flash[:success] = "League successfully created"
         redirect_to league_path(@league)
       else
@@ -33,31 +33,32 @@ class LeaguesController < ApplicationController
     end
   end
 
-  def calendarshow
-    @league=League.find(1)
-    p(@league)
-    @journeys=@league.journeys.paginate(page: params[:page],:per_page=>1)
-    p(@journeys)
-  end
-
-
   private
   def league_params
     params.require(:league).permit(:name, :initial_date)
   end
 
-  def populate_league
-    20.times do |n|
-      Team.create!(name: "Team#{n+1}", user_id: nil, league_id: @league.id, budget: 900)
+  def check_league
+    if !League.any?
+      league = League.new
+      league.update_attributes(name: "Liga NOS", initial_date: Date.today + 7.days)
+      league.save
+      populate_league(league)
     end
-    populate_teams
-    populate_with_journeys
-    populate_journeys
   end
 
-  def populate_teams
-    @allplayers = Player.where(is_chosen: false).includes(:team)
-    @league.teams.each do |team|
+  def populate_league(league)
+    20.times do |n|
+      Team.create!(name: "Team#{n+1}", user_id: nil, league_id: league.id, budget: 900)
+    end
+    populate_teams(league)
+    populate_with_journeys(league)
+    populate_journeys(league)
+  end
+
+  def populate_teams(league)
+    @allplayers = Player.where( "value < ?", 61).where(is_chosen: false)
+    league.teams.each do |team|
       @gk = @allplayers.where(is_chosen: false, position: "GK").sample(2)
       @def = @allplayers.where(is_chosen: false, position: "DEF").sample(5)
       @mid = @allplayers.where(is_chosen: false, position: "MID").sample(5)
@@ -84,16 +85,16 @@ class LeaguesController < ApplicationController
     end
   end
 
-  def populate_with_journeys
+  def populate_with_journeys(league)
     38.times do |n|
-      @journey = Journey.create!(date: (@league.initial_date + n.days), number: (n+1), league_id: @league.id)
+      @journey = Journey.create!(date: (league.initial_date + n.days), number: (n+1), league_id: league.id)
     end
   end
 
-  def populate_journeys
-    teams = @league.teams.ids
+  def populate_journeys(league)
+    teams = league.teams.ids
     teams2= teams.map(&:to_s)
-    journeys = @league.journeys
+    journeys = league.journeys
     # gera calendario de jogos
     journeys_schedule = RoundRobinTournament.schedule(teams2)
 
@@ -101,6 +102,7 @@ class LeaguesController < ApplicationController
     journeys_schedule.each_with_index do |day, index|
       journey = journeys.find_by(number: (index + 1))
       day.map { |team| Game.create!(journey_id: journey.id, team1_id: team.first.to_i, team2_id: team.last.to_i)}
+      day.map { |team| Game.create!(journey_id: (journey.id+19), team1_id: team.last.to_i, team2_id: team.first.to_i)}
     end
   end
 

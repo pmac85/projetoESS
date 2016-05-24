@@ -1,23 +1,89 @@
-<h1><%= @journeys.first.number%></h1>
-<h1><%= @journeys.first.date%></h1>
-<table class="w3-table-all" style="width:50%">
-  <tbody>
-  <tr>
-    <th>House</th>
-    <th>Result</th>
-    <th>Out</th>
-  </tr>
-  <%
-    $x=0
-    begin
-  %>
-      <tr>
-        <td>Eve</td>
-        <td>1-1</td>
-        <td>Jackson</td>
-      </tr>
-  <%
-    $x+=1
-    end while $x<4
-  %>
-  </tbody></table>
+<% provide(:title, "Journeys") %>
+<% jogos="" %>
+
+<script>var jogos=new Array()
+function journeyToJavascript(games,teams){
+  teams=JSON.parse(teams);
+  var gamesJourney=games.split("][");
+  for(x=0;x<gamesJourney.length-1;x++) {
+    gamesJourney[x] = gamesJourney[x] + "]";
+    gamesJourney[x + 1] = "[" + gamesJourney[x + 1];
+  }
+  for(x=0;x<gamesJourney.length;x++) {
+    var gamesStr=JSON.parse(gamesJourney[x]);
+    for(y=0;y<gamesStr.length;y++) {
+      var scr = "---";
+      if (gamesStr[y].score != null) {
+        scr = gamesStr[y].score;
+      }
+
+      var t1 = searchTeamName(gamesStr[y].team1_id, teams);
+      //console.log(t1);
+      var t2 = searchTeamName(gamesStr[y].team2_id, teams);
+      //console.log(t2);
+      jogos.push(new Array(gamesStr[y].journey_id, t1, t2, scr));
+    }
+    //alert(x);
+  }
+  for(x=0;x<jogos.length;x++) {
+    //console.log(jogos[0]);
+  }
+}
+
+function searchTeamName(id, teams){
+
+  for(c=0;c<teams.length;c++){
+    if(id==teams[c].id){
+      return teams[c].name;
+    }
+    //console.log(id +"-"+teams[x].id)
+  }
+  //console.log(teams.length);
+  return "ERROR";
+}
+
+function changedslct(sel){
+  var dv=document.getElementById("gPresent");
+  var jdt=sel.value;
+  var jn=sel.options[sel.selectedIndex].text;
+  jn=jn.substr(jn.indexOf(" ")+1);
+  var next="<h3></h3><table class=\"j-table-all\"><thead><tr><th colspan='3' class='thJ'> Journey "+jn+"<br>"+jdt+"</th></tr></thead><tbody>";
+  for(x=(jn-1)*10;x<((jn-1)*10)+10;x++){
+    if(jogos[x][0]==jn){
+      next+="<tr><td>"+jogos[x][1]+"</td><td>"+jogos[x][3]+"</td><td>"+jogos[x][2]+"</td></tr>";
+    }
+  }
+
+  next+="</tbody></table>";
+  dv.innerHTML=next;
+}
+</script>
+
+<div class="divs">
+  <select id="jselect" onchange="changedslct(this)" style="background: transparent;
+      font-size: 14px;
+      height: 29px;
+      padding: 5px;width: 268px;
+      position: absolute;
+      right: 39%;"
+  >
+    <% @journeys.each do |journey| %>
+        <% jogos=jogos+journey.games.to_json %>
+        <% if(journey.date == Date.today()) %>
+            <option value="<%= journey.date %>" selected>Journey <%= journey.number %></option>
+        <% else %>
+            <option value="<%= journey.date %>" >Journey <%= journey.number %></option>
+        <% end %>
+    <% end %>
+  </select>
+  <%= javascript_tag "var games='#{jogos}';" %>
+  <%= javascript_tag "var teams='#{@teams.to_json}';" %>
+  <script>
+    journeyToJavascript(games,teams);
+    $(document).ready(function(){
+      $("#jselect").trigger("change");}
+    );
+  </script>
+  <div id="gPresent"></div>
+</div>
+
