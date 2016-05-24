@@ -16,11 +16,11 @@
       <div class="col-md-offset-4 col-md-4">
         <h3 class="text-center text-capitalize"><%= @league.name %></h3>
         <%= button_to "Journeys", journeys_show_path , :method => :get, class:"btn btn-primary" %>
-        <% if current_user.admin %>
-            <%= button_to "Create New League", new_league_path, :method => :get, class: "btn btn-primary"  %>
-        <% end %>
       </div>
       <% if @league.teams.any? %>
+          <% @teams.each do |team| %>
+              <%= render "teams/modal", team: team %>
+          <% end %>
           <div class="row">
             <div class="box-body table-responsive">
               <table id="listTeams" class="table table-bordered table-hover table-condensed" style="background-color: #FFFFFF">
@@ -37,18 +37,18 @@
                 </thead>
                 <tbody>
                 <% @teams.each do |team| %>
-                    <tr>
+                    <tr data-toggle="modal" data-target="#<%=team.id%>" class="clickable">
                       <% if team.total_score %>
                           <td class="text-center"><% @teams.index(team) %>º</td>
                       <% else %>
                         <td class="text-center">-</td>
                       <% end %>
                       <% if team.image_path.nil? %>
-                          <td><%= image_tag "default_team.png", size: "30x30" %><%= link_to team.name, team %></td>
+                          <td><%= image_tag "default_team.png", size: "30x30" %><%=  team.name %></td>
                       <% else %>
-                          <td><%= image_tag team.image_path, size: "30x30" %><%= link_to team.name, team %></td>
+                          <td><%= image_tag team.image_path, size: "30x30" %><%= team.name %></td>
                       <% end %>
-                      <% if current_user.teams.any? %>
+                      <% if current_user.teams.any? || current_user.admin %>
                           <% if !team.user %>
                               <td class="text-center">Free</td>
                           <% else %>
@@ -56,10 +56,10 @@
                           <% end %>
                       <% else %>
                           <% if !team.user %>
-                              <td class="text-center">Free
-                              <%= link_to choose_team_path(team), method: :post, data: { confirm: "Are you sure?"} do %>
-                                  <span class="glyphicon glyphicon-check"></span>
-                              <% end %></td>
+                            <td class="text-center">Free
+                            <%= link_to choose_team_path(team), method: :post, data: { confirm: "Are you sure?"} do %>
+                                <span class="glyphicon glyphicon-check"></span>
+                            <% end %></td>
                           <% else %>
                             <td class="text-center"><%= team.user.username %></td>
                           <% end %>

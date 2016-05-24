@@ -1,0 +1,53 @@
+<div class="modal fade" id="<%=team.id%>" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center"><b><%= team.name %></b> &nbsp;&nbsp;&nbsp;&nbsp; Budget: <%= team.budget %></h4>
+      </div>
+      <div class="modal-body">
+        <table class="col-md-12 table-condensed table-hover" >
+          <tr style="background-color: #C0C0C0;color: white" class="text-capitalize">
+            <th class="text-center">Name</th>
+            <th class="text-center">Position</th>
+            <th class="text-center">Value</th>
+          </tr>
+          <% team.players.where(position: "GK").each do |player| %>
+              <tr>
+                <td class="col-md-4"><%= player.name %></td>
+                <td class="col-md-3 text-center"><%= player.position %></td>
+                <td class="col-md-1 text-center"><%= player.value %> </td>
+              </tr>
+          <% end %>
+          <% team.players.where(position: "DEF").each do |player| %>
+              <tr>
+                <td class="col-md-4"><%= player.name %></td>
+                <td class="col-md-3 text-center"><%= player.position %></td>
+                <td class="col-md-1 text-center"><%= player.value %> </td>
+              </tr>
+          <% end %>
+          <% team.players.where(position: "MID").each do |player| %>
+              <tr>
+                <td class="col-md-4"><%= player.name %></td>
+                <td class="col-md-3 text-center"><%= player.position %></td>
+                <td class="col-md-1 text-center"><%= player.value %> </td>
+              </tr>
+          <% end %>
+          <% team.players.where(position: "FOR").each do |player| %>
+              <tr>
+                <td class="col-md-4"><%= player.name %></td>
+                <td class="col-md-3 text-center"><%= player.position %></td>
+                <td class="col-md-1 text-center"><%= player.value %> </td>
+              </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

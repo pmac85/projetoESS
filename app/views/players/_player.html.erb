@@ -1,16 +1,20 @@
-<% if player.is_active && !(request.env['PATH_INFO'].include? "/transfers") %>
-  <tr id="<%= player.id %>" style="background-color: #666666">
+<% if !player.team || current_user.id != player.team.user_id %>
+  <tr>
+<% elsif player.is_active && !(request.env['PATH_INFO'].include? "/transfers") %>
+    <tr id="<%= player.id %>" style="background-color: #666666">
 <% else %>
   <tr id="<%= player.id %>" class="clickable-row">
 <% end %>
   <td>
     <%= render :partial => '/players/playerImage', :locals => { :player => player, :image_size => "40x40" } %>
-    <%= link_to player.name, player %>
+    <%= player.name %>
   </td>
-  <% if player.team %>
-    <td class="text-center"><%= player.team.name %></td>
-  <% else %>
-    <td class="text-center">Free player</td>
+  <% if (request.env['PATH_INFO'].include? "/transfers") %>
+    <% if player.team %>
+      <td class="text-center"><%= player.team.name %></td>
+    <% else %>
+      <td class="text-center">Free player</td>
+    <% end %>
   <% end %>
   <td class="text-center"><%= player.position %></td>
   <td class="text-center"><%= player.value %></td>
