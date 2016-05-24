@@ -31,7 +31,7 @@ class TeamsController < ApplicationController
       @allplayers = @allplayers.where(position: positionArray[positionFilter.to_i-1])
     end
 
-    if(valueFilter != nil && valueFilter != "-1")
+    if(valueFilter != nil && valueFilter != "Unlimited")
       @allplayers = @allplayers.where(value: 0..valueFilter.to_i);
     end
   end
