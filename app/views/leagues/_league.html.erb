@@ -1,7 +1,6 @@
 <p id="league-<% league.name %>">
   <%= link_to league.name, league %> &emsp;
   <% if current_user.admin  %>
-      <%= link_to 'Delete', league, method: :delete, data: { confirm: "You sure?" }, remote: true,
-                  :class => 'btn btn-xs btn-danger' %>
+      <%= link_to 'Delete', league, method: :delete, :class => 'btn btn-xs btn-danger' %>
   <% end %>
 </p>
