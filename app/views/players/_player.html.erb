@@ -7,7 +7,7 @@
 <% end %>
   <td>
     <%= render :partial => '/players/playerImage', :locals => { :player => player, :image_size => "40x40" } %>
-    <%= player.name %>
+    <span><%= player.name %></span>
   </td>
   <% if (request.env['PATH_INFO'].include? "/transfers") %>
     <% if player.team %>
