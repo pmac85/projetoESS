@@ -170,7 +170,7 @@ class TeamsController < ApplicationController
     fora = actives.where(position: "FOR")
 
     if !actives.empty?
-      if actives.count != 11
+      if actives.count < 11
         if gka.empty?
           gk = gkall.limit(1)
           gk.update_all(is_active: true)
@@ -183,28 +183,38 @@ class TeamsController < ApplicationController
         check_actives_position(fora, forall, "FOR", 2, mida.count + defa.count, 8)
       end
     else
-      gk = team.where(position: "GK").limit(1)
+      gk = team.where(position: "GK", is_active: false).limit(1)
       gk.update_all(is_active: true)
-      defense = team.where(position: "DEF").limit(4)
+      defense = team.where(position: "DEF", is_active: false).limit(4)
       defense.update_all(is_active: true)
-      mid = team.where(position: "MID").limit(4)
+      mid = team.where(position: "MID", is_active: false).limit(4)
       mid.update_all(is_active: true)
-      forward = team.where(position: "FOR").limit(2)
+      forward = team.where(position: "FOR", is_active: false).limit(2)
       forward.update_all(is_active: true)
     end
   end
 
   def check_actives_position(listaJog, team, pos, numDef, numNDef, numNDefPerm)
     if team.where(is_active: true).count != 11
-      if listaJog.empty? && numNDef <= numNDefPerm
-        players = team.where(position: pos).limit(numDef)
-        players.update_all(is_active: true)
-      elsif listaJog.empty? && numNDef == numNDefPerm+1
-        players = team.where(position: pos).limit(numDef-1)
-        players.update_all(is_active: true)
+      if listaJog.empty?
+        if numNDef <= numNDefPerm
+          players = team.where(position: pos, is_active: false).limit(numDef)
+          players.update_all(is_active: true)
+        elsif numNDef == numNDefPerm+1
+          players = team.where(position: pos, is_active: false).limit(numDef-1)
+          players.update_all(is_active: true)
+        else
+          players = team.where(position: pos, is_active: false).limit(numDef - listaJog.count)
+          players.update_all(is_active: true)
+        end
       else
-        players = team.where(position: pos).limit(numDef - listaJog.count)
-        players.update_all(is_active: true)
+        if numNDef <= numNDefPerm
+          players = team.where(position: pos, is_active: false).limit(numDef - listaJog.count)
+          players.update_all(is_active: true)
+        elsif numNDef == numNDefPerm+1
+          players = team.where(position: pos, is_active: false).limit(numDef - 1 - listaJog.count)
+          players.update_all(is_active: true)
+        end
       end
     end
   end
