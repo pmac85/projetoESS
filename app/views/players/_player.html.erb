@@ -1,5 +1,5 @@
 <% if !player.team || current_user.id != player.team.user_id %>
-  <tr>
+  <tr id="<%= player.id %>" class="clickable-row">
 <% elsif player.is_active && !(request.env['PATH_INFO'].include? "/transfers") %>
     <tr id="<%= player.id %>" style="background-color: #666666">
 <% else %>

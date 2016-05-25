@@ -132,16 +132,16 @@
               </tr>
             </thead>
             <tbody>
-              <% @team.players.where(position: "GK").each do |player| %>
+              <% @players.where(position: "GK").each do |player| %>
                 <%= render player %>
               <% end %>
-              <% @team.players.where(position: "DEF").each do |player| %>
+              <% @players.where(position: "DEF").each do |player| %>
                 <%= render player %>
               <% end %>
-              <% @team.players.where(position: "MID").each do |player| %>
+              <% @players.where(position: "MID").each do |player| %>
                 <%= render player %>
               <% end %>
-              <% @team.players.where(position: "FOR").each do |player| %>
+              <% @players.where(position: "FOR").each do |player| %>
                 <%= render player %>
               <% end %>
             </tbody>
