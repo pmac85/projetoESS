@@ -2,7 +2,9 @@
 
 <script>
   $(document).ready(function () {
-    $("#listTeams").DataTable();
+    $("#listTeams").DataTable({
+      "order": []
+    });
 
 
   });
@@ -39,7 +41,7 @@
                 <% @teams.each do |team| %>
                     <tr data-toggle="modal" data-target="#<%=team.id%>" class="clickable">
                       <% if team.total_score %>
-                          <td class="text-center"><% @teams.index(team) %>º</td>
+                          <td class="text-center"><%= @teams.index(team) + 1 %>º</td>
                       <% else %>
                         <td class="text-center">-</td>
                       <% end %>

@@ -5,7 +5,7 @@ class LeaguesController < ApplicationController
 
   def show
     @league = League.find(params[:id])
-    @teams = @league.teams.all.includes(:user).order(:total_score)
+    @teams = @league.teams.all.order('total_score DESC')
   end
 
   def index
@@ -24,7 +24,6 @@ class LeaguesController < ApplicationController
         flash[:success] = "League successfully created"
         redirect_to league_path(@league)
       else
-        flash[:warning] = "Something is missing."
         render 'new'
       end
     else
@@ -38,6 +37,12 @@ class LeaguesController < ApplicationController
     @league.teams.each do |team|
       team.players.update_all(team_id: nil, is_chosen: false, is_active: false)
       team.destroy
+    end
+    @league.journeys.each do |journey|
+      journey.games.each do |game|
+        game.destroy
+      end
+      journey.destroy
     end
     @league.destroy
     flash[:success] = "League deleted. You can create a new League now!"

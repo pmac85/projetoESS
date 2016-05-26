@@ -4,11 +4,11 @@
   $(document).ready(function() {
     $('.datepicker').datepicker
     ({
-      minDate: 0,
       format: "dd-mm-yyyy",
       weekStart: 1,
       autoclose: true
-    });
+    })
+    $('.datepicker').datepicker("setDate", new Date());
   });
 </script>
 

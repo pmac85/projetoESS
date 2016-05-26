@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :players,             only: [:index, :show]
   resources :leagues,             only: [:index, :show, :new, :create, :destroy]
   resources :journeys
+  resources :games,               only: [:show]
   get 'teams/:id/transfers' => 'teams#transfers',       :as => 'transfers_get_team'
   post 'teams/:id/transfers' => 'teams#transfers',       :as => 'transfers_team'
   post 'teams/:id/strategy' => 'teams#changeStrategy'
@@ -22,6 +23,6 @@ Rails.application.routes.draw do
   post 'teams/:id/choose'   => 'teams#choose_team',     :as => 'choose_team'
   post 'games/:id/show' =>'games#show', :as =>'game_show'
   get 'journeys/:id/index'   => 'journeys#index', :as => 'journeys_show'
-  post 'journeys/:id/close'  => 'journeys#close'
+  get 'journeys/:id/close'  => 'journeys#close'
 
 end

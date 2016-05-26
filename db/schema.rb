@@ -66,13 +66,13 @@ ActiveRecord::Schema.define(version: 20160525221451) do
     t.integer  "budget"
     t.integer  "user_id"
     t.integer  "league_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.string   "image_path"
-    t.integer  "total_score"
-    t.integer  "victories"
-    t.integer  "draws"
-    t.integer  "defeats"
+    t.integer  "total_score", default: 0
+    t.integer  "victories",   default: 0
+    t.integer  "draws",       default: 0
+    t.integer  "defeats",     default: 0
   end
 
   add_index "teams", ["league_id"], name: "index_teams_on_league_id"
