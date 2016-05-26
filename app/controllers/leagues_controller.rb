@@ -1,7 +1,7 @@
 class LeaguesController < ApplicationController
   require 'round_robin_tournament'
-  before_action :check_league,   except: [:new, :create]
-  before_action :admin_user,     only: [:new, :create]
+  before_action :check_league,   except: [:new, :create, :destroy ]
+  before_action :admin_user,     only: [:new, :create, :destroy]
 
   def show
     @league = League.find(params[:id])
@@ -31,6 +31,17 @@ class LeaguesController < ApplicationController
       flash[:warning] = "You don't have authorization to create a league!"
       redirect_to root_path
     end
+  end
+
+  def destroy
+    @league = League.find(params[:id])
+    @league.teams.each do |team|
+      team.players.update_all(team_id: nil, is_chosen: false, is_active: false)
+      team.destroy
+    end
+    @league.destroy
+    flash[:success] = "League deleted. You can create a new League now!"
+    redirect_to new_league_path
   end
 
   private
