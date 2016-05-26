@@ -6,6 +6,85 @@ class LeaguesController < ApplicationController
   def show
     @league = League.find(params[:id])
     @teams = @league.teams.all.order('total_score DESC')
+    p(:user)
+    journeys=@league.journeys
+    index=-1
+    index2=0
+    nextt=""
+    nextid=""
+    nextj=""
+    lastj1=""
+    last=""
+    lastj2=""
+    lastid1=""
+    lastid2=""
+    usrt=current_user.teams.where(league_id:@league.id).first()
+    if(usrt!=nil)
+    usrtid=usrt.id
+    journeys.each do |journey|
+      if(journey.date == Date.today())
+          index2=index
+          break
+          end
+        index=index+1
+    end
+      if(index2>-1)
+        g= journeys.first.games
+        g.each do |game|
+          if(game.team1_id==usrtid)
+            nextt="Next Oponent: "
+            nextid=game.team1_id.to_s
+            nextj=@teams.find(game.team2_id).name
+            break
+          end
+          if(game.team2_id==usrtid)
+            nextt="Next Oponent: "
+            nextid=game.team2_id.to_s
+            nextj=@teams.find(game.team1_id).name
+            break
+          end
+        end
+      else
+        index2=index2+1
+        g= journeys.find(index2).games
+        g.each do |game|
+          if(game.team1_id==usrtid || game.team2_id==usrtid)
+            lastid1=game.team1_id.to_s
+            lastj1=@teams.find(game.team1_id).name
+            last=game.score
+            lastid2=game.team2_id.to_s
+            lastj2=@teams.find(game.team2_id).name
+            break
+          end
+        end
+        index2=index2+1
+        if(index2<=journeys.length)
+        g= journeys.find(index2).games
+        g.each do |game|
+          if(game.team1_id==usrtid)
+            nextt="Next Oponent: "
+            nextid=game.team1_id.to_s
+            nextj=@teams.find(game.team1_id).name
+            break
+          end
+          if(game.team2_id==usrtid)
+            nextt="Next Oponent: "
+            nextid=game.team2_id.to_s
+            nextj=@teams.find(game.team2_id).name
+            break
+          end
+        end
+      end
+    end
+      end
+    @next=nextt
+    @nextid=nextid
+    @nextj=nextj
+    @lastj1=lastj1
+    @lastj2=lastj2
+    @lastid1=lastid1
+    @lastid2=lastid2
+    @last=last
   end
 
   def index

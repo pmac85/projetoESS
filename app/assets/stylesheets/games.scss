@@ -1,3 +1,58 @@
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.detailsGameResultado{
+  margin: 0 100;
+  overflow: hidden;
+  text-align: center;
+  padding: 15px 0px;
+}
+.casa{
+  width: 41%;
+  float: left;
+  text-align: right;
+}
+
+.imgCasa{
+  float: left;
+  clear: left;
+}
+
+.equipa{
+  font-size: 29px;
+  font-weight: normal;
+  line-height: 24px;
+  text-align: center;
+  padding-top: 120px;
+}
+
+.result{
+  display: inline-block;
+  padding-top: 70;
+}
+.data{
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 5px;
+  color: #040210;
+}
+.score{
+  font-size: 38px;
+  padding: 0 15px;
+  margin: 10px 0;
+  font-weight: bold;
+  margin: 18px 0 0;
+}
+
+.fora{
+  width: 41%;
+  float: right;
+  text-align: left;
+}
+
+.imgFora{
+  float: right;
+  clear: right;
+
+}
