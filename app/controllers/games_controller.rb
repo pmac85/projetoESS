@@ -1,10 +1,14 @@
 class GamesController < ApplicationController
 
+  def show
+    @game=Game.find(params[:id])
+  end
+
   def gerarResultado
     gol1=gol2=0
-    game=Game.find[params[:id]]
-    team1=Team.find[game.team1]
-    team2=Team.find[game.team2]
+    game=Game.find(params[:id])
+    team1=game.team1
+    team2=game.team2
 
     players1=team1.players
     players2=team2.players
@@ -48,15 +52,31 @@ class GamesController < ApplicationController
     valueRandom2=Random.new(6);
 
 
+    #gerar golos
+
+
     if(gol1>gol2)
+      team1.total_score+=3;
+      team1.victories+=1;
+      team2.defeats+=1;
 
+    else if(gol1<gol2)
+      team2.total_score+=3;
+      team2.victories+=1;
+      team1.defeats+=1;
 
+         else
+           team1.total_score+=1;
+           team2.total_score+=1;
+           team1.draws+=1;
+           team2.draws+=1;
+           end
     end
-    if(gol1<gol2)
 
-
-
-
-    end
+    game.save
+    team1.save
+    team2.save
   end
+
+
 end

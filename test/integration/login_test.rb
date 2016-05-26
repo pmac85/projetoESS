@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Login < ActionDispatch::IntegrationTest
+class LoginTest < ActionDispatch::IntegrationTest
 
   def setup
     @password = "123456"
