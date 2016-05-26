@@ -18,7 +18,9 @@ class LeaguesController < ApplicationController
     lastj2=""
     lastid1=""
     lastid2=""
-    usrtid=current_user.teams.where(league_id:@league.id).first().id
+    usrt=current_user.teams.where(league_id:@league.id).first()
+    if(usrt!=nil)
+    usrtid=usrt.id
     journeys.each do |journey|
       if(journey.date == Date.today())
           index2=index
@@ -32,13 +34,13 @@ class LeaguesController < ApplicationController
           if(game.team1_id==usrtid)
             nextt="Next Oponent: "
             nextid=game.team1_id.to_s
-            nextj=@teams.find(game.team1_id).name
+            nextj=@teams.find(game.team2_id).name
             break
           end
           if(game.team2_id==usrtid)
             nextt="Next Oponent: "
             nextid=game.team2_id.to_s
-            nextj=@teams.find(game.team2_id).name
+            nextj=@teams.find(game.team1_id).name
             break
           end
         end
@@ -73,7 +75,7 @@ class LeaguesController < ApplicationController
           end
         end
       end
-
+end
       end
     @next=nextt
     @nextid=nextid
