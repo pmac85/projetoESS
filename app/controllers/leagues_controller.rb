@@ -152,7 +152,7 @@ class LeaguesController < ApplicationController
   end
 
   def populate_teams(league)
-    @allplayers = Player.where( "value < ?", 61).where(is_chosen: false)
+    @allplayers = Player.where( "value < ?", 65).where(is_chosen: false)
     league.teams.each do |team|
       @gk = @allplayers.where(is_chosen: false, position: "GK").sample(2)
       @def = @allplayers.where(is_chosen: false, position: "DEF").sample(5)

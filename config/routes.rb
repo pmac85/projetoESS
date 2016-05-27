@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   post 'teams/:id/transfer' => 'teams#transfer'
   post 'teams/:id/edit'     => 'teams#edit'
   post 'teams/:id/choose'   => 'teams#choose_team',     :as => 'choose_team'
-  post 'games/:id/show' =>'games#show', :as =>'game_show'
+  get 'teams/:id/drop'  => 'teams#drop_user', :as => 'drop_team'
+  post 'games/:id/show' => 'games#show', :as =>'game_show'
   get 'journeys/:id/index'   => 'journeys#index', :as => 'journeys_show'
   get 'journeys/:id/close'  => 'journeys#close'
 
