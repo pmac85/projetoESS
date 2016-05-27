@@ -10,24 +10,29 @@
           <table id="listUsers" class="table table-bordered table-hover" style="background-color: #FFFFFF">
             <thead>
             <tr>
-              <th class="text-center" style="background-color:lightgrey;">ID</th>
               <th class="text-center" style="background-color:lightgrey;">Username</th>
               <th class="text-center" style="background-color:lightgrey;">Email</th>
+              <th class="text-center" style="background-color:lightgrey;">Team</th>
               <th class="text-center" style="background-color:lightgrey;">Actions</th>
             </tr>
             </thead>
             <tbody>
             <% @users.each do |user| %>
                 <tr>
-                  <td class="text-center"><%= link_to user.id, user_path(user) %></td>
-                  <td><%= user.username %></td>
-                  <td><%= user.email %></td>
+                  <td class="text-center"><%= user.username %></td>
+                  <td class="text-center"><%= user.email %></td>
+                  <% if user.teams.any? %>
+                      <td><%= user.teams.first.name %></td>
+                  <% else %>
+                      <td class="text-center">No team</td>
+                  <% end %>
                   <td class="text-center">
-                    <%= link_to t('.transfers', :default => t("helpers.links.transfers")),
-                                edit_user_path(user), :class => 'btn btn-default btn-xs' %>
                     <% if current_user.admin && !current_user?(user) %>
-                      <%= link_to t('.destroy', :default => t("helpers.links.destroy")), user_path(user), :method => :delete, :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))}, :class => 'btn btn-xs btn-danger'
-                    %>
+                        <%= link_to t('.destroy', :default => t("helpers.links.destroy")), user_path(user), :method => :delete, :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))}, :class => 'btn btn-xs btn-danger'
+                      %>
+                    <% elsif current_user.admin && current_user?(user) %>
+                        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                                    edit_user_path(user), :class => 'btn btn-default btn-xs' %>
                     <% end %>
                   </td>
                 </tr>

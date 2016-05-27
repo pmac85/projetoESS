@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :teams
   resources :players,             only: [:index, :show]
   resources :leagues,             only: [:index, :show, :new, :create, :destroy]
-  resources :journeys
+  resources :journeys,            only: [:index]
   resources :games,               only: [:show]
   get 'teams/:id/transfers' => 'teams#transfers',       :as => 'transfers_get_team'
   post 'teams/:id/transfers' => 'teams#transfers',       :as => 'transfers_team'
@@ -21,9 +21,9 @@ Rails.application.routes.draw do
   post 'teams/:id/transfer' => 'teams#transfer'
   post 'teams/:id/edit'     => 'teams#edit'
   post 'teams/:id/choose'   => 'teams#choose_team',     :as => 'choose_team'
-  get 'teams/:id/drop'  => 'teams#drop_user', :as => 'drop_team'
-  post 'games/:id/show' => 'games#show', :as =>'game_show'
-  get 'journeys/:id/index'   => 'journeys#index', :as => 'journeys_show'
-  get 'journeys/:id/close'  => 'journeys#close'
+  get 'teams/:id/drop'      => 'teams#drop_user', :as => 'drop_team'
+  post 'games/:id/show'     => 'games#show', :as =>'game_show'
+  get 'journeys/:id/index'  => 'journeys#index', :as => 'journeys_show'
+  get 'journeys/:id/close'  => 'journeys#close', :as => 'close_journey'
 
 end
