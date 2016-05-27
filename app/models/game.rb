@@ -73,8 +73,8 @@ class Game < ActiveRecord::Base
       rand1+=(difa).abs/100
     end
 
-    gol1=Random.new(rand1)
-    gol2=Random.new(rand2)
+    gol1=Random.rand(rand1)
+    gol2=Random.rand(rand2)
 
     if gol1>gol2
       team1.total_score += 3

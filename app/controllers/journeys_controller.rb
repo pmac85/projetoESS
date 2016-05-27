@@ -1,14 +1,5 @@
 class JourneysController < ApplicationController
 
-  def new
-    @journey = Journey.new
-  end
-
-  def create
-    params[:journeys].inspect
-    render nothing: true
-  end
-
   def index
     @league=League.find(params[:id])
     @journeys=@league.journeys.includes(:games)
@@ -17,10 +8,16 @@ class JourneysController < ApplicationController
 
   def close
     journey=Journey.find(params[:id])
-    journey.games.each do |game|
-      game.gerarResultado
+    if !journey.is_closed
+      journey.games.each do |game|
+        game.gerarResultado
+      end
+      journey.is_closed = true
+      journey.save
+      flash[:notice] = "Journey #{journey.number} closed."
+      redirect_to :back
+    else
+      flash[:info] = "Journey #{journey.number} can't be closed again."
     end
-    flash[:notice] = "Journey #{journey.number} closed."
-    redirect_to league_path(journey.league_id)
   end
 end

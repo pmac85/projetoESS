@@ -9,7 +9,7 @@
         </h1>
         </br>
         <% if current_user == @user %>
-            <%= button_to "Edit Profile", edit_user_path(current_user), class: "btn1 btn btn-primary" %>
+            <%= button_to "Edit Profile", edit_user_path(current_user), method: :get, class: "btn btn-primary" %>
         <% end %>
       </section>
     </aside>
