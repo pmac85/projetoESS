@@ -15,8 +15,7 @@
       <td class="text-center">
         <%= link_to 'Transfers', transfers_team_path(team), method: :post, :class => 'btn btn-default btn-xs' %>
         </br>
-        <%= link_to 'Delete', team_path(team), method: :delete, data: { confirm: "You sure?" },
-                                               remote: true, :class => 'btn btn-xs btn-danger' %>
+        <%= link_to 'Delete', drop_team_path(team), method: :get, :class => 'btn btn-xs btn-danger' %>
       </td>
     <% end %>
   </tr>
