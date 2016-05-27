@@ -42,18 +42,39 @@ class Game < ActiveRecord::Base
 
 
 
-    team1GoalA=gk1+def1+(mid1/2)
-    team2GoalA=gk2+def2+(mid2/2)
+    team1GoalS=gk1+def1+(mid1/2)
+    team2GoalS=gk2+def2+(mid2/2)
 
     team1GoalM=(mid1/2)+for1
     team2GoalM=(mid2/2)+for2
 
-    valueRandom1=Random.new(6)
-    valueRandom2=Random.new(6)
+    #gol1=Random.new(6)
+    #gol2=Random.new(6)
+    difd = team1GoalS - team2GoalM
+    difa = team2GoalS - team1GoalM
+    rand1 = 2
+    rand2 = 2
 
+    equipa1=team1GoalM+team1GoalS
+    equipa2=team2GoalM+team2GoalS
+
+    if equipa1 > equipa2
+      rand1+=2
+    elsif equipa1<equipa2
+      rand2+=2
+    end
 
     #gerar golos
+    if difd < 0
+      rand2+=(difd).abs/100
+    end
 
+    if difa < 0
+      rand1+=(difa).abs/100
+    end
+
+    gol1=Random.new(rand1)
+    gol2=Random.new(rand2)
 
     if gol1>gol2
       team1.total_score += 3
