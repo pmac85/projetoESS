@@ -16,7 +16,11 @@
             <li><%= link_to "TRANSFERS", transfers_get_team_path(current_user.teams.first) %></li>
             <li><%= link_to "LEAGUE", league_path(current_user.teams.first.league_id) %></li>
           <% else %>
-            <li><%= link_to "LEAGUE", league_path(Team.first.league_id) %></li>
+                <% if(League.any?)%>
+                    <li><%= link_to "LEAGUE", league_path(Team.first.league_id) %></li>
+                <%else%>
+                    <li><%= link_to "LEAGUE", leagues_path %></li>
+                <%end%>
           <% end %>
             <% if (current_user.admin? && !current_user.nil?) %>
                 <li><%= link_to "USERS", users_path %></li>

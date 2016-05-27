@@ -17,7 +17,7 @@
   <div class="wrapper">
     <%= render 'layouts/header2' %>
   </div>
-  <div class="content-wrapper" style="padding: 100px 100px 0px 100px;">
+  <div class="content-wrapper">
     <div class="overlay">
       <% flash.each do |message_type, message| %>
           <div class="alert alert-<%= message_type %>" id="flash"><%= message %></div>

@@ -28,7 +28,11 @@ function changedslct(sel){
     }
     var t1 = searchTeamName(jogos2[x].team1_id, teams);
     var t2 = searchTeamName(jogos2[x].team2_id, teams);
-      next+="<tr><td>"+t1+"</td><td data-toggle='modal' data-target='#"+jogos2[x].id+"' class='clickable'>"+scr+"</td><td>"+t2+"</td></tr>";
+      next+="<tr>" +
+          "<td data-toggle='modal' data-target='#"+jogos2[x].team1_id+"' class='clickable'>"+t1+"</td>" +
+          "<td href='#resultgame' data-toggle='modal' data-target='#resultgame"+jogos2[x].id+"' class='clickable'>"+scr+"</td>" +
+          "<td data-toggle='modal' data-target='#"+jogos2[x].team2_id+"' class='clickable'>"+t2+"</td>" +
+          "</tr>";
   }
 
   next+="</tbody></table>";
@@ -37,6 +41,9 @@ function changedslct(sel){
 </script>
 
 <div class="divs">
+  <% @teams.each do|team|%>
+      <%=render "teams/modal", team:team%>
+  <%end%>
   <% @journeys.each do |journey| %>
       <% journey.games.each do |game|%>
         <%= render "games/modal", game: game %>
