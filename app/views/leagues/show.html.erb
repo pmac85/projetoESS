@@ -21,6 +21,9 @@
       <div class="col-md-offset-4 col-md-4">
         <h3 class="text-center text-capitalize"><%= @league.name %></h3>
         <%= button_to "Fixtures", journeys_show_path , :method => :get, class:"btn btn-primary" %>
+        <% if current_user.admin  %>
+            <%= button_to 'Delete League', league_path(@league), method: :delete, class: 'btn btn2 btn-danger' %>
+        <% end %>
       </div>
       <div class="col-md-offset-4 col-md-4">
         <h4 class="text-center"><a data-toggle="modal" data-target="#<%= @lastid1 %>" class="clickable"><%= @lastj1 %></a> <%= @last %> <a data-toggle="modal" data-target="#<%= @lastid2 %>" class="clickable"><%= @lastj2 %></a></h4>
