@@ -121,7 +121,13 @@ class LeaguesController < ApplicationController
   def destroy
     @league = League.find(params[:id])
     if @league.journeys.last.is_closed
+      array = League.find(params[:id]).teams.all.order('total_score ASC')
       @league.teams.each do |team|
+        if team.user
+          user = User.where(team.user_id)
+          user.coach_points += array.index(team) + 1
+          user.save
+        end
         team.players.update_all(team_id: nil, is_chosen: false, is_active: false)
         team.destroy
       end

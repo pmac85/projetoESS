@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160527133545) do
+ActiveRecord::Schema.define(version: 20160527204041) do
 
   create_table "games", force: :cascade do |t|
     t.string   "score"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20160527133545) do
     t.string   "activation_digest"
     t.boolean  "activated",         default: false
     t.datetime "activated_at"
+    t.integer  "coach_points",      default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
