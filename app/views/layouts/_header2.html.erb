@@ -13,10 +13,10 @@
         <% if logged_in? %>
           <% if current_user.teams.any? %>
             <li><%= link_to "TEAM", team_path(current_user.teams.first) %></li>
+            <li><%= link_to "TRANSFERS", transfers_get_team_path(current_user.teams.first) %></li>
             <li><%= link_to "LEAGUE", league_path(current_user.teams.first.league_id) %></li>
           <% else %>
-            <li><%= link_to "TEAMS", teams_path %></li>
-            <li><%= link_to "LEAGUES", leagues_path %></li>
+            <li><%= link_to "LEAGUE", league_path(Team.first.league_id) %></li>
           <% end %>
             <% if (current_user.admin? && !current_user.nil?) %>
                 <li><%= link_to "USERS", users_path %></li>

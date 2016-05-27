@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy, :transfers]
+  before_action :logged_in_user, only: [:create, :destroy, :transfers, :changeStrategy]
   before_action :correct_user
   before_action :check_actives, only: [:show]
 
@@ -28,24 +28,24 @@ class TeamsController < ApplicationController
     @players = @team.players
     @allplayers = Player.where(is_chosen: false).includes(:team)
 
-    if(positionFilter != nil && positionFilter != "-1")
+    if positionFilter != nil && positionFilter != "-1"
       @allplayers = @allplayers.where(position: positionArray[positionFilter.to_i-1])
     end
 
-    if(valueFilter != nil && valueFilter != "Unlimited")
+    if valueFilter != nil && valueFilter != "Unlimited"
       @allplayers = @allplayers.where(value: 0..valueFilter.to_i)
     end
   end
 
 
   def transfer
-    if(params['sell'] == nil)
+    if params['sell'] == nil
       sell = []
     else
       sell = params['sell']
     end
 
-    if(params['buy'] == nil)
+    if params['buy'] == nil
       buy = []
     else
       buy = params['buy']
@@ -55,23 +55,23 @@ class TeamsController < ApplicationController
     @toSell = Player.where(id: sell)
     @toBuy = Player.where(id: buy)
 
-    if(sell.length != buy.length)
+    if sell.length != buy.length
       flash[:danger] = "Transferência não pode ser realizada! Pois não está a escolher o mesmo número de jogadores de cada lado"
       render :nothing => true
       return
     end
 
-    if(@toSell.where(position: 'FOR').count != @toBuy.where(position: 'FOR').count ||
+    if @toSell.where(position: 'FOR').count != @toBuy.where(position: 'FOR').count ||
        @toSell.where(position: 'MID').count != @toBuy.where(position: 'MID').count ||
        @toSell.where(position: 'DEF').count != @toBuy.where(position: 'DEF').count ||
-       @toSell.where(position: 'GK').count != @toBuy.where(position: 'GK').count)
+       @toSell.where(position: 'GK').count != @toBuy.where(position: 'GK').count
 
       flash[:danger] = "Transferência não pode ser realizada. Está a selecionar jogadores de posições que não correspondem."
       render :nothing => true
       return
     end
 
-    if(@toBuy.sum(:value) > @team.budget+@toSell.sum(:value))
+    if @toBuy.sum(:value) > @team.budget+@toSell.sum(:value)
       flash[:danger] = "Transferência não pode ser realizada. Está a tentar fazer transferências para as quais não tem orçamento."
       render :nothing => true
       return
@@ -107,13 +107,11 @@ class TeamsController < ApplicationController
     end
   end
 
-  def destroy
-    @team = Team.find(params[:id]).destroy
-    #flash[:success] = "Team deleted"
-    respond_to do |format|
-      format.html {redirect_to request.referrer || root_url}
-      format.js
-    end
+  def drop_user
+    @team = Team.where(params[:id]).update_all(user_id: nil)
+    @team1 = Team.find(params[:id])
+    flash[:success] = "You are no longer #{@team1.name} manager. Choose a new team."
+    redirect_to league_path(@team1.league_id)
   end
 
   def changeStrategy
@@ -148,7 +146,7 @@ class TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team).permit(:name, :image_path)
+    params.require(:team).permit(:name, :image_path, :user_id)
   end
 
   def correct_user

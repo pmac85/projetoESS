@@ -21,8 +21,9 @@ function changedslct(sel){
   var next="<h3></h3><table class=\"j-table-all\"><thead><tr><th colspan='3' class='thJ'> Journey "+(jn+1)+"<br>"+jdt+"</th></tr></thead><tbody>";
   for(x=0;x<jogos2.length;x++){
     var scr = "---";
-    if (jogos2[x].score != null) {
-      scr = jogos2[x].score;
+    console.log(jogos2[x]);
+    if (jogos2[x].team1_score != null && jogos2[x].team2_score != null) {
+      scr = jogos2[x].team1_score+" - "+jogos2[x].team2_score;
     }
     var t1 = searchTeamName(jogos2[x].team1_id, teams);
     var t2 = searchTeamName(jogos2[x].team2_id, teams);
