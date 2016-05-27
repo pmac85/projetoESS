@@ -18,6 +18,7 @@ function changedslct(sel){
   var jdt=sel.value;
   var jn=sel.selectedIndex;
   var jogos2=JSON.parse(jogos[jn]);
+
   var next="<h3></h3><table class=\"j-table-all\"><thead><tr><th colspan='3' class='thJ'> Journey "+(jn+1)+"<br>"+jdt+"</th></tr></thead><tbody>";
   for(x=0;x<jogos2.length;x++){
     var scr = "---";
@@ -26,7 +27,11 @@ function changedslct(sel){
     }
     var t1 = searchTeamName(jogos2[x].team1_id, teams);
     var t2 = searchTeamName(jogos2[x].team2_id, teams);
-      next+="<tr><td>"+t1+"</td><td>"+scr+"</td><td>"+t2+"</td></tr>";
+      next+="<tr>" +
+          "<td data-toggle='modal' data-target='#"+jogos2[x].team1_id+"' class='clickable'>"+t1+"</td>" +
+          "<td href='#resultgame' data-toggle='modal' data-target='#resultgame"+jogos2[x].id+"' class='clickable'>"+scr+"</td>" +
+          "<td data-toggle='modal' data-target='#"+jogos2[x].team2_id+"' class='clickable'>"+t2+"</td>" +
+          "</tr>";
   }
 
   next+="</tbody></table>";
@@ -40,6 +45,14 @@ function changedslct(sel){
 </script>
 
 <div class="divs">
+  <% @teams.each do|team|%>
+      <%=render "teams/modal", team:team%>
+  <%end%>
+  <% @journeys.each do |journey| %>
+      <% journey.games.each do |game|%>
+        <%= render "games/modal", game: game %>
+      <% end %>
+  <% end %>
   <div class="col-md-4 col-md-offset-4">
     <select class="btn btn-default" id="jselect" onchange="changedslct(this)" style="font-size: 14px;">
       <% @journeys.each do |journey| %>

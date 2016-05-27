@@ -33,14 +33,14 @@ class LeaguesController < ApplicationController
         g.each do |game|
           if(game.team1_id==usrtid)
             nextt="Next Oponent: "
-            nextid=game.team1_id.to_s
-            nextj=@teams.find(game.team2_id).name
+            nextid=game.team2_id.to_s
+            nextj=game.team2.name
             break
           end
           if(game.team2_id==usrtid)
             nextt="Next Oponent: "
-            nextid=game.team2_id.to_s
-            nextj=@teams.find(game.team1_id).name
+            nextid=game.team1_id.to_s
+            nextj=game.team1.name
             break
           end
         end
@@ -50,10 +50,10 @@ class LeaguesController < ApplicationController
         g.each do |game|
           if(game.team1_id==usrtid || game.team2_id==usrtid)
             lastid1=game.team1_id.to_s
-            lastj1=@teams.find(game.team1_id).name
+            lastj1=game.team1.name
             last=game.score
             lastid2=game.team2_id.to_s
-            lastj2=@teams.find(game.team2_id).name
+            lastj2=game.team2.name
             break
           end
         end
@@ -63,14 +63,14 @@ class LeaguesController < ApplicationController
         g.each do |game|
           if(game.team1_id==usrtid)
             nextt="Next Oponent: "
-            nextid=game.team1_id.to_s
-            nextj=@teams.find(game.team1_id).name
+            nextid=game.team2_id.to_s
+            nextj=game.team2.name
             break
           end
           if(game.team2_id==usrtid)
             nextt="Next Oponent: "
-            nextid=game.team2_id.to_s
-            nextj=@teams.find(game.team2_id).name
+            nextid=game.team1_id.to_s
+            nextj=game.team1.name
             break
           end
         end
