@@ -1,12 +1,11 @@
 class LeaguesController < ApplicationController
   require 'round_robin_tournament'
-  before_action :check_league,   except: [:new, :create, :destroy ]
+  before_action :check_league,   except: [:new, :create, :destroy, :index ]
   before_action :admin_user,     only: [:new, :create, :destroy]
 
   def show
     @league = League.find(params[:id])
     @teams = @league.teams.all.order('total_score DESC')
-    p(:user)
     journeys=@league.journeys
     index=-1
     index2=0
@@ -28,7 +27,7 @@ class LeaguesController < ApplicationController
           end
         index=index+1
     end
-      if(index2>-1)
+      if(index2==-1)
         g= journeys.first.games
         g.each do |game|
           if(game.team1_id==usrtid)
@@ -51,7 +50,7 @@ class LeaguesController < ApplicationController
           if(game.team1_id==usrtid || game.team2_id==usrtid)
             lastid1=game.team1_id.to_s
             lastj1=game.team1.name
-            last=game.score
+            last=game.team1_score.to_s + " - " + game.team2_score.to_s
             lastid2=game.team2_id.to_s
             lastj2=game.team2.name
             break
@@ -88,7 +87,15 @@ class LeaguesController < ApplicationController
   end
 
   def index
-    @leagues = League.paginate(page: params[:page])
+    if League.any?
+      @leagues = League.paginate(page: params[:page])
+    elsif current_user.admin
+      flash[:info] = "There is any league created. Please create one!"
+      redirect_to new_league_path
+    else
+      flash[:info] = "There is any league created."
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def new
@@ -113,19 +120,30 @@ class LeaguesController < ApplicationController
 
   def destroy
     @league = League.find(params[:id])
-    @league.teams.each do |team|
-      team.players.update_all(team_id: nil, is_chosen: false, is_active: false)
-      team.destroy
-    end
-    @league.journeys.each do |journey|
-      journey.games.each do |game|
-        game.destroy
+    if @league.journeys.last.is_closed
+      array = League.find(params[:id]).teams.all.order('total_score ASC')
+      @league.teams.each do |team|
+        if team.user
+          user = User.where(team.user_id)
+          user.coach_points += array.index(team) + 1
+          user.save
+        end
+        team.players.update_all(team_id: nil, is_chosen: false, is_active: false)
+        team.destroy
       end
-      journey.destroy
+      @league.journeys.each do |journey|
+        journey.games.each do |game|
+          game.destroy
+        end
+        journey.destroy
+      end
+      @league.destroy
+      flash[:success] = "League deleted. You can create a new League now!"
+      redirect_to new_league_path
+    else
+      flash[:warning] = "You can not destroy a league that isn't over yet!"
+      redirect_to :back
     end
-    @league.destroy
-    flash[:success] = "League deleted. You can create a new League now!"
-    redirect_to new_league_path
   end
 
   private

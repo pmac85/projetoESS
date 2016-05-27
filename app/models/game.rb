@@ -80,27 +80,19 @@ class Game < ActiveRecord::Base
       team1.total_score += 3
       team1.victories += 1
       team2.defeats += 1
-      user=User.where(id:team1_id)
-      user.budget+=10
-      user.save
+      team1.budget+=10
     elsif gol1<gol2
       team2.total_score += 3
       team2.victories += 1
       team1.defeats += 1
-      user=User.where(id:team2_id)
-      user.budget+=10
-      user.save
+      team2.budget+=10
     else
       team1.total_score += 1
       team2.total_score += 1
       team1.draws += 1
       team2.draws += 1
-      user=User.where(id:team1_id)
-      user.budget+=5
-      user.save
-      user=User.where(id:team2_id)
-      user.budget+=5
-      user.save
+      team1.budget+=5
+      team2.budget+=5
     end
     game.team1_score = gol1
     game.team2_score = gol2

@@ -117,15 +117,29 @@ class TeamsController < ApplicationController
   def changeStrategy
     @team = Team.find(params[:id])
 
-    @team.players.update_all(is_active: false)
-
     ids = []
+    limit = {
+        'FOR' => [0,5],
+        'MID' => [0,5],
+        'DEF' => [0,5],
+        'GK' => [1,1]
+    }
     ['FOR','MID','DEF','GK'].each do |pos|
-      ids += params[pos] if(params[pos] != nil)
+      params[pos] = [] if(params[pos] == nil)
+
+      if(params[pos].size < limit[pos][0] || params[pos].size > limit[pos][1])
+        flash[:danger] = "Invalid number of players in #{pos} position."
+        render :nothing => true
+        return
+      end
+
+      ids += params[pos]
     end
 
+    @team.players.update_all(is_active: false)
     @team.players.where(id: ids).update_all(is_active: true)
 
+    flash[:success] = "Strategy changed successfully."
     render :nothing => true
   end
 
