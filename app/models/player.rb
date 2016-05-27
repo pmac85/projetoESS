@@ -16,13 +16,13 @@ class Player < ActiveRecord::Base
 
     case self.position
       when 'GK'
-        errors.add(:position, 'Error in Player, the are already too many players with this position') if(size > 2)
+        errors.add(:position, 'Error in Player, there are already too many players with this position') if(size > 2)
       when 'DEF'
-        errors.add(:position, 'Error in Player, the are already too many players with this position') if(size > 5)
+        errors.add(:position, 'Error in Player, there are already too many players with this position') if(size > 5)
       when 'MID'
-        errors.add(:position, 'Error in Player, the are already too many players with this position') if(size > 5)
+        errors.add(:position, 'Error in Player, there are already too many players with this position') if(size > 5)
       when 'FOR'
-        errors.add(:position, 'Error in Player, the are already too many players with this position') if(size > 3)
+        errors.add(:position, 'Error in Player, there are already too many players with this position') if(size > 3)
     end
   end
 end
