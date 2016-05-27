@@ -13,8 +13,9 @@
         style: 'multi',
         info: false
       },
+      "bLengthChange":false,
       "pageLength": 15,
-      "pagingType": 'numbers'
+      "pagingType": 'simple'
       //"info": false
     });
     myPlayers = $("#listPlayers").DataTable({
@@ -126,14 +127,18 @@
         <div class="botao-pesquisa">
           <button type="button" class="btn btn-info" onclick = "recarregaAllPlayers()"><span class="glyphicon glyphicon-search"></span> Search</button>
         </div>
+        <div style="width: 110px;
+            display: inline-block;">
+          <h1>Budget: <label id="teamBudget"><%= @team.budget %></label></h1>
+        </div>
       </div>
-      <div style="top: 0; right: 50px; position: absolute"><h1>Budget: <label id="teamBudget"><%= @team.budget %></label></h1></div>
+
     </div>
     <div>
     <aside id="playersEdit" class="col-md-6" style="padding-right: 2%;">
       <h3>Players</h3>
       <div class="row">
-        <table id="listAllPlayers" class="table table-bordered table-condensed" style="background-color: #FFFFFF">
+        <table id="listAllPlayers" class="table table-bordered table-condensed" style="float: right;background-color: #FFFFFF">
           <thead>
           <tr class="info">
             <th class="text-center" style="background-color:lightgrey;">Name</th>
