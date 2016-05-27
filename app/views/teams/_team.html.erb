@@ -13,9 +13,9 @@
     <td class="text-center"><%= team.league.name %></td>
     <% if current_user.id == team.user_id %>
       <td class="text-center">
-        <%= link_to 'Transfers', transfers_team_path(team), method: :post, :class => 'btn btn-default btn-xs' %>
+        <%= link_to 'Transfers', transfers_team_path(team), method: :post, :class => 'btn btn2 btn-default btn-xs' %>
         </br>
-        <%= link_to 'Delete', drop_team_path(team), method: :get, :class => 'btn btn-xs btn-danger' %>
+        <%= link_to 'Delete', drop_team_path(team), method: :get, :class => 'btn btn2 btn-xs btn-danger' %>
       </td>
     <% end %>
   </tr>

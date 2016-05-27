@@ -56,7 +56,7 @@ class TeamsController < ApplicationController
     @toBuy = Player.where(id: buy)
 
     if sell.length != buy.length
-      flash[:danger] = "Transferência não pode ser realizada! Pois não está a escolher o mesmo número de jogadores de cada lado"
+      flash[:danger] = "Cannot make transfer! You don't choose the same number of player to trade"
       render :nothing => true
       return
     end
@@ -66,13 +66,13 @@ class TeamsController < ApplicationController
        @toSell.where(position: 'DEF').count != @toBuy.where(position: 'DEF').count ||
        @toSell.where(position: 'GK').count != @toBuy.where(position: 'GK').count
 
-      flash[:danger] = "Transferência não pode ser realizada. Está a selecionar jogadores de posições que não correspondem."
+      flash[:danger] = "Cannot make transfer! The selected players are not from the same position."
       render :nothing => true
       return
     end
 
     if @toBuy.sum(:value) > @team.budget+@toSell.sum(:value)
-      flash[:danger] = "Transferência não pode ser realizada. Está a tentar fazer transferências para as quais não tem orçamento."
+      flash[:danger] = "Cannot make transfer! You don't have enough budget."
       render :nothing => true
       return
     end
