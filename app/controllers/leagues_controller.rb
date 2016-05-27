@@ -6,7 +6,6 @@ class LeaguesController < ApplicationController
   def show
     @league = League.find(params[:id])
     @teams = @league.teams.all.order('total_score DESC')
-    p(:user)
     journeys=@league.journeys
     index=-1
     index2=0
@@ -121,19 +120,24 @@ class LeaguesController < ApplicationController
 
   def destroy
     @league = League.find(params[:id])
-    @league.teams.each do |team|
-      team.players.update_all(team_id: nil, is_chosen: false, is_active: false)
-      team.destroy
-    end
-    @league.journeys.each do |journey|
-      journey.games.each do |game|
-        game.destroy
+    if @league.journeys.last.is_closed
+      @league.teams.each do |team|
+        team.players.update_all(team_id: nil, is_chosen: false, is_active: false)
+        team.destroy
       end
-      journey.destroy
+      @league.journeys.each do |journey|
+        journey.games.each do |game|
+          game.destroy
+        end
+        journey.destroy
+      end
+      @league.destroy
+      flash[:success] = "League deleted. You can create a new League now!"
+      redirect_to new_league_path
+    else
+      flash[:warning] = "You can not destroy a league that isn't over yet!"
+      redirect_to :back
     end
-    @league.destroy
-    flash[:success] = "League deleted. You can create a new League now!"
-    redirect_to new_league_path
   end
 
   private
