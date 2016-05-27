@@ -91,7 +91,7 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     if @team.update_attributes(team_params)
       flash[:success] = "Team profile updated."
-      redirect_to team_path(current_user)
+      redirect_to team_path(current_user.teams.first.id)
     else
       render 'edit'
     end

@@ -19,12 +19,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-   #   @user.send_activation_email
       @user.activate
       log_in @user
       flash[:success] = "Account created! Enjoy the game."
-   #   flash[:info] = "Please check your email to activate your account."
-   #   redirect_to root_path
       redirect_to user_path(current_user)
     else
       render 'new'

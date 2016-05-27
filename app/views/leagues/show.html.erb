@@ -55,7 +55,7 @@
                       <% else %>
                         <td class="text-center">-</td>
                       <% end %>
-                      <% if team.image_path.nil? %>
+                      <% if team.image_path.nil? || team.image_path.blank? %>
                           <td><%= image_tag "default_team.png", size: "30x30" %><%=  team.name %></td>
                       <% else %>
                           <td><%= image_tag team.image_path, size: "30x30" %><%= team.name %></td>
