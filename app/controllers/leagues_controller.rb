@@ -1,6 +1,6 @@
 class LeaguesController < ApplicationController
   require 'round_robin_tournament'
-  before_action :check_league,   except: [:new, :create, :destroy ]
+  before_action :check_league,   except: [:new, :create, :destroy, :index ]
   before_action :admin_user,     only: [:new, :create, :destroy]
 
   def show
@@ -28,7 +28,7 @@ class LeaguesController < ApplicationController
           end
         index=index+1
     end
-      if(index2>-1)
+      if(index2==-1)
         g= journeys.first.games
         g.each do |game|
           if(game.team1_id==usrtid)
@@ -51,7 +51,7 @@ class LeaguesController < ApplicationController
           if(game.team1_id==usrtid || game.team2_id==usrtid)
             lastid1=game.team1_id.to_s
             lastj1=game.team1.name
-            last=game.score
+            last=game.team1_score.to_s + " - " + game.team2_score.to_s
             lastid2=game.team2_id.to_s
             lastj2=game.team2.name
             break
@@ -88,7 +88,15 @@ class LeaguesController < ApplicationController
   end
 
   def index
-    @leagues = League.paginate(page: params[:page])
+    if League.any?
+      @leagues = League.paginate(page: params[:page])
+    elsif current_user.admin
+      flash[:info] = "There is any league created. Please create one!"
+      redirect_to new_league_path
+    else
+      flash[:info] = "There is any league created."
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def new

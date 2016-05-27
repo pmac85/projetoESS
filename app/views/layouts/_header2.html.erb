@@ -18,8 +18,8 @@
           <% else %>
                 <% if(League.any?)%>
                     <li><%= link_to "LEAGUE", league_path(Team.first.league_id) %></li>
-                <%else%>
-                    <li><%= link_to "LEAGUE", leagues_path %></li>
+                <% elsif current_user.admin %>
+                    <li><%= link_to "NEW LEAGUE", new_league_path %></li>
                 <%end%>
           <% end %>
             <% if (current_user.admin? && !current_user.nil?) %>

@@ -57,9 +57,9 @@ function changedslct(sel){
       <% @journeys.each do |journey| %>
           <%= javascript_tag "jogos.push('#{journey.games.to_json}');" %>
           <% if(journey.date == Date.today()) %>
-              <option value="<%= journey.date %>" selected>Journey <%= journey.number %></option>
+              <option value="<%= journey.date %>" selected>Matchday <%= journey.number %></option>
           <% else %>
-              <option value="<%= journey.date %>" >Journey <%= journey.number %></option>
+              <option value="<%= journey.date %>" >Matchday <%= journey.number %></option>
           <% end %>
       <% end %>
     </select>
