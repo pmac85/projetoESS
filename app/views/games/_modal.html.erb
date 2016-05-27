@@ -1,0 +1,40 @@
+<div class="modal fade" id="<%=game.id%>" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="detailsGameResultado">
+          <div class="casa">
+            <div class="imgCasa">
+                <% if game.team1.image_path %>
+                  <%= image_tag game.team1.image_path, size: "150x150" %>
+                <% else %>
+                  <%= image_tag "default_team.png", size: "150x150" %>
+                <%end%>
+              </div>
+            <p class="equipa"><%= game.team1.name%></p>
+          </div>
+          <div class="result">
+            <p class="score"><%= game.team1_score %> - <%= game.team2_score %> </p>
+          </div>
+          <div class="fora">
+            <div class="imgCasa">
+              <% if game.team2.image_path %>
+                  <%= image_tag game.team2.image_path, size: "150x150" %>
+              <% else %>
+                  <%= image_tag "default_team.png", size: "150x150" %>
+              <%end%>
+            </div>
+            <p class="equipa"><%= game.team2.name %></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
