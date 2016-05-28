@@ -1,9 +1,9 @@
 <% if !player.team || current_user.id != player.team.user_id %>
-  <tr id="<%= player.id %>" class="clickable-row">
+  <tr id="<%= player.id %>" class="clickable-row" style="cursor:pointer;">
 <% elsif player.is_active && !(request.env['PATH_INFO'].include? "/transfers") %>
     <tr id="<%= player.id %>" style="background-color: #666666">
 <% else %>
-  <tr id="<%= player.id %>" class="clickable-row">
+  <tr id="<%= player.id %>" class="clickable-row" style="cursor:pointer;">
 <% end %>
   <td>
     <%= render :partial => '/players/playerImage', :locals => { :player => player, :image_size => "40x40" } %>
