@@ -20,6 +20,7 @@ gem 'sdoc',                    '0.4.0', group: :doc
 
 gem 'bootstrap-datepicker-rails'
 gem 'round_robin_tournament'
+gem 'whenever', require: false
 
 
 group :development, :test do

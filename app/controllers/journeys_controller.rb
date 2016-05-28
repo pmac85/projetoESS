@@ -18,6 +18,13 @@ class JourneysController < ApplicationController
         journey.is_closed = true
         journey.save
         flash[:info] = "Matchday #{journey.number} closed."
+      elsif journey.id == 1
+        journey.games.each do |game|
+          game.gerarResultado
+        end
+        journey.is_closed = true
+        journey.save
+        flash[:info] = "Matchday #{journey.number} closed."
       else
         flash[:warning] = "You can't close one matchday if the previous is open."
       end

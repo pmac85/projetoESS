@@ -2,12 +2,12 @@
 <div class="row">
   <div class="divs box-body table-responsive">
     <aside class="col-md-4">
-      <section class="user_info">
-        <h1>
+      <section class="user_info text-center">
+        <div class="pull-left">
           <%= gravatar_for @user %>
-          <%= @user.username %>
-        </h1>
-        </br>
+          <h1 style="padding-top: 80px;"><%= @user.username %></h1>
+          <p class="text-center"><b>Coach points: </b><%= @user.coach_points %></p>
+        </div>
         <% if current_user == @user %>
             <%= button_to "Edit Profile", edit_user_path(current_user), method: :get, class: "btn btn2 btn-primary" %>
         <% end %>

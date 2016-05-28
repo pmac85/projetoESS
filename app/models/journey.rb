@@ -3,11 +3,9 @@ class Journey < ActiveRecord::Base
   has_many :games
   validates :date,   presence: true
   validates :number, presence: true
-  validate 'close_journey_automatic'
 
   def close_journey_automatic
-    case date
-      when date == Date.today.end_of_day
+    if date == Date.today
         self.games.each do |game|
           game.gerarResultado
         end
