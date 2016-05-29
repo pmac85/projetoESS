@@ -78,41 +78,41 @@ class Team_Test < ActionDispatch::IntegrationTest
                  players.where(is_active: false).pluck(:id).sort
   end
 
-  test "Strategy Test 2 - Remove MID Add GK" do
+  test "Strategy Test 2 - Remove MID Add FOR" do
     post "/teams/#{@team.id}/strategy",
-         GK: [@tp1.id,@p3.id],
-         FOR: [@tp2.id,@tp3.id],
+         GK: [@tp1.id],
+         FOR: [@tp2.id,@tp3.id,@p2.id],
          MID: [@tp4.id,@tp5.id,@tp6.id],
          DEF: [@tp8.id,@tp9.id,@tp10.id,@tp11.id]
     players = Team.find(@team.id).players
-    assert_equal [@tp1.id,@p3.id].sort,
+    assert_equal [@tp1.id].sort,
                  players.where(is_active: true, position: "GK").pluck(:id).sort
-    assert_equal [@tp2.id,@tp3.id].sort,
+    assert_equal [@tp2.id,@tp3.id,@p2.id].sort,
                  players.where(is_active: true, position: "FOR").pluck(:id).sort
     assert_equal [@tp4.id,@tp5.id,@tp6.id].sort,
                  players.where(is_active: true, position: "MID").pluck(:id).sort
     assert_equal [@tp8.id,@tp9.id,@tp10.id,@tp11.id].sort,
                  players.where(is_active: true, position: "DEF").pluck(:id).sort
-    assert_equal [@p1.id,@p2.id,@tp7.id].sort,
+    assert_equal [@p1.id,@p3.id,@tp7.id].sort,
                  players.where(is_active: false).pluck(:id).sort
   end
 
   test "Strategy Test 3 - Remove GK Add FOR" do
     post "/teams/#{@team.id}/strategy",
          GK: [],
-         FOR: [@tp2.id,@tp3.id,@p2.id],
+         FOR: [@tp2.id,@tp3.id],
          MID: [@tp4.id,@tp5.id,@tp6.id,@tp7.id],
          DEF: [@tp8.id,@tp9.id,@tp10.id,@tp11.id]
     players = Team.find(@team.id).players
-    assert_equal [],
+    assert_equal [@tp1.id],
                  players.where(is_active: true, position: "GK").pluck(:id).sort
-    assert_equal [@tp2.id,@tp3.id,@p2.id].sort,
+    assert_equal [@tp2.id,@tp3.id].sort,
                  players.where(is_active: true, position: "FOR").pluck(:id).sort
     assert_equal [@tp4.id,@tp5.id,@tp6.id,@tp7.id].sort,
                  players.where(is_active: true, position: "MID").pluck(:id).sort
     assert_equal [@tp8.id,@tp9.id,@tp10.id,@tp11.id].sort,
                  players.where(is_active: true, position: "DEF").pluck(:id).sort
-    assert_equal [@tp1.id,@p1.id,@p3.id].sort,
+    assert_equal [@p1.id,@p2.id,@p3.id].sort,
                  players.where(is_active: false).pluck(:id).sort
   end
 

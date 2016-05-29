@@ -8,7 +8,7 @@ class Player < ActiveRecord::Base
 
   private
   def validate_number_in_team
-      errors.add(:team_id, "Error in team_id, team can't have more than 15 players") if(team_id && Player.where(team_id: self.team_id).size >= 15)
+      errors.add(:team_id, "Error in team_id, team can't have more than 15 players") if(team_id && Player.where(team_id: self.team_id).size > 15)
   end
   def playersPositions
     return if !self.team_id

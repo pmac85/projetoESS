@@ -56,7 +56,7 @@ class TeamsController < ApplicationController
     @toBuy = Player.where(id: buy)
 
     if sell.length != buy.length
-      flash[:danger] = "Cannot make transfer! You don't choose the same number of player to trade"
+      flash[:danger] = "Cannot make transfer! You didn't choose the same number of player to trade"
       render :nothing => true
       return
     end
@@ -119,7 +119,7 @@ class TeamsController < ApplicationController
 
     ids = []
     limit = {
-        'FOR' => [0,5],
+        'FOR' => [0,3],
         'MID' => [0,5],
         'DEF' => [0,5],
         'GK' => [1,1]
