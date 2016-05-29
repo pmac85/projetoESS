@@ -25,17 +25,17 @@ class TeamTest < ActiveSupport::TestCase
         league_id: @league.id
     )
 
-    @tp1 = Player.create(name:"Joe Hart", position:"GK", value:62, real_team:"ManCity", team_id: @team.id, is_chosen: true, is_active: true)
-    @tp2 = Player.create(name:"Samir Nasri", position:"FOR", value:67, real_team:"ManCity", team_id: @team.id, is_chosen: true, is_active: true)
-    @tp3 = Player.create(name:"Jesús Navas", position:"FOR", value:61, real_team:"ManCity", team_id: @team.id, is_chosen: true, is_active: true)
-    @tp4 = Player.create(name:"David Silva", position:"MID", value:70, real_team:"ManCity", team_id: @team.id, is_chosen: true, is_active: true)
-    @tp5 = Player.create(name:"Blaise Matuidi", position:"MID", value:65, real_team:"PSG", team_id: @team.id, is_chosen: true, is_active: true)
-    @tp6 = Player.create(name:"Adrien Rabiot", position:"MID", value:54, real_team:"PSG", team_id: @team.id, is_chosen: true, is_active: true)
-    @tp7 = Player.create(name:"Javier Pastore", position:"MID", value:65, real_team:"PSG", team_id: @team.id, is_chosen: true, is_active: true)
-    @tp8 = Player.create(name:"Eliaquim Mangala", position:"DEF", value:66, real_team:"ManCity", team_id: @team.id, is_chosen: true, is_active: true)
-    @tp9 = Player.create(name:"Vincent Kompany", position:"DEF", value:66, real_team:"ManCity", team_id: @team.id, is_chosen: true, is_active: true)
-    @tp10 = Player.create(name:"Martín Demichelis", position:"DEF", value:52, real_team:"ManCity", team_id: @team.id, is_chosen: true, is_active: true)
-    @tp11 = Player.create(name:"Aleksandar Kolarov", position:"DEF", value:57, real_team:"ManCity", team_id: @team.id, is_chosen: true, is_active: true)
+    @tp1 = Player.create(name:"Joe Hart", position:"GK", value:62, team_id: @team.id)
+    @tp2 = Player.create(name:"Samir Nasri", position:"FOR", value:67, team_id: @team.id)
+    @tp3 = Player.create(name:"Jesús Navas", position:"FOR", value:61, team_id: @team.id)
+    @tp4 = Player.create(name:"David Silva", position:"MID", value:70, team_id: @team.id)
+    @tp5 = Player.create(name:"Blaise Matuidi", position:"MID", value:65, team_id: @team.id)
+    @tp6 = Player.create(name:"Adrien Rabiot", position:"MID", value:54, team_id: @team.id)
+    @tp7 = Player.create(name:"Javier Pastore", position:"MID", value:65, team_id: @team.id)
+    @tp8 = Player.create(name:"Eliaquim Mangala", position:"DEF", value:66, team_id: @team.id)
+    @tp9 = Player.create(name:"Vincent Kompany", position:"DEF", value:66, team_id: @team.id)
+    @tp10 = Player.create(name:"Martín Demichelis", position:"DEF", value:52, team_id: @team.id)
+    @tp11 = Player.create(name:"Aleksandar Kolarov", position:"DEF", value:57, team_id: @team.id)
   end
 
   test "More than 1 team in league" do

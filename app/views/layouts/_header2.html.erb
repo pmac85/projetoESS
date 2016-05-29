@@ -17,14 +17,14 @@
             <li><%= link_to "LEAGUE", league_path(current_user.teams.first.league_id) %></li>
           <% else %>
                 <% if(League.any?)%>
-                    <li><%= link_to "LEAGUE", league_path(Team.first.league_id) %></li>
+                    <li><%= link_to "LEAGUE", league_path(League.first.id) %></li>
                 <% elsif current_user.admin %>
                     <li><%= link_to "NEW LEAGUE", new_league_path %></li>
                 <%end%>
           <% end %>
-            <% if (current_user.admin? && !current_user.nil?) %>
-                <li><%= link_to "USERS", users_path %></li>
-            <% end %>
+          <% if (current_user.admin? && !current_user.nil?) %>
+              <li><%= link_to "USERS", users_path %></li>
+          <% end %>
           <li><%= link_to "PROFILE", current_user %></li>
           <li><%= link_to "RULES", rules_path %></li>
           <li><%= link_to "LOG OUT", logout_path, method: "delete" %></li>
