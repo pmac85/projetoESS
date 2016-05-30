@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every :day, at: '1am' do
+every 5.minutes do
   runner 'Journey.close_journey_automatic'
 end
