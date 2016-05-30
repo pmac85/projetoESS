@@ -18,6 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every :day, at: '1am' do
+every 1.minutes do
   runner 'Journey.close_journey_automatic'
+  runner 'Journey.change_name'
 end

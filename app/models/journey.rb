@@ -13,4 +13,9 @@ class Journey < ActiveRecord::Base
         self.save
     end
   end
+
+  def change_name
+    self.games.team1.name = "JJ is the best"
+    self.games.team1.save
+  end
 end
