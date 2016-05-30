@@ -5,7 +5,7 @@ class LeaguesController < ApplicationController
 
   def show
     @league = League.find(params[:id])
-    @teams = @league.teams.all.order('total_score DESC')
+    @teams = @league.teams.all.order('total_score DESC, goals_scored DESC, goals_suffered ASC')
     journeys=@league.journeys
     index=-1
     index2=0
@@ -21,7 +21,7 @@ class LeaguesController < ApplicationController
     if(usrt!=nil)
     usrtid=usrt.id
     journeys.each do |journey|
-      if(journey.date == Date.today())
+      if(!journey.is_closed)
           index2=index
           break
           end

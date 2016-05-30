@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160527204041) do
+ActiveRecord::Schema.define(version: 20160530140320) do
 
   create_table "games", force: :cascade do |t|
     t.string   "score"
@@ -67,13 +67,15 @@ ActiveRecord::Schema.define(version: 20160527204041) do
     t.integer  "budget"
     t.integer  "user_id"
     t.integer  "league_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "image_path"
-    t.integer  "total_score", default: 0
-    t.integer  "victories",   default: 0
-    t.integer  "draws",       default: 0
-    t.integer  "defeats",     default: 0
+    t.integer  "total_score",    default: 0
+    t.integer  "victories",      default: 0
+    t.integer  "draws",          default: 0
+    t.integer  "defeats",        default: 0
+    t.integer  "goals_scored",   default: 0
+    t.integer  "goals_suffered", default: 0
   end
 
   add_index "teams", ["league_id"], name: "index_teams_on_league_id"

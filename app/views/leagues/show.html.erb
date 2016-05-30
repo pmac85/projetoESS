@@ -26,15 +26,19 @@
         <% end %>
       </div>
       <div class="col-md-offset-4 col-md-4">
+        <% if(@last!="") %>
         <h4 class="text-center beauty">
           <a data-toggle="modal" data-target="#<%= @lastid1 %>" class="clickable"><%= @lastj1 %></a>
           <%= @last %>
           <a data-toggle="modal" data-target="#<%= @lastid2 %>" class="clickable"><%= @lastj2 %></a>
         </h4>
+        <% end %>
+        <% if(@next!="") %>
         <h4 class="text-center beauty">
           <%= @next %>
           <a data-toggle="modal" data-target="#<%= @nextid %>" class="clickable"><%= @nextj %></a>
         </h4>
+        <% end %>
       </div>
       <% if @league.teams.any? %>
           <% @teams.each do |team| %>
@@ -52,6 +56,9 @@
                   <th class="text-center" style="background-color:lightgrey;">Victories</th>
                   <th class="text-center" style="background-color:lightgrey;">Draws</th>
                   <th class="text-center" style="background-color:lightgrey;">Defeats</th>
+                  <th class="text-center" style="background-color:lightgrey;">GS</th>
+                  <th class="text-center" style="background-color:lightgrey;">GC</th>
+                  <th class="text-center" style="background-color:lightgrey;">GD</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -88,7 +95,13 @@
                           <td class="text-center"><%= team.victories %></td>
                           <td class="text-center"><%= team.draws %></td>
                           <td class="text-center"><%= team.defeats %></td>
+                          <td class="text-center"><%= team.goals_scored %></td>
+                          <td class="text-center"><%= team.goals_suffered %></td>
+                          <td class="text-center"><%= team.goals_scored-team.goals_suffered %></td>
                       <% else %>
+                          <td class="text-center">-</td>
+                          <td class="text-center">-</td>
+                          <td class="text-center">-</td>
                           <td class="text-center">-</td>
                           <td class="text-center">-</td>
                           <td class="text-center">-</td>

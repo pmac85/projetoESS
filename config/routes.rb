@@ -25,5 +25,6 @@ Rails.application.routes.draw do
   post 'games/:id/show'     => 'games#show', :as =>'game_show'
   get 'journeys/:id/index'  => 'journeys#index', :as => 'journeys_show'
   get 'journeys/:id/close'  => 'journeys#close', :as => 'close_journey'
+  get 'journeys/:id/close_all'  => 'journeys#close_all', :as => 'close_all_journeys'
 
 end

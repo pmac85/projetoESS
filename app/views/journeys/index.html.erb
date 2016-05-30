@@ -65,6 +65,7 @@ function changedslct(sel){
     </select>
     <% if current_user.admin %>
       <%= button_to "Close Matchday", close_journey_path, :method => :get, :form => { :id => "selectedf" }, class:"btn btn2 btn-danger" %>
+      <%= button_to "Close All Matchdays", close_all_journeys_path, :method => :get, :form => { :id => @journeys.first.league_id }, class:"btn btn2 btn-danger" %>
     <% end %>
   </div>
   <div class="col-md-8 col-md-offset-2 btn1" id="gPresent"></div>

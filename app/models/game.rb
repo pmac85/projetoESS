@@ -97,6 +97,11 @@ class Game < ActiveRecord::Base
     game.team1_score = gol1
     game.team2_score = gol2
 
+    game.team1.goals_scored+=gol1
+    game.team1.goals_suffered+=gol2
+    game.team2.goals_scored+=gol2
+    game.team2.goals_suffered+=gol1
+
     game.save
     team1.save
     team2.save
