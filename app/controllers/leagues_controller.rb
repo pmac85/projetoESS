@@ -123,8 +123,9 @@ class LeaguesController < ApplicationController
     if @league.journeys.last.is_closed
       array = League.find(params[:id]).teams.all.order('total_score ASC')
       @league.teams.each do |team|
-        if team.user
-          user = User.where(team.user_id)
+        if(team.user_id != nil)
+          user = User.find(team.user_id)
+          p(user)
           user.coach_points += array.index(team) + 1
           user.save
         end
@@ -144,6 +145,22 @@ class LeaguesController < ApplicationController
       flash[:warning] = "You can not destroy a league that isn't over yet!"
       redirect_to :back
     end
+  end
+
+  def close_all
+    league = League.find(params[:id])
+
+    league.journeys.each do |journey|
+      if(!journey.is_closed)
+        journey.games.each do |game|
+          game.gerarResultado
+        end
+        journey.is_closed = true
+        journey.save
+      end
+    end
+
+    redirect_to :back
   end
 
   private
