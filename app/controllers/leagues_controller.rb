@@ -1,6 +1,7 @@
 class LeaguesController < ApplicationController
   require 'round_robin_tournament'
   before_action :check_league,   except: [:new, :create, :destroy, :index ]
+  before_action :check_journey,  except:[:new, :create]
   before_action :admin_user,     only: [:new, :create, :destroy]
 
   def show
@@ -45,7 +46,7 @@ class LeaguesController < ApplicationController
         end
       else
         index2=index2+1
-        g= journeys.find(index2).games
+        g= journeys.find_by(number: index2).games
         g.each do |game|
           if(game.team1_id==usrtid || game.team2_id==usrtid)
             lastid1=game.team1_id.to_s
@@ -58,7 +59,7 @@ class LeaguesController < ApplicationController
         end
         index2=index2+1
         if(index2<=journeys.length)
-        g= journeys.find(index2).games
+        g= journeys.find_by(number: index2).games
         g.each do |game|
           if(game.team1_id==usrtid)
             nextt="Next Oponent: "
@@ -158,13 +159,26 @@ class LeaguesController < ApplicationController
         journey.save
       end
     end
-
+    flash[:success] = "All journeys closed with success."
     redirect_to :back
   end
 
   private
   def league_params
     params.require(:league).permit(:name, :initial_date)
+  end
+
+  def check_journey
+    journeys = League.find(params[:id]).journeys
+    journeys.each do |journey|
+      if journey.date == Date.today && (!journey.is_closed)
+        journey.games.each do |game|
+          game.gerarResultado
+        end
+        journey.is_closed = true
+        journey.save
+      end
+    end
   end
 
   def check_league
