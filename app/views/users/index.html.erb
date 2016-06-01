@@ -22,7 +22,7 @@
                   <td class="text-center"><%= user.username %></td>
                   <td class="text-center"><%= user.email %></td>
                   <% if user.teams.any? %>
-                      <td><%= user.teams.first.name %></td>
+                      <td class="text-center"><%= user.teams.first.name %></td>
                   <% else %>
                       <td class="text-center">No team</td>
                   <% end %>
