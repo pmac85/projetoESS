@@ -8,9 +8,15 @@
         $(this).addClass('highlighted').siblings().removeClass('highlighted');
     });
 
-    function switchPlayers(id){
-      if(!$(".highlighted").length)
+    function switchPlayers(id) {
+      if (!$(".highlighted").length) {
+        alert("Select a player from the table first!");
         return;
+      }
+      if(($(".highlighted").find('td').eq(1).text() == 'GK') != $("#GK #"+id).length){
+        alert("You can only trade GKs with GKs!");
+        return;
+      }
 
       removeFromField(id);
       addToField();
