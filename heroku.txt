@@ -1,3 +1,3 @@
 A aplicação está a funcionar neste link abaixo:
 
-https://boiling-falls-45539.herokuapp.com/
+https://vast-ridge-74766.herokuapp.com/
