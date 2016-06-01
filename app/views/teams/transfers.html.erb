@@ -23,6 +23,7 @@
         style: 'multi',
         info: false
       },
+      "searching":false,
       "paging": false,
       "info": false
     });
@@ -127,15 +128,11 @@
         <div class="botao-pesquisa">
           <button type="button" class="btn btn-info" onclick = "recarregaAllPlayers()"><span class="glyphicon glyphicon-search"></span> Search</button>
         </div>
-        <div style="width: 110px;
-            display: inline-block;">
-          <h1>Budget: <label id="teamBudget"><%= @team.budget %></label></h1>
-        </div>
       </div>
 
     </div>
     <div>
-    <aside id="playersEdit" class="col-md-6" style="padding-right: 2%;">
+    <aside id="playersEdit" class="col-md-6 transfer" style="padding-right: 2%;">
       <h3>Players</h3>
       <div class="row">
         <table id="listAllPlayers" class="table table-bordered table-condensed" style="float: right;background-color: #FFFFFF">
@@ -153,9 +150,12 @@
         </table>
       </div>
     </aside>
-    <aside class="col-md-6" style="padding-left: 3%;">
+    <aside class="col-md-6 transfer" style="padding-left: 3%;text-align: center;">
       <% if @team.players.any? %>
           <h3>My Team</h3>
+
+          <label id="teamBudget" style="margin-bottom: 20px;">Budget: <%= @team.budget %></label>
+
           <div class="row">
             <table id="listPlayers" class="table table-bordered table-condensed" style="background-color: #FFFFFF">
               <thead>

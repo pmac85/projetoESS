@@ -79,8 +79,7 @@ class TeamsController < ApplicationController
 
     if @toBuy.where.not(team_id:nil).count !=0
       flash[:danger] = "Cannot make transfer! One or more choosen players are not avaliable anymore."
-      p(@toBuy)
-      render :nothing => true
+        render :nothing => true
       return
     end
 
@@ -157,6 +156,9 @@ class TeamsController < ApplicationController
       redirect_to root_path
     elsif current_user.admin
       flash[:danger] = "You can't have a team."
+      redirect_to root_path
+    elsif !@team.user_id.nil?
+      flash[:danger] = "That team is already choosen."
       redirect_to root_path
     else
       flash[:success] = "You have a new team. Enjoy."
