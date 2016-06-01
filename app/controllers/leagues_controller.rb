@@ -1,6 +1,5 @@
 class LeaguesController < ApplicationController
   require 'round_robin_tournament'
-  before_action :check_league,   except: [:new, :create, :destroy, :index ]
   before_action :check_journey,  except:[:new, :create]
   before_action :admin_user,     only: [:new, :create, :destroy]
 
@@ -19,25 +18,25 @@ class LeaguesController < ApplicationController
     lastid1=""
     lastid2=""
     usrt=current_user.teams.where(league_id:@league.id).first()
-    if(usrt!=nil)
+    if usrt!=nil
     usrtid=usrt.id
     journeys.each do |journey|
-      if(!journey.is_closed)
+      if !journey.is_closed
           index2=index
           break
-          end
-        index=index+1
+      end
+      index=index+1
     end
-      if(index2==-1)
+      if index2==-1
         g= journeys.first.games
         g.each do |game|
-          if(game.team1_id==usrtid)
+          if game.team1_id==usrtid
             nextt="Next Oponent: "
             nextid=game.team2_id.to_s
             nextj=game.team2.name
             break
           end
-          if(game.team2_id==usrtid)
+          if game.team2_id==usrtid
             nextt="Next Oponent: "
             nextid=game.team1_id.to_s
             nextj=game.team1.name
@@ -45,10 +44,14 @@ class LeaguesController < ApplicationController
           end
         end
       else
-        index2=index2+1
+        if journeys.where(is_closed: false).count != 0
+          index2=index2+1
+        else
+          index2= journeys.last.number
+        end
         g= journeys.find_by(number: index2).games
         g.each do |game|
-          if(game.team1_id==usrtid || game.team2_id==usrtid)
+          if game.team1_id==usrtid || game.team2_id==usrtid
             lastid1=game.team1_id.to_s
             lastj1=game.team1.name
             last=game.team1_score.to_s + " - " + game.team2_score.to_s
@@ -58,16 +61,16 @@ class LeaguesController < ApplicationController
           end
         end
         index2=index2+1
-        if(index2<=journeys.length)
+        if index2<=journeys.length
         g= journeys.find_by(number: index2).games
         g.each do |game|
-          if(game.team1_id==usrtid)
+          if game.team1_id==usrtid
             nextt="Next Oponent: "
             nextid=game.team2_id.to_s
             nextj=game.team2.name
             break
           end
-          if(game.team2_id==usrtid)
+          if game.team2_id==usrtid
             nextt="Next Oponent: "
             nextid=game.team1_id.to_s
             nextj=game.team1.name
@@ -122,8 +125,9 @@ class LeaguesController < ApplicationController
   def destroy
     @league = League.find(params[:id])
     if @league.journeys.last.is_closed
-      array = League.find(params[:id]).teams.all.order('total_score ASC')
-      @league.teams.each do |team|
+
+      array = @league.teams.all.order('total_score DESC, goals_scored DESC, goals_suffered ASC').reverse_order
+      array.each do |team|
         if team.user
           user = User.find(team.user_id)
           user.coach_points += array.index(team) + 1
@@ -151,7 +155,7 @@ class LeaguesController < ApplicationController
     league = League.find(params[:id])
 
     league.journeys.each do |journey|
-      if(!journey.is_closed)
+      if !journey.is_closed
         journey.games.each do |game|
           game.gerarResultado
         end
@@ -178,15 +182,6 @@ class LeaguesController < ApplicationController
         journey.is_closed = true
         journey.save
       end
-    end
-  end
-
-  def check_league
-    if !League.any?
-      league = League.new
-      league.update_attributes(name: "Liga NOS", initial_date: Date.today + 7.days)
-      league.save
-      populate_league(league)
     end
   end
 
