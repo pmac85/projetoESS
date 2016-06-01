@@ -123,9 +123,8 @@ class LeaguesController < ApplicationController
     if @league.journeys.last.is_closed
       array = League.find(params[:id]).teams.all.order('total_score ASC')
       @league.teams.each do |team|
-        if(team.user_id != nil)
+        if team.user
           user = User.find(team.user_id)
-          p(user)
           user.coach_points += array.index(team) + 1
           user.save
         end
