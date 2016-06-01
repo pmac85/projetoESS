@@ -31,7 +31,7 @@
         <div id='"+id+"' style='overflow: hidden; border: 2px solid #000000; background-color: #C0C0C0; width: 15%; height: 100%; position: relative; display: inline-block'>\
           <p>"+img+"</p>\
           <p style='line-height: 100%; font-size: 70%'>"+name+"</p>\
-          <button type='button' class='btn btn-default' onclick='switchPlayers("+id+")' style='position: absolute; right: 0; bottom: 0;  width: 100%; overflow: hidden'>\
+          <button type='button' class='btn btn-xs btn-default' onclick='switchPlayers("+id+")' style='position: absolute; right: 0; bottom: 0;  width: 100%; overflow: hidden'>\
             <span class='glyphicon glyphicon-retweet'></span>\
           </button>\
         </div>\
@@ -108,7 +108,7 @@
                     <p style="line-height: 100%; font-size: 70%"><%= player.name %></p>
 
 
-                    <button type="button" class="btn btn-default" onclick="switchPlayers(<%= player.id %>)" style="position: absolute; right: 0; bottom: 0;  width: 100%; overflow: hidden">
+                    <button type="button" class="btn btn-xs btn-default" onclick="switchPlayers(<%= player.id %>)" style="position: absolute; right: 0; bottom: 0;  width: 100%; overflow: hidden">
                       <span class="glyphicon glyphicon-retweet"></span>
                     </button>
                   </div>

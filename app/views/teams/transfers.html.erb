@@ -24,7 +24,9 @@
         info: false
       },
       "paging": false,
-      "info": false
+      "info": false,
+      "ordering":false,
+      "order": []
     });
 
 
@@ -167,7 +169,18 @@
                 </tr>
               </thead>
               <tbody>
-                <%= render @players %>
+                <% @players.where(position: "GK").each do |player| %>
+                    <%= render player %>
+                <% end %>
+                <% @players.where(position: "DEF").each do |player| %>
+                    <%= render player %>
+                <% end %>
+                <% @players.where(position: "MID").each do |player| %>
+                    <%= render player %>
+                <% end %>
+                <% @players.where(position: "FOR").each do |player| %>
+                    <%= render player %>
+                <% end %>
               </tbody>
             </table>
           </div>
