@@ -77,6 +77,13 @@ class TeamsController < ApplicationController
       return
     end
 
+    if @toBuy.where.not(team_id:nil).count !=0
+      flash[:danger] = "Cannot make transfer! One or more choosen players are not avaliable anymore."
+      p(@toBuy)
+      render :nothing => true
+      return
+    end
+
     @toBuy.update_all(team_id: @team.id, is_chosen: true)
     @toSell.update_all(team_id: nil, is_chosen: false, is_active: false)
     @team.update(budget: @team.budget+@toSell.sum(:value)-@toBuy.sum(:value))

@@ -146,6 +146,22 @@ class LeaguesController < ApplicationController
     end
   end
 
+  def close_all
+    league = League.find(params[:id])
+
+    league.journeys.each do |journey|
+      if(!journey.is_closed)
+        journey.games.each do |game|
+          game.gerarResultado
+        end
+        journey.is_closed = true
+        journey.save
+      end
+    end
+
+    redirect_to :back
+  end
+
   private
   def league_params
     params.require(:league).permit(:name, :initial_date)
