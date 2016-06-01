@@ -124,7 +124,7 @@ class LeaguesController < ApplicationController
       array = League.find(params[:id]).teams.all.order('total_score ASC')
       @league.teams.each do |team|
         if team.user
-          user = User.where(team.user_id)
+          user = User.find(team.user_id)
           user.coach_points += array.index(team) + 1
           user.save
         end
