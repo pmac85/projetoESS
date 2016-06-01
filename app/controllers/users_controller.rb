@@ -14,6 +14,16 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @teams = @user.teams
+    if @teams.any?
+    place=League.where(id:@teams.first.league_id).first.teams.all.order('total_score DESC, goals_scored DESC, goals_suffered ASC')
+    @index=1
+    place.each do |p|
+      if(p==@teams.first)
+        break
+      end
+      @index+=1
+    end
+      end
   end
 
   def create
