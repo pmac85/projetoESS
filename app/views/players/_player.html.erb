@@ -5,7 +5,7 @@
 <% else %>
   <tr id="<%= player.id %>" class="clickable-row" style="cursor:pointer;">
 <% end %>
-  <td>
+  <td style="text-align: left;">
     <%= render :partial => '/players/playerImage', :locals => { :player => player, :image_size => "40x40" } %>
     <span><%= player.name %></span>
   </td>
