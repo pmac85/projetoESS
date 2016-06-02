@@ -156,7 +156,7 @@
       <% if @team.players.any? %>
           <h3>My Team</h3>
 
-          <label id="teamBudget" style="margin-bottom: 20px;">Budget: <%= @team.budget %></label>
+          Budget: <label id="teamBudget" style="margin-bottom: 20px;"><%= @team.budget %></label>
 
           <div class="row">
             <table id="listPlayers" class="table table-bordered table-condensed" style="background-color: #FFFFFF">

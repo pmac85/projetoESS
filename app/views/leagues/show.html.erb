@@ -65,7 +65,7 @@
                 <% @teams.each do |team| %>
                   <% if current_user.teams.any? %>
                     <% if team == current_user.teams.first %>
-                      <tr data-toggle="modal" data-target="#<%=team.id%>" class="clickable" style="background-color: #666666">
+                      <tr data-toggle="modal" data-target="#<%=team.id%>" class="clickable" style="background-color: lightgray">
                     <% else %>
                       <tr data-toggle="modal" data-target="#<%=team.id%>" class="clickable">
                     <% end %>
