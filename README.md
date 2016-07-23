@@ -1,4 +1,4 @@
-**Football Virtual League**
+**Virtual Football League**
 
 Projeto para a UC de Engenharia Web
 
